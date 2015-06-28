@@ -5,18 +5,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import com.example.syoung.fitsy.exercise_course.ExerciseCourseLayout;
+import com.example.syoung.fitsy.exercise_main.ExerciseMainLayout;
+import com.example.syoung.fitsy.history.HistoryLayout;
+import com.example.syoung.fitsy.statistics.StatisticsLayout;
+import com.example.syoung.fitsy.user_information.UserInformationLayout;
 
 
 public class Main extends ActionBarActivity
@@ -47,10 +48,29 @@ public class Main extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        Fragment objFragment = null;
+
+        switch (position){
+            case 0:
+                objFragment = new ExerciseMainLayout();
+                break;
+            case 1:
+                objFragment = new StatisticsLayout();
+                break;
+            case 2:
+                objFragment = new HistoryLayout();
+                break;
+            case 3:
+                objFragment = new ExerciseCourseLayout();
+                break;
+            case 4:
+                objFragment = new UserInformationLayout();
+                break;
+        }
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, objFragment)
                 .commit();
     }
 
