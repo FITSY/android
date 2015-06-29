@@ -40,7 +40,7 @@ public class Main extends ActionBarActivity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        mTitle = getString(R.string.title_section1);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
@@ -53,18 +53,23 @@ public class Main extends ActionBarActivity
         switch (position){
             case 0:
                 objFragment = new ExerciseMainLayout();
+                mTitle = getString(R.string.title_section1);
                 break;
             case 1:
                 objFragment = new StatisticsLayout();
+                mTitle = getString(R.string.title_section2);
                 break;
             case 2:
                 objFragment = new HistoryLayout();
+                mTitle = getString(R.string.title_section3);
                 break;
             case 3:
                 objFragment = new ExerciseCourseLayout();
+                mTitle = getString(R.string.title_section4);
                 break;
             case 4:
                 objFragment = new UserInformationLayout();
+                mTitle = getString(R.string.title_section5);
                 break;
         }
         // update the main content by replacing fragments
@@ -75,23 +80,6 @@ public class Main extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_section4);
-                break;
-            case 5:
-                mTitle = getString(R.string.title_section5);
-                break;
-        }
     }
 
     public void restoreActionBar() {
