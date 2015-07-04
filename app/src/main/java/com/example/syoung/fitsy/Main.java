@@ -20,9 +20,7 @@ import com.example.syoung.fitsy.statistics.StatisticsLayout;
 import com.example.syoung.fitsy.user_information.UserInformationLayout;
 
 
-public class Main extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
+public class Main extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -38,8 +36,7 @@ public class Main extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getString(R.string.title_section1);
 
         // Set up the drawer.

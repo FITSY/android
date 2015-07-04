@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">FITSY</string>
 
-    <string name="title_section1">Home</string>
-    <string name="title_section2">통계</string>
-    <string name="title_section3">히스토리</string>
-    <string name="title_section4">운동코스</string>
-    <string name="title_section5">나의정보</string>
+    <string name="title_section1">My FIT</string>
+    <string name="title_section2">Statistics</string>
+    <string name="title_section3">History</string>
+    <string name="title_section4">My Course</string>
+    <string name="title_section5">My Info</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
