@@ -19,6 +19,7 @@ import com.example.syoung.fitsy.history.HistoryLayout;
 import com.example.syoung.fitsy.statistics.StatisticsLayout;
 import com.example.syoung.fitsy.user_information.UserInformationLayout;
 
+//TODO: fragment 생성 lazy loading으로 변경
 
 public class Main extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     /**
