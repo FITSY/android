@@ -71,9 +71,7 @@ public class Main extends ActionBarActivity implements NavigationDrawerFragment.
         }
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, objFragment)
-                .commit();
+        fragmentManager.beginTransaction().replace(R.id.container, objFragment).commit();
     }
 
     public void onSectionAttached(int number) {
@@ -142,8 +140,7 @@ public class Main extends ActionBarActivity implements NavigationDrawerFragment.
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
