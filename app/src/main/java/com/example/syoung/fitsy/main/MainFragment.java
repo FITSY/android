@@ -29,7 +29,7 @@ public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        rootView = inflater.inflate(R.layout.exercise_main_layout, container, false);
+        rootView = inflater.inflate(R.layout.fragment_fitsy_main, container, false);
         return rootView;
     }
 }
