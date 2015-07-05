@@ -1,4 +1,4 @@
-package com.example.syoung.fitsy.exercise_main;
+package com.example.syoung.fitsy.statistics;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,12 +12,25 @@ import com.example.syoung.fitsy.R;
 /**
  * Created by syoung on 2015-06-28.
  */
-public class ExerciseMainLayout extends Fragment {
+public class StatisticsFragment extends Fragment {
     private View rootView;
-    @Nullable
+
+    private static StatisticsFragment instance;
+
+    private StatisticsFragment() {
+
+    }
+
+    public static StatisticsFragment getInstance() {
+        if (instance == null) {
+            instance = new StatisticsFragment();
+        }
+        return instance;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        rootView = inflater.inflate(R.layout.exercise_main_layout, container, false);
+        rootView = inflater.inflate(R.layout.statistics_layout, container, false);
         return rootView;
     }
 }

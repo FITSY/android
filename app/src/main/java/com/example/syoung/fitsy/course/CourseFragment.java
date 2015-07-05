@@ -1,7 +1,6 @@
-package com.example.syoung.fitsy.exercise_course;
+package com.example.syoung.fitsy.course;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +11,22 @@ import com.example.syoung.fitsy.R;
 /**
  * Created by syoung on 2015-06-28.
  */
-public class ExerciseCourseLayout extends Fragment{
+public class CourseFragment extends Fragment{
     private View rootView;
-    @Nullable
+
+    private static CourseFragment instance;
+
+    private CourseFragment() {
+
+    }
+
+    public static CourseFragment getInstance() {
+        if (instance == null) {
+            instance = new CourseFragment();
+        }
+        return instance;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.exercise_course_layout, container, false);

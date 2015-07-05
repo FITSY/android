@@ -1,4 +1,4 @@
-package com.example.syoung.fitsy.statistics;
+package com.example.syoung.fitsy.history;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,12 +12,25 @@ import com.example.syoung.fitsy.R;
 /**
  * Created by syoung on 2015-06-28.
  */
-public class StatisticsLayout extends Fragment {
+public class HistoryFragment extends Fragment {
     private View rootView;
-    @Nullable
+
+    private static HistoryFragment instance;
+
+    private HistoryFragment() {
+
+    }
+
+    public static HistoryFragment getInstance() {
+        if (instance == null) {
+            instance = new HistoryFragment();
+        }
+        return instance;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        rootView = inflater.inflate(R.layout.statistics_layout, container, false);
+        rootView = inflater.inflate(R.layout.history_layout, container, false);
         return rootView;
     }
 }
