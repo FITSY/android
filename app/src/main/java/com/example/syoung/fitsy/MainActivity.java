@@ -77,12 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            System.out.println("what?");
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 }
