@@ -1,21 +1,18 @@
 package com.example.syoung.fitsy;
 
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
 
 import com.example.syoung.fitsy.course.CourseFragment;
-import com.example.syoung.fitsy.main.MainFragment;
 import com.example.syoung.fitsy.history.HistoryFragment;
-import com.example.syoung.fitsy.statistics.StatisticsFragment;
+import com.example.syoung.fitsy.main.MainFragment;
 import com.example.syoung.fitsy.myinfo.MyInformationFragment;
+import com.example.syoung.fitsy.statistics.StatisticsFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 

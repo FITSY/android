@@ -43,7 +43,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/listView"/>
+        android:id="@+id/mainCourseListView"/>
 
     <ImageButton
         android:layout_width="wrap_content"
