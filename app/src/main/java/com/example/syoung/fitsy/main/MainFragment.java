@@ -24,7 +24,7 @@ public class MainFragment extends Fragment {
     private View rootView;
 
     private static MainFragment instance;
-    @InjectView(R.id.mainCourseListView) ListView mainCourseView;
+    //@InjectView(R.id.mainCourseListView) ListView mainCourseView;
 
 //    private List<String> courseData = new ArrayList<>();
 //    private MainCourseListAdapter mainCourseListAdapter;
@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
 //        mainCourseListAdapter.notifyDataSetChanged();
     }
 
-    @OnItemClick(R.id.mainCourseListView)
+    //@OnItemClick(R.id.mainCourseListView)
     void onItemClicked(int position) {
 //        if(courseData.size() == position){
 //            return;
