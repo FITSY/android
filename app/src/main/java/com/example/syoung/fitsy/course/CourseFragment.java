@@ -80,9 +80,7 @@ public class CourseFragment extends Fragment{
         recommend_list_request.execute();
 
         // 각 리스트가 완성될 때까지 대기
-        while(current_course_list == null){}
-        while(add_list_request == null){}
-        while(recommend_list_request == null){}
+        while(current_course_list == null || add_list_request == null || recommend_list_request == null){}
 
         // LazyAdapter -> 리스트 View 생성
         current_course_adapter = new LazyAdapter(getActivity(), current_course_list, R.layout.course_list_node, new String[] {}, new int[] {});
