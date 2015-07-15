@@ -48,23 +48,6 @@ public class CourseFragment extends Fragment{
 
     private static CourseFragment instance;
 
-    private CourseFragment() {
-        super();
-    }
-
-    public CourseFragment(int course_image, String course_name) {
-        super();
-        this.course_image = course_image;
-        this.course_name = course_name;
-    }
-
-    public static CourseFragment getInstance() {
-        if (instance == null) {
-            instance = new CourseFragment();
-        }
-        return instance;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_course, container, false);
