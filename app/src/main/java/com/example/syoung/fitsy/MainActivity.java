@@ -14,6 +14,8 @@ import com.example.syoung.fitsy.main.MainFragment;
 import com.example.syoung.fitsy.myinfo.MyInformationFragment;
 import com.example.syoung.fitsy.statistics.StatisticsFragment;
 
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private NavigationDrawerFragment navigationDrawerFragment;
