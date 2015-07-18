@@ -24,9 +24,9 @@ public class CourseFragment extends Fragment{
     private View rootView;
 
     // 정보를 가져올 페이지 정보
-    static final String CURRENT_URL = "localhost:8080/current_course.php"; // 현재 운동정보 관련 URL
-    static final String ADD_URL = "localhost:8080/add_course.php"; // 검색/추가 운동 관련 URL
-    static final String RECOMMEND_URL = "localhost:8080/recommend_course.php"; // 추천 운동정보 관련 URL
+    static final String CURRENT_URL = "localhost:8080/sgen/current_course.php"; // 현재 운동정보 관련 URL
+    static final String ADD_URL = "localhost:8080/sgen/add_course.php"; // 검색/추가 운동 관련 URL
+    static final String RECOMMEND_URL = "localhost:8080/sgen/recommend_course.php"; // 추천 운동정보 관련 URL
     static final int TAG_CURRENT = 1;
     static final int TAG_ADD = 2;
     static final int TAG_RECO = 3;
@@ -37,6 +37,9 @@ public class CourseFragment extends Fragment{
 
     public int course_image;
     public String course_name;
+    static String order; // get : get courses, insert : insert_courses, delete : delete_courses
+                         // add_course 같은 경우에는 default : 그냥 맨 처음에 보여지는 리스트들, insert : insert_courses, search : 입력한 값에 따른 결과들
+    static String exercise_name = null;
 
     ListView view_current_course_list;
     ListView view_add_course_list;
@@ -64,16 +67,20 @@ public class CourseFragment extends Fragment{
         rootView = inflater.inflate(R.layout.fragment_course, container, false);
 
         CommonUtilities.ID = "test"; // 임시 아이디
+        CommonUtilities.PASSWORD = "1234"; // 임시 비밀번
 
         // ListView 등록
         view_current_course_list = (ListView) rootView.findViewById (R.id.current_course_list);
         view_add_course_list = (ListView) rootView.findViewById (R.id.add_course_list);
         view_recommend_course_list = (ListView) rootView.findViewById (R.id.recommend_course_list);
 
+        // course를 get / insert / delete 할 건지를 정한다
+        order = "get";
+
         // http request 요청
-        MakeDynamicList current_list_request = new MakeDynamicList(CURRENT_URL, TAG_CURRENT);
-        MakeDynamicList add_list_request = new MakeDynamicList(ADD_URL, TAG_ADD);
-        MakeDynamicList recommend_list_request = new MakeDynamicList(RECOMMEND_URL, TAG_RECO);
+        MakeDynamicList current_list_request = new MakeDynamicList(CURRENT_URL, TAG_CURRENT, order);
+        MakeDynamicList add_list_request = new MakeDynamicList(ADD_URL, TAG_ADD, "default");
+        MakeDynamicList recommend_list_request = new MakeDynamicList(RECOMMEND_URL, TAG_RECO, order);
 
         current_list_request.execute();
         add_list_request.execute();

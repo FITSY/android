@@ -31,15 +31,28 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
     static String URL = null; // 정보를 가져올 페이지 정보
     static String ChosenTag;
     static int whichTag;
+    static String order; // 1 : get courses, 2 : insert_courses, 3 : delete_courses
+    static String exercise_name = null; // 운동 리스트를 추가하거나 삭제할 경우 필요한 운동 이
 
     ArrayList<HashMap<String, String>> list;
     JSONArray jsonArr = null;
 
     // 생성자
-    public MakeDynamicList(String _url, int _whichTag) {
+    public MakeDynamicList(String _url, int _whichTag, String _order) {
 
         this.URL = _url;
         this.whichTag = _whichTag;
+        this.order = _order;
+
+    }
+
+    public MakeDynamicList(String _url, int _whichTag, String _order, String _exercise_name) {
+
+        this.URL = _url;
+        this.whichTag = _whichTag;
+        this.order = _order;
+        this.exercise_name = _exercise_name; // add_course 같은 경우에는 insert 일 때 exercise_name이 변수값으로 들어오고, search 일때는 search_input이 변수값으로 들어온다
+                                             // recommend_course 같은 경우에는 insert 일 때 추천 코스 이름이 변수값으로 들어온다
 
     }
 
@@ -53,9 +66,14 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
         // Service Handler Instance 생성
         ServiceHandler sh = new ServiceHandler();
 
-        // 파라미터 추가. 유저의 ID를 전송한다.
+        // 파라미터 추가
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("id", CommonUtilities.ID));
+        params.add(new BasicNameValuePair("password", CommonUtilities.PASSWORD));
+        params.add(new BasicNameValuePair("order", order));
+
+        if(exercise_name != null)
+            params.add(new BasicNameValuePair("exercise_name", exercise_name));
 
         // JSON 형태의 응답(response)을 받기 위해 HTTP request 를 해당 URL 로 보낸다.
         String jsonStr = sh.makeServiceCall(URL, ServiceHandler.GET, params);

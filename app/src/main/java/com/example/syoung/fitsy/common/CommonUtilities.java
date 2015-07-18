@@ -6,5 +6,6 @@ package com.example.syoung.fitsy.common;
 public class CommonUtilities {
 
     public static String ID = null;
+    public static String PASSWORD = null;
 
 }
