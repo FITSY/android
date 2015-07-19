@@ -1,7 +1,14 @@
 package com.example.syoung.fitsy;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,16 +30,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-//TODO : Sun - 메뉴바 버튼 눌렀을 때 AlertDialog 호출, AlertDialog BluetoothList 추가
+import com.example.syoung.fitsy.main.adapter.BluetoothListAdapter;
+import com.example.syoung.fitsy.main.bluetooth.ConnectThread;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class NavigationDrawerFragment extends Fragment {
 
     private Toolbar toolbar;
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
+    private static final int REQUEST_ENABLE_BT = 0;
 
     private NavigationDrawerCallbacks callbacks;
     private ActionBarDrawerToggle drawerToggle;
@@ -42,6 +55,7 @@ public class NavigationDrawerFragment extends Fragment {
     private int currentSelectedPosition = 0;
     private boolean fromSavedInstanceState;
     private boolean userLearnedDrawer;
+
 
     public NavigationDrawerFragment() {
     }
@@ -202,49 +216,6 @@ public class NavigationDrawerFragment extends Fragment {
             inflater.inflate(R.menu.global, menu);
         }
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        if (item.getItemId() == R.id.hand_device) {
-            String [] items=new String []{"Item 1","Item 2","Item 3","Item 4"};
-            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-            builder.setTitle("Hand Device");
-
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                }
-            });
-
-            builder.show();
-            return true;
-        }
-
-        if (item.getItemId() == R.id.foot_device) {
-            String [] items=new String []{"Item 1","Item 2","Item 3","Item 4"};
-            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-            builder.setTitle("Foot Device");
-
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                }
-            });
-
-            builder.show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public static interface NavigationDrawerCallbacks {

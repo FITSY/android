@@ -27,8 +27,7 @@ public class ConnectBluetooth {
     private static final int REQUEST_ENABLE_BT = 0;
     private Context context;
     private BluetoothAdapter mBluetoothAdapter;
-    @Bind(R.id.bluetoothList)
-    ListView bluetoothListView;
+    @Bind(R.id.bluetoothList) ListView bluetoothListView;
     private List<BluetoothDevice> bluetoothDeviceData = new ArrayList<>();
     private BluetoothListAdapter adapter;
     private ProgressBar bluetoothProgressBar;

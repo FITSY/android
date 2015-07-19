@@ -1,26 +1,47 @@
 package com.example.syoung.fitsy;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.syoung.fitsy.course.CourseFragment;
 import com.example.syoung.fitsy.history.HistoryFragment;
 import com.example.syoung.fitsy.main.MainFragment;
+import com.example.syoung.fitsy.main.adapter.BluetoothListAdapter;
+import com.example.syoung.fitsy.main.bluetooth.ConnectThread;
 import com.example.syoung.fitsy.myinfo.MyInformationFragment;
 import com.example.syoung.fitsy.statistics.StatisticsFragment;
 
-import butterknife.ButterKnife;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+//TODO : Sun - 메뉴바 버튼 눌렀을 때 AlertDialog 호출, AlertDialog BluetoothList 추가
+//TODO : Sun - 블루투스 값 제대로 받기
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private NavigationDrawerFragment navigationDrawerFragment;
     private CharSequence title;
+    private static final int REQUEST_ENABLE_BT = 0;
 
+    private BluetoothAdapter bluetoothAdapter;
+    private List<BluetoothDevice> bluetoothDeviceData = new ArrayList<>();
+    private BluetoothListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +97,100 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        if (item.getItemId() == R.id.hand_device) {
+            String [] items=new String []{"Item 1","Item 2","Item 3","Item 4"};
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("Hand Device");
+
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                }
+            });
+
+            builder.show();
+            return true;
+        }
+
+        if (item.getItemId() == R.id.foot_device) {
+            AlertDialog.Builder footDeviceBuilder = new AlertDialog.Builder(this);
+            footDeviceBuilder.setTitle("Foot Device");
+
+            adapter = new BluetoothListAdapter(this);
+            adapter.setData(bluetoothDeviceData);
+            footDeviceBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (bluetoothDeviceData.size() == which) {
+                        return;
+                    }
+                    BluetoothDevice selectedDevice = bluetoothDeviceData.get(which);
+                    startConnect(selectedDevice);
+                }
+            });
+            footDeviceBuilder.show();
+
+            IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+            this.registerReceiver(mReceiver, filter);
+
+            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (bluetoothAdapter == null) {
+                Toast.makeText(this, "This device did not support bluetooth", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+//            if (!bluetoothAdapter.isEnabled()) {
+//                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+//            } else {
+//                setBluetoothList();
+//            }
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        this.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_ENABLE_BT:
+                setBluetoothList();
+                break;
+        }
+    }
+
+    private void setBluetoothList() {
+        Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+        for (BluetoothDevice device : pairedDevices) {
+            bluetoothDeviceData.add(device);
+        }
+        adapter.notifyDataSetChanged();
+        bluetoothAdapter.startDiscovery();
+    }
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.e("action", action);
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                bluetoothDeviceData.add(device);
+                adapter.notifyDataSetChanged();
+            } else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+//                bluetoothListView.removeFooterView(bluetoothProgressBar);
+            }
+        }
+    };
+
+    private void startConnect(BluetoothDevice selectedDevice) {
+        ConnectThread connectThread = new ConnectThread(selectedDevice);
+        connectThread.start();
     }
 }
