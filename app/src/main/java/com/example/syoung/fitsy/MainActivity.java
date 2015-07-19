@@ -32,6 +32,7 @@ import java.util.Set;
 
 //TODO : Sun - 메뉴바 버튼 눌렀을 때 AlertDialog 호출, AlertDialog BluetoothList 추가
 //TODO : Sun - 블루투스 값 제대로 받기
+//TODO : Sun - bluetoothAdapter.isEnabled() error
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     private BluetoothAdapter bluetoothAdapter;
     private List<BluetoothDevice> bluetoothDeviceData = new ArrayList<>();
-    private BluetoothListAdapter adapter;
+    private BluetoothListAdapter bluetoothListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,28 +101,25 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         if (item.getItemId() == R.id.hand_device) {
             String [] items=new String []{"Item 1","Item 2","Item 3","Item 4"};
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
-            builder.setTitle("Hand Device");
+            AlertDialog.Builder handDeviceBuilder = getDeviceAlertDialogBuilder("Hand Device");
 
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-
+            handDeviceBuilder.setItems(items, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
                 }
             });
 
-            builder.show();
+            handDeviceBuilder.show();
             return true;
         }
 
         if (item.getItemId() == R.id.foot_device) {
-            AlertDialog.Builder footDeviceBuilder = new AlertDialog.Builder(this);
-            footDeviceBuilder.setTitle("Foot Device");
 
-            adapter = new BluetoothListAdapter(this);
-            adapter.setData(bluetoothDeviceData);
-            footDeviceBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            bluetoothListAdapter = new BluetoothListAdapter(this);
+            bluetoothListAdapter.setData(bluetoothDeviceData);
+
+            AlertDialog.Builder footDeviceBuilder = getDeviceAlertDialogBuilder("Foot Device");
+            footDeviceBuilder.setAdapter(bluetoothListAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (bluetoothDeviceData.size() == which) {
@@ -131,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                     startConnect(selectedDevice);
                 }
             });
+
             footDeviceBuilder.show();
 
             IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
@@ -141,8 +140,10 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if (bluetoothAdapter == null) {
                 Toast.makeText(this, "This device did not support bluetooth", Toast.LENGTH_SHORT).show();
-                return true;
+                return false;
             }
+            Toast.makeText(this, "This device support bluetooth", Toast.LENGTH_SHORT).show();
+
 //            if (!bluetoothAdapter.isEnabled()) {
 //                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 //                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
@@ -154,6 +155,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private AlertDialog.Builder getDeviceAlertDialogBuilder(String title) {
+        AlertDialog.Builder deviceBuilder;
+        deviceBuilder = new AlertDialog.Builder(this);
+        deviceBuilder.setTitle(title);
+        return deviceBuilder;
     }
 
     @Override
@@ -171,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         for (BluetoothDevice device : pairedDevices) {
             bluetoothDeviceData.add(device);
         }
-        adapter.notifyDataSetChanged();
+        bluetoothListAdapter.notifyDataSetChanged();
         bluetoothAdapter.startDiscovery();
     }
 
@@ -182,9 +190,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 bluetoothDeviceData.add(device);
-                adapter.notifyDataSetChanged();
+                bluetoothListAdapter.notifyDataSetChanged();
             } else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-//                bluetoothListView.removeFooterView(bluetoothProgressBar);
             }
         }
     };

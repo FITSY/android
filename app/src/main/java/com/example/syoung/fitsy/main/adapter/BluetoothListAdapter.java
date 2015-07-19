@@ -14,6 +14,7 @@ import java.util.List;
 
 public class BluetoothListAdapter extends BaseAdapter {
 
+//    private List<String> data;
     private List<BluetoothDevice> data;
     private Context context;
 
@@ -24,6 +25,10 @@ public class BluetoothListAdapter extends BaseAdapter {
     public void setData(List<BluetoothDevice> data) {
         this.data = data;
     }
+
+//    public void setData(List<String> data) {
+//        this.data = data;
+//    }
 
     @Override
     public int getCount() {
@@ -52,6 +57,8 @@ public class BluetoothListAdapter extends BaseAdapter {
         }
         BluetoothDevice device = data.get(position);
 
+//        String device = data.get(position);
+
         holder.setData(device);
 
         return convertView;
@@ -70,5 +77,10 @@ public class BluetoothListAdapter extends BaseAdapter {
             name.setText(data.getName());
             address.setText(data.getAddress());
         }
+
+//        private void setData(String data) {
+//            name.setText(data);
+//            address.setText("test");
+//        }
     }
 }
