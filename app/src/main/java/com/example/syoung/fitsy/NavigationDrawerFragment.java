@@ -1,6 +1,7 @@
 package com.example.syoung.fitsy;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -20,7 +22,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+//TODO : Sun - 메뉴바 버튼 눌렀을 때 AlertDialog 호출, AlertDialog BluetoothList 추가
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -206,12 +211,36 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.hand_device) {
-            Toast.makeText(getActivity(), "hand device.", Toast.LENGTH_SHORT).show();
+            String [] items=new String []{"Item 1","Item 2","Item 3","Item 4"};
+            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+            builder.setTitle("Hand Device");
+
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                }
+            });
+
+            builder.show();
             return true;
         }
 
         if (item.getItemId() == R.id.foot_device) {
-            Toast.makeText(getActivity(), "foot device.", Toast.LENGTH_SHORT).show();
+            String [] items=new String []{"Item 1","Item 2","Item 3","Item 4"};
+            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+            builder.setTitle("Foot Device");
+
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                }
+            });
+
+            builder.show();
             return true;
         }
 
