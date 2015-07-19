@@ -14,19 +14,14 @@ import java.util.List;
 
 public class BluetoothListAdapter extends BaseAdapter {
 
-//    private List<BluetoothDevice> data;
-    private List<String> data;
+    private List<BluetoothDevice> data;
     private Context context;
 
     public BluetoothListAdapter(Context context) {
         this.context = context;
     }
 
-//    public void setData(List<BluetoothDevice> data) {
-//        this.data = data;
-//    }
-
-    public void setData(List<String> data) {
+    public void setData(List<BluetoothDevice> data) {
         this.data = data;
     }
 
@@ -55,9 +50,8 @@ public class BluetoothListAdapter extends BaseAdapter {
         } else {
             holder = (Holder) convertView.getTag();
         }
-//        BluetoothDevice device = data.get(position);
+        BluetoothDevice device = data.get(position);
 
-        String device = data.get(position);
         holder.setData(device);
 
         return convertView;
@@ -72,14 +66,9 @@ public class BluetoothListAdapter extends BaseAdapter {
             address = (TextView) parent.findViewById(R.id.item_bluetooth_list_address);
         }
 
-//        private void setData(BluetoothDevice data) {
-//            name.setText(data.getName());
-//            address.setText(data.getAddress());
-//        }
-
-        private void setData(String data) {
-            name.setText(data);
-            address.setText("hello");
+        private void setData(BluetoothDevice data) {
+            name.setText(data.getName());
+            address.setText(data.getAddress());
         }
     }
 }
