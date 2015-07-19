@@ -45,7 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -76,6 +78,32 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:text="Button5" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="Button6" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="Button7" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="Button8" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="Button9" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="Button10" />
+
         </LinearLayout>
     </HorizontalScrollView>
 
