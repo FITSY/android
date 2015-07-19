@@ -54,61 +54,61 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button1" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button2" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button3" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button4" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button5" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button6" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button7" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button8" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button9" />
+                android:background="@mipmap/ic_launcher" />
 
-            <Button
+            <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:text="Button10" />
+                android:background="@mipmap/ic_launcher" />
 
         </LinearLayout>
     </HorizontalScrollView>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
