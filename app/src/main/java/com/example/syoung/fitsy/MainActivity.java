@@ -32,7 +32,6 @@ import java.util.Set;
 
 //TODO : Sun - 메뉴바 버튼 눌렀을 때 AlertDialog 호출, AlertDialog BluetoothList 추가
 //TODO : Sun - 블루투스 값 제대로 받기
-//TODO : Sun - bluetoothAdapter.isEnabled() error
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -115,9 +114,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         if (item.getItemId() == R.id.foot_device) {
 
-            bluetoothListAdapter = new BluetoothListAdapter(this);
-            bluetoothListAdapter.setData(bluetoothDeviceData);
-
             AlertDialog.Builder footDeviceBuilder = getDeviceAlertDialogBuilder("Foot Device");
             footDeviceBuilder.setAdapter(bluetoothListAdapter, new DialogInterface.OnClickListener() {
                 @Override
@@ -138,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             this.registerReceiver(mReceiver, filter);
 
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
             if (bluetoothAdapter == null) {
                 Toast.makeText(this, "This device did not support bluetooth", Toast.LENGTH_SHORT).show();
                 return false;
@@ -150,6 +147,10 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 //            } else {
 //                setBluetoothList();
 //            }
+
+            bluetoothListAdapter = new BluetoothListAdapter(this);
+            bluetoothListAdapter.setData(bluetoothDeviceData);
+
 
             return true;
         }
