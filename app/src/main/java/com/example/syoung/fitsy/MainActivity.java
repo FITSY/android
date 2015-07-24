@@ -30,8 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-//TODO : Sun - ¸Þ´º¹Ù ¹öÆ° ´­·¶À» ¶§ AlertDialog È£Ãâ, AlertDialog BluetoothList Ãß°¡
-//TODO : Sun - ºí·çÅõ½º °ª Á¦´ë·Î ¹Þ±â
+//TODO : Sun - ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ AlertDialog È£ï¿½ï¿½, AlertDialog BluetoothList ï¿½ß°ï¿½
+//TODO : Sun - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -52,6 +52,17 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         title = getString(R.string.title_section1);
 
         navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        bluetoothListAdapter = new BluetoothListAdapter(this);
+        bluetoothListAdapter.setData(bluetoothDeviceData);
+
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        this.registerReceiver(mReceiver, filter);
+
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
     }
 
     @Override
@@ -128,29 +139,18 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
             footDeviceBuilder.show();
 
-            IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-            this.registerReceiver(mReceiver, filter);
-
-            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
             if (bluetoothAdapter == null) {
                 Toast.makeText(this, "This device did not support bluetooth", Toast.LENGTH_SHORT).show();
                 return false;
             }
             Toast.makeText(this, "This device support bluetooth", Toast.LENGTH_SHORT).show();
 
-//            if (!bluetoothAdapter.isEnabled()) {
-//                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-//                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-//            } else {
-//                setBluetoothList();
-//            }
-
-            bluetoothListAdapter = new BluetoothListAdapter(this);
-            bluetoothListAdapter.setData(bluetoothDeviceData);
-
+            if (!bluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            } else {
+                setBluetoothList();
+            }
 
             return true;
         }
