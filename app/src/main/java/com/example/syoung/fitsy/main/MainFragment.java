@@ -29,15 +29,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
-//TODO : Sun - MainFragment 에 horizontal Scroll View 추가
-//TODO : Sun - 화면 전환 (다섯 page, main, nfc, 운동(유산소, 무산소, 운동 방법))
-
 public class MainFragment extends Fragment {
 
     private View rootView;
     private static MainFragment instance;
 
-    private MainFragment() {
+    public MainFragment() {
 
     }
 

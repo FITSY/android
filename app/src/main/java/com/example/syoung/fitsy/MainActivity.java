@@ -30,8 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-//TODO : Sun - �޴��� ��ư ������ �� AlertDialog ȣ��, AlertDialog BluetoothList �߰�
-//TODO : Sun - ������� �� ����� �ޱ�
+//TODO : all Fragment change(private constructor => public constructor)
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -63,6 +62,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 
     @Override
@@ -124,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
 
         if (item.getItemId() == R.id.foot_device) {
-
             AlertDialog.Builder footDeviceBuilder = getDeviceAlertDialogBuilder("Foot Device");
             footDeviceBuilder.setAdapter(bluetoothListAdapter, new DialogInterface.OnClickListener() {
                 @Override
@@ -143,8 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 Toast.makeText(this, "This device did not support bluetooth", Toast.LENGTH_SHORT).show();
                 return false;
             }
-            Toast.makeText(this, "This device support bluetooth", Toast.LENGTH_SHORT).show();
-
             if (!bluetoothAdapter.isEnabled()) {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
