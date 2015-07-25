@@ -16,7 +16,7 @@ public class MyInformationFragment extends Fragment {
 
     private static MyInformationFragment instance;
 
-    private MyInformationFragment() {
+    public MyInformationFragment() {
 
     }
 

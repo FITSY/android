@@ -16,7 +16,7 @@ public class StatisticsFragment extends Fragment {
 
     private static StatisticsFragment instance;
 
-    private StatisticsFragment() {
+    public StatisticsFragment() {
 
     }
 

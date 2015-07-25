@@ -51,7 +51,7 @@ public class CourseFragment extends Fragment{
 
     private static CourseFragment instance;
 
-    private CourseFragment() {
+    public CourseFragment() {
 
     }
 

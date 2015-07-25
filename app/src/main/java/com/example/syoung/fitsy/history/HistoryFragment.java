@@ -16,7 +16,7 @@ public class HistoryFragment extends Fragment {
 
     private static HistoryFragment instance;
 
-    private HistoryFragment() {
+    public HistoryFragment() {
 
     }
 
