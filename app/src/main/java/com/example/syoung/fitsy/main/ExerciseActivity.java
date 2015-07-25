@@ -1,11 +1,9 @@
 package com.example.syoung.fitsy.main;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-import com.example.syoung.fitsy.MainActivity;
 import com.example.syoung.fitsy.R;
 
 import butterknife.Bind;
