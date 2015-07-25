@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import com.example.syoung.fitsy.R;
 
-/**
- * Created by syoung on 2015-07-25.
- */
 public class ExerciseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

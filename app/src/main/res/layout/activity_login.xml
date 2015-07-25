@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="199dp"
+        android:layout_height="199dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/ic_launcher" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/centerId"
+        android:hint="센터 아이디"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userId"
+        android:hint="사용자 아이디"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint = "비밀번호"
+        android:gravity="center"
+        android:id="@+id/userPassword" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG IN"
+        android:id="@+id/loginBtn"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>
