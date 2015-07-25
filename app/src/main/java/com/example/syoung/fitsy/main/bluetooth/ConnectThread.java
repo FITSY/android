@@ -2,6 +2,7 @@ package com.example.syoung.fitsy.main.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,6 +74,10 @@ public class ConnectThread extends Thread {
     }
 
     private void manageData(byte[] data) {
-
+        StringBuilder builder = new StringBuilder();
+        for(byte b : data){
+            builder.append(b).append(" ");
+        }
+        Log.e("data", builder.toString());
     }
 }
