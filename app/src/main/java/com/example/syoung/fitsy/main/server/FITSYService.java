@@ -4,6 +4,6 @@ import retrofit.Callback;
 import retrofit.http.GET;
 
 public interface FITSYService {
-    @GET("/test")
+    @GET("/")
     public void getResponse(Callback<Login> cb);
 }

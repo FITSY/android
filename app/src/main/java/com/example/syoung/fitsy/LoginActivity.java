@@ -39,7 +39,7 @@ public class LoginActivity extends Activity {
         Gson gson = new Gson();
 
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://192.168.200.198:8080")
+                .setEndpoint("http://52.68.206.85:3000/")
                 .setConverter(new GsonConverter(gson))
                 .build();
 
@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
         service.getResponse(new Callback<Login>() {
             @Override
             public void success(Login login, Response response) {
-                Log.e("success", login.getId() + ", " + login.getPassword());
+                Log.e("success", login.get_id() + ", " + login.getTest());
             }
             @Override
             public void failure(RetrofitError error) {
