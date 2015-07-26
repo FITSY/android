@@ -30,8 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-//TODO : all Fragment change(private constructor => public constructor)
-
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private NavigationDrawerFragment navigationDrawerFragment;
@@ -115,16 +113,30 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         int id = item.getItemId();
 
         if (item.getItemId() == R.id.hand_device) {
-            String [] items=new String []{"Item 1","Item 2","Item 3","Item 4"};
-            AlertDialog.Builder handDeviceBuilder = getDeviceAlertDialogBuilder("Hand Device");
-
-            handDeviceBuilder.setItems(items, new DialogInterface.OnClickListener() {
+            AlertDialog.Builder handDeviceBuilder = getDeviceAlertDialogBuilder("Foot Device");
+            handDeviceBuilder.setAdapter(bluetoothListAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    if (bluetoothDeviceData.size() == which) {
+                        return;
+                    }
+                    BluetoothDevice selectedDevice = bluetoothDeviceData.get(which);
+                    startConnect(selectedDevice);
                 }
             });
 
             handDeviceBuilder.show();
+
+            if (bluetoothAdapter == null) {
+                Toast.makeText(this, "This device did not support bluetooth", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (!bluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            } else {
+                setBluetoothList();
+            }
             return true;
         }
 
