@@ -15,7 +15,8 @@ public class ExerciseActivity extends Activity {
     @Bind(R.id.exerciseFinishBtn) ImageButton exerciseFinishBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_fitsy_main_exercise);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fitsy_main_exercise);
         ButterKnife.bind(this);
     }
 
