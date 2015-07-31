@@ -48,9 +48,9 @@ public class MainFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         exerciseCourseItemList = new ArrayList<RowItem>();
 
-        MakeDynamicList makeList = new MakeDynamicList(getActivity());
-        makeList.execute();
-        
+//        MakeDynamicList makeList = new MakeDynamicList(getActivity());
+//        makeList.execute();
+
         return rootView;
     }
 
