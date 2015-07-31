@@ -1,28 +1,25 @@
 package com.example.syoung.fitsy.main.adapter;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.syoung.fitsy.R;
+import com.example.syoung.fitsy.main.data.CourseItem;
 
 import java.util.List;
 
-public class BluetoothListAdapter extends BaseAdapter {
+public class ExerciseCourseListAdapter extends BaseAdapter {
 
-    private List<BluetoothDevice> data;
+    private List<CourseItem> data;
     private Context context;
 
-    public BluetoothListAdapter(Context context) {
+    public ExerciseCourseListAdapter(Context context) {
         this.context = context;
-    }
-
-    public void setData(List<BluetoothDevice> data) {
-        this.data = data;
     }
 
     @Override
@@ -31,7 +28,7 @@ public class BluetoothListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public CourseItem getItem(int position) {
         return data.get(position);
     }
 
@@ -44,31 +41,40 @@ public class BluetoothListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_bluetooth_list, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_main_course_list, null);
             holder = new Holder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
-        BluetoothDevice device = data.get(position);
 
-        holder.setData(device);
+        CourseItem item = data.get(position);
+
+        holder.setData(item);
 
         return convertView;
     }
 
     private class Holder {
+        private ImageView image;
         private TextView name;
-        private TextView address;
 
         private Holder(View parent) {
-            name = (TextView) parent.findViewById(R.id.item_bluetooth_list_name);
-            address = (TextView) parent.findViewById(R.id.item_bluetooth_list_address);
+            image = (ImageView) parent.findViewById(R.id.item_main_course_image);
+            name = (TextView) parent.findViewById(R.id.item_main_course_name);
         }
 
-        private void setData(BluetoothDevice data) {
-            name.setText(data.getName());
-            address.setText(data.getAddress());
+        private void setData(CourseItem data) {
+            image.setImageResource(data.getImageId());
+            name.setText(data.getImageName());
         }
+    }
+
+    public List<CourseItem> getData() {
+        return data;
+    }
+
+    public void setData(List<CourseItem> data) {
+        this.data = data;
     }
 }

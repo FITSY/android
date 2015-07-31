@@ -3,7 +3,6 @@ package com.example.syoung.fitsy.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +10,15 @@ import android.widget.ImageButton;
 
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
-import com.example.syoung.fitsy.common.MakeDynamicList;
-import com.example.syoung.fitsy.common.RowItem;
+import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
+import com.example.syoung.fitsy.main.data.CourseItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 
 public class MainFragment extends Fragment {
 
@@ -27,9 +26,10 @@ public class MainFragment extends Fragment {
     private static MainFragment instance;
 
     @Bind(R.id.startBtn) ImageButton startBtn;
-    @Bind(R.id.exercise_course_list) HorizontalListView horizontalListView;
+    @Bind(R.id.main_exercise_course_list) HorizontalListView exerciseCourseHorizontalListView;
 
-    private ArrayList<RowItem> exerciseCourseItemList;
+    private ExerciseCourseListAdapter exerciseCourseListAdapter;
+    private List<CourseItem> exerciseCourseItemList;
 
     public MainFragment() {
 
@@ -46,12 +46,30 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_fitsy_main, container, false);
         ButterKnife.bind(this, rootView);
-        exerciseCourseItemList = new ArrayList<RowItem>();
 
-//        MakeDynamicList makeList = new MakeDynamicList(getActivity());
-//        makeList.execute();
+        setExerciseCourseList();
 
         return rootView;
+    }
+
+    private void setExerciseCourseList() {
+
+        exerciseCourseItemList = new ArrayList<CourseItem>();
+        String exerciseName = "leg_curl";
+        int exerciseId = getActivity().getResources().getIdentifier(exerciseName, "drawable", getActivity().getPackageName());
+        CourseItem rowItem = new CourseItem(exerciseId, exerciseName);
+        exerciseCourseItemList.add(rowItem);
+        exerciseCourseItemList.add(rowItem);
+        exerciseCourseItemList.add(rowItem);
+        exerciseCourseItemList.add(rowItem);
+        exerciseCourseItemList.add(rowItem);
+        exerciseCourseItemList.add(rowItem);
+        exerciseCourseItemList.add(rowItem);
+        exerciseCourseItemList.add(rowItem);
+
+        exerciseCourseListAdapter = new ExerciseCourseListAdapter(getActivity());
+        exerciseCourseListAdapter.setData(exerciseCourseItemList);
+        exerciseCourseHorizontalListView.setAdapter(exerciseCourseListAdapter);
     }
 
     @Override

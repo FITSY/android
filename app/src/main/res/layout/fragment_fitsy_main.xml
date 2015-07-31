@@ -42,7 +42,7 @@
     </LinearLayout>
 
     <com.example.syoung.fitsy.common.HorizontalListView
-        android:id="@+id/exercise_course_list"
+        android:id="@+id/main_exercise_course_list"
         android:layout_width="wrap_content"
         android:layout_height="139dp"/>
 
