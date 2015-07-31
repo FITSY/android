@@ -11,6 +11,8 @@ import android.util.Log;
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.course.CourseFragment;
 
+import java.util.ArrayList;
+
 /**
  * Created by HyunJoo on 15. 7. 9..
  *
@@ -26,20 +28,18 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
     static final String TAG_ADD = "add_course";
     static final String TAG_EXERCISE_NAME = "exercise_name";
 
-    public static boolean isReady;
-
-    static int test_id;
-
     //static String URL = "http://192.168.0.10:8080/sgen_test/get_all_course.php"; // 굿 카페 (or 하하) ip
     //static String URL = "http://192.168.0.21:8080/sgen_test/get_all_course.php"; // 정보를 가져올 페이지 정보 (연구실 ip)
     static String URL = "http://192.168.1.19:8080/sgen_test/get_all_course.php";
+    //static String URL = null;
+    //private ArrayList<RowItem> tList = new ArrayList<RowItem>();
 
     Activity activity;
 
     // 생성자
     public MakeDynamicList(Activity activity) {
-
-        isReady = false;
+        //this.tList = mList;
+        //this.URL = _url;
         this.activity = activity;
 
     }
@@ -142,8 +142,6 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
                 else
                     CourseFragment.add_array_list.add(temp_hash_map);
             }
-
-            test_id = temp_image_id;
         } catch (JSONException e) {
             e.printStackTrace();
         }
