@@ -41,71 +41,10 @@
             android:background="@mipmap/ic_launcher" />
     </LinearLayout>
 
-    <HorizontalScrollView
+    <com.example.syoung.fitsy.common.HorizontalListView
+        android:id="@+id/main_exercise_course_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_launcher" />
-
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:layout_height="139dp"/>
 
     <ImageButton
         android:id="@+id/startBtn"

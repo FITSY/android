@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.syoung.fitsy.main.server.FITSYService;
 import com.example.syoung.fitsy.main.server.Login;
