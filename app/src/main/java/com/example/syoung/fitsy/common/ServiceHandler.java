@@ -1,7 +1,11 @@
-package com.example.syoung.fitsy.course;
+package com.example.syoung.fitsy.common;
+
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -19,7 +23,6 @@ import org.apache.http.util.EntityUtils;
  * Created by HyunJoo on 15. 7. 9..
  */
 public class ServiceHandler {
-
     static String response = null;
     public final static int GET = 1;
     public final static int POST = 2;
@@ -42,13 +45,18 @@ public class ServiceHandler {
 
             // request 형식이 POST 인지 GET 인지 구별
             if (method == POST) {
-                HttpPost httpPost = new HttpPost(url);
+                URL _url = new URL(url);
+
+                HttpPost httpRequest = null;
+
+                httpRequest = new HttpPost(_url.toURI());
+                //HttpPost httpPost = new HttpPost(url);
                 // post 파라미터들 추가
                 if (params != null) {
-                    httpPost.setEntity(new UrlEncodedFormEntity(params));
+                    httpRequest.setEntity(new UrlEncodedFormEntity(params));
                 }
 
-                httpResponse = httpClient.execute(httpPost);
+                httpResponse = (HttpResponse) httpClient.execute(httpRequest);
 
             } else if (method == GET) {
                 // 파라미터들을 주어진 URL 에 붙여서 보냄
@@ -64,7 +72,10 @@ public class ServiceHandler {
             }
             httpEntity = httpResponse.getEntity();
             response = EntityUtils.toString(httpEntity);
+            Log.e("ServiceHandler", "response : " + response);
 
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="2dp">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/course_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,13 +13,14 @@
         android:background="@null"/>
 
 
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/delete_button"
         android:layout_alignRight="@id/course_image"
-        android:background="@null"/>
+        android:layout_alignTop="@id/course_image"
+        android:background="@null"/>-->
 
 
     <TextView
@@ -27,11 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="레그프레스"
-        android:textSize="9dp"
         android:textColor="#000000"
-        android:padding="2dp"
-        android:layout_alignBottom="@id/course_image"
-        android:layout_marginLeft="10.5dp"
-        android:textAlignment="center"/>
+        android:textSize="25dp"
+        android:gravity="center"
+        android:layout_alignLeft="@id/course_image"
+        android:layout_alignRight="@id/course_image"
+        android:layout_alignBottom="@id/course_image"/>
 
 </RelativeLayout>
