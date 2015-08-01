@@ -85,7 +85,6 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
             Log.e(TAG, "해당 URL 로부터 아무런 정보를 얻을 수 없습니다.");
         }
 
-        //onPostExecute(null);
         return null;
     }
 
@@ -123,16 +122,21 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
 
                 exercise_name = temp_JSONobj.getString(TAG_EXERCISE_NAME);
 
-                temp_image_id = activity.getResources().getIdentifier(exercise_name, "drawable", activity.getPackageName());
-
-                // 임시 hash map
-                RowItem temp_hash_map = new RowItem(temp_image_id, exercise_name);
+                // TODO : add_course_list일 경우와 current_course_list일 경우, 이미지 리소스의 이름이 다름. 수정해야 함
 
                 // adding contact to contact list
-                if (index == 0)
+                if (index == 0) {
+                    //current_array
+                    temp_image_id = activity.getResources().getIdentifier(exercise_name, "drawable", activity.getPackageName());
+                    RowItem temp_hash_map = new RowItem(temp_image_id);
                     CourseFragment.current_array_list.add(temp_hash_map);
-                else
+                }
+                else {
+                    //add_array
+                    temp_image_id = activity.getResources().getIdentifier(exercise_name + "2", "drawable", activity.getPackageName());
+                    RowItem temp_hash_map = new RowItem(temp_image_id);
                     CourseFragment.add_array_list.add(temp_hash_map);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

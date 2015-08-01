@@ -39,7 +39,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     public static ArrayList<RowItem> current_array_list;
     public static ArrayList<RowItem> add_array_list;
-    public static ArrayList<RowItem> recommend_array_list;
+    //public static ArrayList<RowItem> recommend_array_list;
 
     LazyAdapter current_course_adapter;
     LazyAdapter add_course_adapter;
@@ -71,15 +71,17 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         // ListView 등록
         current_course_view = (HorizontalListView) rootView.findViewById (R.id.current_course_list);
         add_course_view = (HorizontalListView) rootView.findViewById (R.id.add_course_list);
-        recommend_course_view = (HorizontalListView) rootView.findViewById (R.id.recommend_course_list);
-
+        //recommend_course_view = (HorizontalListView) rootView.findViewById (R.id.recommend_course_list);
         // 버튼 등록
         open_button = (Button) rootView.findViewById(R.id.open_add_course);
+
+        // TODO : recommend_course_list에서 해당 코스의 이름을 클릭했을 시의 동작
+        // TODO : 검색 기능 완성
 
         // list 초기화
         current_array_list = new ArrayList<RowItem>();
         add_array_list = new ArrayList<RowItem>();
-        recommend_array_list = new ArrayList<RowItem>();
+        //recommend_array_list = new ArrayList<RowItem>();
 
         open_button.setOnClickListener(new View.OnClickListener() {
 
@@ -99,13 +101,15 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private void buttonClick(){
 
         if(add_course_view.isShown()){
-            slide_up(thisActivity,add_course_view);
+            //slide_up(thisActivity,add_course_view);
+            slide_up(thisActivity, rootView.findViewById(R.id.add_course_open));
             open_button.setText("운동 수정 열기 ∨");
-            add_course_view.setVisibility(View.GONE);
+            rootView.findViewById(R.id.add_course_open).setVisibility(View.GONE);
         }else{
-            slide_down(thisActivity,add_course_view);
+            //slide_down(thisActivity,add_course_view);
+            slide_down(thisActivity,rootView.findViewById(R.id.add_course_open));
             open_button.setText("운동 수정 닫기 ∧");
-            add_course_view.setVisibility(View.VISIBLE);
+            rootView.findViewById(R.id.add_course_open).setVisibility(View.VISIBLE);
         }
     }
 
@@ -116,7 +120,6 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         current_course_view.setAdapter(current_adapter);
         add_course_view.setAdapter(add_adapter);
-        recommend_course_view.setAdapter(current_adapter);
 
         current_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

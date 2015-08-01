@@ -7,9 +7,9 @@ public class RowItem {
     private int imageId;
     private String image_name;
 
-    public RowItem(int imageId, String image_name) {
+    public RowItem(int imageId/*, String image_name*/) {
         this.imageId = imageId;
-        this.image_name = image_name;
+        //this.image_name = image_name;
     }
 
     public RowItem(){

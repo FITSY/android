@@ -12,75 +12,331 @@
         android:padding="3dp">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/current_course"
-            android:layout_weight="1">
+            android:id="@+id/current_course">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="현재 운동 코스"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:paddingBottom="5dp"
+                android:textColor="#000000"/>
 
             <com.example.syoung.fitsy.common.HorizontalListView
                 android:id="@+id/current_course_list"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="100dp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/add_course"
-            android:layout_weight="1">
+            android:paddingTop="10dp">
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="20dp"
                 android:text="운동 수정 열기 ∨"
                 android:id="@+id/open_add_course"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:background="#2300ff"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
 
-            <com.example.syoung.fitsy.common.HorizontalListView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/add_course_list"
-                android:visibility="gone"/>
+                android:orientation="vertical"
+                android:id="@+id/add_course_open"
+                android:paddingTop="10dp"
+                android:background="#f2f2f2"
+                android:visibility="gone">
+
+                <EditText
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:focusable="false"
+                    android:id="@+id/search_input"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@drawable/search_button"
+                    android:background="@null"
+                    android:layout_alignRight="@id/search_input"
+                    android:layout_alignBottom="@id/search_input"
+                    android:layout_alignTop="@id/search_input"
+                    android:layout_alignLeft="@id/search_input"/>
+
+                <com.example.syoung.fitsy.common.HorizontalListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:id="@+id/add_course_list"/>
+
+            </LinearLayout>
 
         </LinearLayout>
+
+
+        <ScrollView
+            android:id="@+id/sv_layout"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/recommend_course_vertical_list"
-            android:layout_weight="1">
+            android:id="@+id/recommend_course_vertical_list">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/recommend_course">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="추천 운동 코스"
+                android:textColor="#000000"
+                android:textSize="20dp"/>
 
-                <TextView
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="PT 추천 코스"
+                android:textSize="15dp"/>
+
+            <HorizontalScrollView
+                android:id="@+id/sv_layout"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:paddingTop="10dp"
+                 android:id="@+id/recommend_course"
+                 android:paddingBottom="20dp">
+
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="PT 추천 코스"
+                android:textSize="15dp"/>
+
+            <HorizontalScrollView
+                android:id="@+id/sv_layout2"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="추천 운동 코스"
-                    android:textSize="20dp"/>
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:id="@+id/recommend_course2"
+                    android:paddingBottom="20dp">
 
-                <com.example.syoung.fitsy.common.HorizontalListView
-                    android:id="@+id/recommend_course_list"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="PT 추천 코스"
+                android:textSize="15dp"/>
+
+            <HorizontalScrollView
+                android:id="@+id/sv_layout3"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:id="@+id/recommend_course3"
+                    android:paddingBottom="20dp">
+
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="PT 추천 코스"
+                android:textSize="15dp"/>
+
+            <HorizontalScrollView
+                android:id="@+id/sv_layout4"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:id="@+id/recommend_course4"
+                    android:paddingBottom="20dp">
+
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/leg_curl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </HorizontalScrollView>
 
         </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </RelativeLayout>

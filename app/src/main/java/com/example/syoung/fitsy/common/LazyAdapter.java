@@ -37,8 +37,8 @@ public class LazyAdapter extends ArrayAdapter<RowItem> {
 
         if (item != null) {
 
-            TextView course_name = (TextView) view.findViewById(R.id.course_name);
-            course_name.setText(item.getImageName());
+            /*TextView course_name = (TextView) view.findViewById(R.id.course_name);
+            course_name.setText(item.getImageName());*/
 
             ImageView course_image = (ImageView) view.findViewById(R.id.course_image);
             course_image.setImageResource(item.getImageId());
