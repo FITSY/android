@@ -4,18 +4,76 @@ package com.example.syoung.fitsy.common;
  * Created by HyunJoo on 2015. 7. 29..
  */
 public class RowItem {
-    private int imageId;
-    private String image_name;
+    private int id;
+    private String cid;
+    private String cpw;
+    private int ooption1;
+    private int ooption2;
+    private int imageId; // exercise_name으로부터 얻은 해당 이름과 매치되는 이미지의 리소스 아이디
 
-    public RowItem(int imageId/*, String image_name*/) {
+    public RowItem(int id, String cid, String cpw, int ooption1, int ooption2, int imageId) {
+        this.id = id;
+        this.cid = cid;
+        this.cpw = cpw;
+        this.ooption1 = ooption1;
+        this.ooption2 = ooption2;
         this.imageId = imageId;
-        //this.image_name = image_name;
+    }
+
+    public RowItem(int imageId) {
+        this.imageId = imageId;
     }
 
     public RowItem(){
 
     }
 
+    // 운동 순번
+   public int getId() {
+        return imageId;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // 사용자 아이디
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
+    // 사용자 비밀번호
+    public String getCpw() {
+        return cpw;
+    }
+
+    public void setCpw(String cpw) {
+        this.cpw = cpw;
+    }
+
+    // ooption1 : 무게(무산소) / 운동시간(유산소)
+    public int getOoption1() {
+        return ooption1;
+    }
+
+    public void setOoption1(int ooption1) {
+        this.ooption1 = ooption1;
+    }
+
+    // ooption2 : 횟수(무산소) / 속도(유산소)
+    public int getOoption2() {
+        return imageId;
+    }
+
+    public void setOoption2(int ooption2) {
+        this.ooption2 = ooption2;
+    }
+
+    // 운동 이름으로부터 얻은 해당 이미지의 아이디
     public int getImageId() {
         return imageId;
     }
@@ -24,16 +82,4 @@ public class RowItem {
         this.imageId = imageId;
     }
 
-    public String getImageName() {
-        return image_name;
-    }
-
-    public void setImageName(String _image_name) {
-        this.image_name = _image_name;
-    }
-
-    @Override
-    public String toString() {
-        return image_name;
-    }
 }

@@ -39,4 +39,30 @@ public class Action_Anim {
         }
 
     }
+
+    public static void translate_to_up(Context ctx, View v){
+
+        android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.translate_to_up);
+        if(a != null){
+            a.reset();
+            if(v != null){
+                v.clearAnimation();
+                v.startAnimation(a);
+            }
+        }
+
+    }
+
+    public static void translate_to_down (Context ctx, View v){
+
+        android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.translate_to_down);
+        if(a != null){
+            a.reset();
+            if(v != null){
+                v.clearAnimation();
+                v.startAnimation(a);
+            }
+        }
+
+    }
 }

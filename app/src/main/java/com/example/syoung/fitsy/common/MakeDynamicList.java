@@ -19,6 +19,9 @@ import java.util.ArrayList;
  * <설명>
  * current_list와 add_list를 만드는 클래스
  */
+
+// TODO : 준형오빠가 주는 JSON형태에 맞춰서 다시 JSON 파싱하기
+
 public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
 
     static final String TAG = "MakeDynamicList";
@@ -26,12 +29,18 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
     static final String TAG_ALL = "all_courses";
     static final String TAG_CURRENT = "current_course";
     static final String TAG_ADD = "add_course";
+
+    static final String TAG_ID = "id";
+    static final String TAG_CID = "cid";
+    static final String TAG_CPW = "cpw";
+    static final String TAG_OOPTION1 = "ooption1";
+    static final String TAG_OOPTION2 = "ooption2";
     static final String TAG_EXERCISE_NAME = "exercise_name";
 
     //static String URL = "http://192.168.0.10:8080/sgen_test/get_all_course.php"; // 굿 카페 (or 하하) ip
     //static String URL = "http://192.168.0.21:8080/sgen_test/get_all_course.php"; // 정보를 가져올 페이지 정보 (연구실 ip)
-    static String URL = "http://192.168.1.19:8080/sgen_test/get_all_course.php"; // WIFI 이름 : '엔젤리너스2층'
-    //static String URL = "http://192.168.0.5:8080/sgen_test/get_all_course.php";
+    //static String URL = "http://192.168.1.19:8080/sgen_test/get_all_course.php"; // WIFI 이름 : '엔젤리너스2층'
+    static String URL = "http://192.168.0.5:8080/sgen_test/get_all_course.php";
 
     Activity activity;
 
@@ -101,7 +110,14 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
     protected void get_courses(int index, JSONObject jsonObj) {
         JSONArray jsonArr = null;
         JSONObject temp_JSONobj = null;
+
+        int temp_id;
+        String temp_cid;
+        String temp_cpw;
+        int temp_ooption1;
+        int temp_ooption2;
         String exercise_name;
+
         int temp_image_id = 0;
 
         try {
@@ -120,22 +136,27 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
 
                 temp_JSONobj = jsonArr.getJSONObject(i);
 
+                /*temp_id = temp_JSONobj.getInt(TAG_ID);
+                temp_cid = temp_JSONobj.getString(TAG_CID);
+                temp_cpw = temp_JSONobj.getString(TAG_CPW);
+                temp_ooption1 = temp_JSONobj.getInt(TAG_OOPTION1);
+                temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);*/
                 exercise_name = temp_JSONobj.getString(TAG_EXERCISE_NAME);
-
-                // TODO : add_course_list일 경우와 current_course_list일 경우, 이미지 리소스의 이름이 다름. 수정해야 함
 
                 // adding contact to contact list
                 if (index == 0) {
                     //current_array
                     temp_image_id = activity.getResources().getIdentifier(exercise_name, "drawable", activity.getPackageName());
-                    RowItem temp_hash_map = new RowItem(temp_image_id);
-                    CourseFragment.current_array_list.add(temp_hash_map);
+                    //RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_ooption1, temp_ooption2, temp_image_id);
+                    RowItem temp_row_item = new RowItem(temp_image_id);
+                    CourseFragment.current_array_list.add(temp_row_item);
                 }
                 else {
                     //add_array
                     temp_image_id = activity.getResources().getIdentifier(exercise_name + "2", "drawable", activity.getPackageName());
-                    RowItem temp_hash_map = new RowItem(temp_image_id);
-                    CourseFragment.add_array_list.add(temp_hash_map);
+                    //RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_ooption1, temp_ooption2, temp_image_id);
+                    RowItem temp_row_item = new RowItem(temp_image_id);
+                    CourseFragment.add_array_list.add(temp_row_item);
                 }
             }
         } catch (JSONException e) {
