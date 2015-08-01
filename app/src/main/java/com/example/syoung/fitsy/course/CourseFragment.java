@@ -50,6 +50,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     private static CourseFragment instance;
     private static Activity thisActivity;
+    Action_Anim anim;
 
     public CourseFragment() {
 
@@ -67,6 +68,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         rootView = inflater.inflate(R.layout.fragment_course, container, false);
 
         thisActivity = getActivity();
+
+        anim = new Action_Anim();
 
         // ListView 등록
         current_course_view = (HorizontalListView) rootView.findViewById (R.id.current_course_list);
@@ -102,12 +105,12 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         if(add_course_view.isShown()){
             //slide_up(thisActivity,add_course_view);
-            slide_up(thisActivity, rootView.findViewById(R.id.add_course_open));
+            anim.slide_up(thisActivity, rootView.findViewById(R.id.add_course_open));
             open_button.setText("운동 수정 열기 ∨");
             rootView.findViewById(R.id.add_course_open).setVisibility(View.GONE);
         }else{
             //slide_down(thisActivity,add_course_view);
-            slide_down(thisActivity,rootView.findViewById(R.id.add_course_open));
+            anim.slide_down(thisActivity,rootView.findViewById(R.id.add_course_open));
             open_button.setText("운동 수정 닫기 ∧");
             rootView.findViewById(R.id.add_course_open).setVisibility(View.VISIBLE);
         }
@@ -135,32 +138,6 @@ public class CourseFragment extends android.support.v4.app.Fragment{
                 toast.show();
             }
         });
-
-    }
-
-    public static void slide_down(Context ctx, View v){
-
-        Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_down);
-        if(a != null){
-            a.reset();
-            if(v != null){
-                v.clearAnimation();
-                v.startAnimation(a);
-            }
-        }
-
-    }
-
-    public static void slide_up(Context ctx, View v){
-
-        Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_up);
-        if(a != null){
-            a.reset();
-            if(v != null){
-                v.clearAnimation();
-                v.startAnimation(a);
-            }
-        }
 
     }
 
