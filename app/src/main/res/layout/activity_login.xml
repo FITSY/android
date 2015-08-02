@@ -4,10 +4,11 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="199dp"
-        android:layout_height="199dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="195.33dp"
+        android:background="@drawable/logo" />
 
 
     <EditText
@@ -35,11 +36,12 @@
         android:gravity="center"
         android:id="@+id/userPassword" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOG IN"
         android:id="@+id/loginBtn"
+        android:src="@drawable/btn_login"
+        android:layout_marginBottom="93.67dp"
         android:layout_gravity="center_horizontal" />
 
 

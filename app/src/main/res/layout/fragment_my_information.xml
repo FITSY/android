@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,111 +13,252 @@
         android:paddingRight="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".MyInformationFragment">
+
         <LinearLayout
             android:id="@+id/lay"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:orientation="vertical">
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:adjustViewBounds="true"
-        android:id="@+id/imageView"
-        android:paddingLeft="50px"
-        android:src="@drawable/cycle"
-        android:layout_below="@+id/scrollView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이름 : "
-        android:paddingTop="10dp"
-        android:textSize="10pt"
-        android:id="@+id/text2"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_toRightOf="@+id/imageView"
- />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="키 : "
-        android:textSize="10pt"
-        android:paddingTop="20dp"
-        android:id="@+id/text3"
-        android:layout_below="@+id/text2"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        />
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/picture_box">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="몸무게 : "
-        android:textSize="10pt"
-        android:paddingTop="50px"
-        android:id="@+id/text4"
-        android:layout_below="@+id/text3"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:adjustViewBounds="true"
+                        android:paddingBottom="50dp"
+                        android:paddingLeft="50dp"
+                        android:paddingRight="50dp"
+                        android:paddingTop="50dp"
+                        android:src="@drawable/camera" />
+                </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="음성 버전"
-        android:id="@+id/text5"
-        android:textSize="15pt"
-        android:textStyle="bold"
-        android:paddingLeft="15px"
-        android:layout_below="@+id/imageView"
-        android:layout_toRightOf="@+id/scrollView2" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="남자 트레이너"
-        android:id="@+id/button1"
-        android:layout_below="@+id/text5"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClick"/>
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_x="10px"
+                        android:layout_y="10px"
+                        android:paddingLeft="50px"
+                        android:paddingTop="80px"
+                        android:text="이름 : "
+                        android:textSize="10pt" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="여자 트레이너"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button1"
-        android:layout_toRightOf="@+id/button1"
-        android:layout_toEndOf="@+id/button1"
-        android:onClick="onClick"/>
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="50px"
+                        android:paddingTop="80px"
+                        android:text="키 : "
+                        android:textSize="10pt" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="인바디정보"
-        android:textSize="15pt"
-        android:textStyle="bold"
-        android:paddingLeft="15px"
-        android:layout_below="@+id/button2"
-        android:layout_toRightOf="@+id/scrollView2"
-        android:layout_toEndOf="@+id/scrollView2"
-        android:id="@+id/textView2" />
+                    <TextView
+                        android:id="@+id/text3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:paddingLeft="50px"
+                        android:paddingTop="80px"
+                        android:text="몸무게 : "
+                        android:textSize="10pt" />
+                </LinearLayout>
+            </LinearLayout>
 
-    <ImageView
-        android:layout_width="450dp"
-        android:layout_height="500dp"
-        android:adjustViewBounds="true"
-        android:id="@+id/imageView2"
-        android:src="@drawable/cycle"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15px"
+                android:paddingTop="30dp"
+                android:text="음성 버전"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="onClick"
+                    android:text="남자 트레이너" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:text="여자 트레이너" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15px"
+                android:text="인바디정보"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/inbody_information">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="250dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:adjustViewBounds="true"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:src="@drawable/person" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="50px"
+                        android:paddingTop="80px"
+                        android:text="신장 : "
+                        android:textSize="8pt" />
+
+                    <TextView
+                        android:id="@+id/text5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="50px"
+                        android:paddingTop="80px"
+                        android:text="체중 : "
+                        android:textSize="8pt" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="130px"
+                        android:text="기초대사량 : "
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15px"
+                android:paddingTop="30dp"
+                android:text="체형평가"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/body_table" />
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/body_check" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15px"
+                android:paddingTop="30dp"
+                android:text="복부비만평가"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/bokbu_fat_check" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15px"
+                android:paddingTop="30dp"
+                android:text="체성분 변화 그래프"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="50dp"
+                android:onClick="onClick"
+                android:text="log out" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="20dp"
+                android:onClick="onClick"
+                android:text="비밀번호 수정" />
+        </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+</AbsoluteLayout>

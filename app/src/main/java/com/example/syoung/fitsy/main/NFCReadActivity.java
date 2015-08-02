@@ -44,8 +44,7 @@ public class NFCReadActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_nfc_read);
 
 		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.nfcContainer, new PlaceholderFragment()).commit();
 		}
 
 		readResult = (TextView) findViewById(R.id.readResult);
@@ -116,7 +115,7 @@ public class NFCReadActivity extends AppCompatActivity {
 		Tag tag = passedIntent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 		if (tag != null) {
 			byte[] tagId = tag.getId();
-			readResult.append("태그 ID : " + toHexString(tagId) + "\n"); // TextView에 태그 ID 덧붙임
+			readResult.append("tag ID : " + toHexString(tagId) + "\n"); // TextView에 태그 ID 덧붙임
 		}
 
 		if (passedIntent != null) {
