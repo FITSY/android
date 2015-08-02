@@ -71,12 +71,16 @@
 
                         <EditText
                             android:id="@+id/search_input"
-                            android:layout_width="100dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/search_button"
-                            android:layout_alignTop="@id/search_button"
-                            android:focusableInTouchMode="true"
-                            android:textColorHighlight="#2300ff" />
+                            android:imeOptions="actionSearch"
+                            android:inputType="text"
+                            android:textSize="12dp"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            android:hint="운동/운동 기구/운동 부위"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"/>
 
                         <ImageButton
                             android:id="@+id/search_button"
@@ -84,7 +88,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="10dp"
-                            android:background="@null"
                             android:src="@drawable/search_button" />
 
                     </LinearLayout>

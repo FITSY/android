@@ -159,7 +159,6 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
                     temp_image_id = sRid.getImageID(exercise_name);
                     RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id);
                     CourseFragment.current_array_list.add(temp_row_item);
-                    Log.e(TAG, i + "번째 CourseFragment.current_array_list.id : " + CourseFragment.current_array_list.get(i).getId());
                 }
                 else {
                     //add_array
