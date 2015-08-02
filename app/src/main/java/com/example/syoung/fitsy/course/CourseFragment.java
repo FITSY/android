@@ -10,6 +10,9 @@ import android.widget.AdapterView;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,15 +45,24 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     public static HorizontalListView current_course_view;
     public static HorizontalListView add_course_view;
+
     public static HorizontalListView pt_recommend_course_view;
+    public static HorizontalListView elephant_recommend_course_view;
+    public static HorizontalListView bye_fat_recommend_course_view;
 
     public static ArrayList<RowItem> current_array_list;
     public static ArrayList<RowItem> add_array_list;
+
     public static ArrayList<RowItem> pt_recommend_list;
+    public static ArrayList<RowItem> elephant_recommend_list;
+    public static ArrayList<RowItem> bye_fat_recommend_list;
 
     LazyAdapter current_course_adapter;
     LazyAdapter add_course_adapter;
+
     LazyAdapter pt_recommend_adapter;
+    LazyAdapter elephant_recommend_adapter;
+    LazyAdapter bye_fat_recommend_adapter;
 
     private Button open_button;
 
@@ -60,6 +72,9 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private static Activity thisActivity;
 
     Action_Anim anim;
+    SearchImageRID searchImageRID;
+    public static ProgressBar bar;
+    public static LinearLayout backgrd;
 
     public CourseFragment() {
 
@@ -79,23 +94,67 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         thisActivity = getActivity();
 
         anim = new Action_Anim();
+        searchImageRID = new SearchImageRID(thisActivity);
 
         // ListView 등록
         current_course_view = (HorizontalListView) rootView.findViewById (R.id.current_course_list);
         add_course_view = (HorizontalListView) rootView.findViewById (R.id.add_course_list);
+
+        // 추천 운동 코스들
         pt_recommend_course_view = (HorizontalListView) rootView.findViewById (R.id.pt_recommend_list);
+        elephant_recommend_course_view = (HorizontalListView) rootView.findViewById (R.id.elephant_recommend_list);
+        bye_fat_recommend_course_view = (HorizontalListView) rootView.findViewById (R.id.bye_fat_recommend_list);
 
         // 버튼 등록
         open_button = (Button) rootView.findViewById(R.id.open_add_course);
 
+        bar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        backgrd = (LinearLayout) rootView.findViewById(R.id.progress_layout);
+
         // list 초기화
         current_array_list = new ArrayList<RowItem>();
         add_array_list = new ArrayList<RowItem>();
-        pt_recommend_list = new ArrayList<RowItem>();
 
-        for(int i = 0; i < exercise_number; i++){
-            RowItem item = new RowItem();
-        }
+        pt_recommend_list = new ArrayList<RowItem>();
+        elephant_recommend_list = new ArrayList<RowItem>();
+        bye_fat_recommend_list = new ArrayList<RowItem>();
+
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_press2")));
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_extension2")));
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("let_pull_down2")));
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("pec_deck_flyes2")));
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("shoulder_press2")));
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("running2")));
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("cycle2")));
+        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_curl2")));
+
+
+        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("shoulder_press2")));
+        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("running2")));
+        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("let_pull_down2")));
+        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_extension2")));
+        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_press2")));
+        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("pec_deck_flyes2")));
+        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("cycle2")));
+
+
+        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("cycle2")));
+        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_extension2")));
+        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("running2")));
+        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("pec_deck_flyes2")));
+        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("shoulder_press2")));
+        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("let_pull_down2")));
+        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_press2")));
+
+
+        LazyAdapter pt_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, pt_recommend_list);
+        LazyAdapter elepahnt_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, elephant_recommend_list);
+        LazyAdapter bye_fat_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, bye_fat_recommend_list);
+
+        pt_recommend_course_view.setAdapter(pt_adapter);
+        elephant_recommend_course_view.setAdapter(elepahnt_adapter);
+        bye_fat_recommend_course_view.setAdapter(bye_fat_adapter);
+
 
         open_button.setOnClickListener(new View.OnClickListener() {
 
@@ -139,16 +198,16 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         current_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast toast = Toast.makeText(thisActivity, "currennt_course : " + current_array_list.get(position).getImageName(), Toast.LENGTH_SHORT);
-//                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-//                toast.show();
+                Toast toast = Toast.makeText(thisActivity, "currennt_course : " + current_array_list.get(position), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
             }
         });
         add_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position).getImageName(), Toast.LENGTH_SHORT);
-//                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-//                toast.show();
+                Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
             }
         });
 

@@ -1,331 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="3dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="3dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/current_course">
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="현재 운동 코스"
-                android:textSize="20dp"
-                android:paddingBottom="5dp"
-                android:textColor="#000000"/>
-
-            <com.example.syoung.fitsy.common.HorizontalListView
-                android:id="@+id/current_course_list"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/add_course"
-            android:paddingTop="10dp">
-
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="20dp"
-                android:text="운동 수정 열기 ∨"
-                android:id="@+id/open_add_course"
-                android:textSize="15dp"
-                android:background="#2300ff"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/add_course_open"
-                android:background="#f2f2f2"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="right">
-
-
-                    <EditText
-                        android:id="@+id/search_input"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/search_button"
-                        android:layout_alignTop="@id/search_button"
-                        android:textColorHighlight="#2300ff"
-                        android:focusableInTouchMode="true"/>
-
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/search_button"
-                        android:background="@null"
-                        android:layout_gravity="center"
-                        android:id="@+id/search_button"
-                        android:layout_marginRight="10dp"/>
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/search_part"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:paddingBottom="3dp"
-                    android:text="전체" />
-
-                <com.example.syoung.fitsy.common.HorizontalListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:id="@+id/add_course_list"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/recommend_course_vertical_list"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="추천 운동 코스"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"/>
-
-        <ScrollView
-            android:id="@+id/vertical_layout"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:text="PT 추천 코스"
-                android:textSize="15dp"/>
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="3dp">
 
             <LinearLayout
+                android:id="@+id/current_course"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="현재 운동 코스"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
                 <com.example.syoung.fitsy.common.HorizontalListView
+                    android:id="@+id/current_course_list"
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:id="@+id/pt_recommend_list"/>
+                    android:layout_height="100dp" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:id="@+id/add_course"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="PT 추천 코스"
-                android:textSize="15dp"/>
+                android:orientation="vertical"
+                android:paddingTop="10dp">
 
-            <HorizontalScrollView
-                android:id="@+id/sv_layout2"
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/open_add_course"
+                    android:layout_width="300dp"
+                    android:layout_height="20dp"
+                    android:background="#2300ff"
+                    android:text="운동 수정 열기 ∨"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:id="@+id/add_course_open"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:id="@+id/recommend_course2"
-                    android:paddingBottom="20dp">
+                    android:background="#f2f2f2"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+
+                        <EditText
+                            android:id="@+id/search_input"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/search_button"
+                            android:layout_alignTop="@id/search_button"
+                            android:focusableInTouchMode="true"
+                            android:textColorHighlight="#2300ff" />
+
+                        <ImageButton
+                            android:id="@+id/search_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@null"
+                            android:src="@drawable/search_button" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/search_part"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="10dp"
+                        android:paddingBottom="3dp"
+                        android:text="전체" />
+
+                    <com.example.syoung.fitsy.common.HorizontalListView
+                        android:id="@+id/add_course_list"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="70dp" />
+
                 </LinearLayout>
 
-            </HorizontalScrollView>
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/recommend_course_vertical_list"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="PT 추천 코스"
-                android:textSize="15dp"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <HorizontalScrollView
-                android:id="@+id/sv_layout3"
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:id="@+id/recommend_course3"
-                    android:paddingBottom="20dp">
+                    android:text="추천 운동 코스"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
 
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="PT 추천 코스"
-                android:textSize="15dp"/>
-
-            <HorizontalScrollView
-                android:id="@+id/sv_layout4"
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
+                <ScrollView
+                    android:id="@+id/vertical_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:id="@+id/recommend_course4"
-                    android:paddingBottom="20dp">
+                    android:layout_weight="1">
 
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/leg_curl2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-            </HorizontalScrollView>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@null"
+                            android:gravity="left|center"
+                            android:text="PT 추천 코스"
+                            android:textSize="15dp" />
 
-        </LinearLayout>
-        </ScrollView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.example.syoung.fitsy.common.HorizontalListView
+                                android:id="@+id/pt_recommend_list"
+                                android:layout_width="wrap_content"
+                                android:layout_height="70dp" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@null"
+                            android:gravity="left|center"
+                            android:text="코끼리 탈출"
+                            android:textSize="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.example.syoung.fitsy.common.HorizontalListView
+                                android:id="@+id/elephant_recommend_list"
+                                android:layout_width="wrap_content"
+                                android:layout_height="70dp" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@null"
+                            android:gravity="left|center"
+                            android:text="지방 안녕!"
+                            android:textSize="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.example.syoung.fitsy.common.HorizontalListView
+                                android:id="@+id/bye_fat_recommend_list"
+                                android:layout_width="wrap_content"
+                                android:layout_height="70dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4f000000"
+        android:gravity="center"
+        android:padding="0dp"
+        android:orientation="vertical" >
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/progress"
+            android:visibility="gone"></ProgressBar>
+
+    </LinearLayout>
+
+
 </RelativeLayout>
