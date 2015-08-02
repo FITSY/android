@@ -172,5 +172,4 @@ public class NFCReadActivity extends AppCompatActivity {
     public void finishExercise() {
         finish();
     }
-
 }

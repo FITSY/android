@@ -9,6 +9,6 @@
         android:id="@+id/item_main_course_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"/>
+        android:background="@null" />
 
 </RelativeLayout>

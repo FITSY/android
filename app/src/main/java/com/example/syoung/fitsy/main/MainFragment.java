@@ -20,6 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 public class MainFragment extends Fragment {
 
@@ -31,6 +32,7 @@ public class MainFragment extends Fragment {
 
     private ExerciseCourseListAdapter exerciseCourseListAdapter;
     private List<UserCourse> exerciseCourseItemList;
+    private List<UserCourse> nowExerciseCourseItemList;
 
     public MainFragment() {
 
@@ -47,6 +49,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_fitsy_main, container, false);
         ButterKnife.bind(this, rootView);
+        nowExerciseCourseItemList = new ArrayList<UserCourse>();
         exerciseCourseItemList = (ArrayList<UserCourse>) getActivity().getIntent().getSerializableExtra("userCourseList");
         setExerciseCourseList();
         return rootView;
@@ -66,7 +69,13 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.startBtn)
     public void exerciseStart() {
         Intent exerciseIntent = new Intent(this.getActivity(), NFCReadActivity.class);
-        exerciseIntent.putExtra("userCourseList", (Serializable) exerciseCourseItemList);
+        exerciseIntent.putExtra("userCourseList", (Serializable) nowExerciseCourseItemList);
         startActivity(exerciseIntent);
+    }
+
+    @OnItemClick(R.id.main_exercise_course_list)
+    void OnItemClicked(int position){
+        //TODO : 선택되면 바뀌게 하기
+        nowExerciseCourseItemList.add(exerciseCourseItemList.get(position));
     }
 }
