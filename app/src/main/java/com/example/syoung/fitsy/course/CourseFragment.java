@@ -79,6 +79,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     Action_Anim anim;
     SearchImageRID searchImageRID;
+    private static SearchConverter searchConverter;
+
     public static ProgressBar bar;
     public static LinearLayout backgrd;
 
@@ -108,6 +110,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         anim = new Action_Anim();
         searchImageRID = new SearchImageRID(thisActivity);
+        searchConverter = new SearchConverter();
 
         // ListView 등록
         current_course_view = (HorizontalListView) rootView.findViewById (R.id.current_course_list);
@@ -189,6 +192,15 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         });
 
+        search_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                searchButtonClick();
+            }
+
+        });
+
         pt_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,6 +250,16 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         return rootView;
     }
 
+    private void searchButtonClick(){
+
+        //Toast.makeText(getActivity(), search_input.getText(), Toast.LENGTH_SHORT).show();
+        ArrayList<RowItem> temp_add_course_list = new ArrayList<RowItem>();
+        //temp_add_course_list =
+        keyboard.hideSoftInputFromWindow(search_input.getWindowToken(), 0);
+        searchConverter.getSearchResult(search_input.getText().toString());
+
+    }
+
     private void openButtonClick(){
 
         if(add_course_view.isShown()){
@@ -260,6 +282,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         current_course_view.setAdapter(current_adapter);
         add_course_view.setAdapter(add_adapter);
+
+        searchConverter.setArrayList(add_array_list);
 
         // 리스트 아이템을 터치 했을 떄 이벤트 발생
         current_course_view.setOnItemClickListener(new OnItemClickListener() {
