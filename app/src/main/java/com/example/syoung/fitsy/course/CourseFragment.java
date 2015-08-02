@@ -2,19 +2,25 @@ package com.example.syoung.fitsy.course;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -79,6 +85,9 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private ImageButton pt_confirm;
     private ImageButton elephant_confirm;
     private ImageButton bye_fat_confirm;
+    private EditText search_input;
+    private ImageButton search_button;
+    private InputMethodManager keyboard;
 
     public CourseFragment() {
 
@@ -114,6 +123,13 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         pt_confirm = (ImageButton) rootView.findViewById(R.id.pt_confirm);
         elephant_confirm = (ImageButton) rootView.findViewById(R.id.elephant_confirm);
         bye_fat_confirm = (ImageButton) rootView.findViewById(R.id.bye_fat_confirm);
+        search_button = (ImageButton) rootView.findViewById(R.id.search_button);
+
+        // 키보드 등록
+        keyboard = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+
+        // EditText 등록
+        search_input = (EditText) rootView.findViewById(R.id.search_input);
 
         // custom progress circle 등록
         bar = (ProgressBar) rootView.findViewById(R.id.progressBar);
@@ -189,6 +205,29 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        search_input.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        search_input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        search_input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_SEARCH:
+                        // 엔터 눌렀을 시에 검색되게 함
+
+                        // 키보드 감추기
+                        keyboard.hideSoftInputFromWindow(search_input.getWindowToken(), 0);
+
+                        Toast.makeText(getActivity(), "검색", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(getActivity(), "기본", Toast.LENGTH_SHORT).show();
+                        return false;
+                }
+                return true;
             }
         });
 
