@@ -12,6 +12,7 @@ import com.example.syoung.fitsy.main.server.UserCourse;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -63,5 +64,9 @@ public class LoginActivity extends Activity {
                 Log.e("fail", "");
             }
         });
+
+//        mainIntent.putExtra("userCourseList", (Serializable) new ArrayList<UserCourse>());
+//        startActivity(mainIntent);
+//        finish();
     }
 }

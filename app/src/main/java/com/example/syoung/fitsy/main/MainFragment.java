@@ -31,7 +31,6 @@ public class MainFragment extends Fragment {
 
     private ExerciseCourseListAdapter exerciseCourseListAdapter;
     private List<UserCourse> exerciseCourseItemList;
-    private List<UserCourse> userCourseList;
 
     public MainFragment() {
 
@@ -48,18 +47,12 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_fitsy_main, container, false);
         ButterKnife.bind(this, rootView);
-        userCourseList = (ArrayList<UserCourse>) getActivity().getIntent().getSerializableExtra("userCourseList");
+        exerciseCourseItemList = (ArrayList<UserCourse>) getActivity().getIntent().getSerializableExtra("userCourseList");
         setExerciseCourseList();
         return rootView;
     }
 
     private void setExerciseCourseList() {
-
-        exerciseCourseItemList = new ArrayList<UserCourse>();
-
-        for(UserCourse userCourse : userCourseList){
-            exerciseCourseItemList.add(userCourse);
-        }
 
         exerciseCourseListAdapter = new ExerciseCourseListAdapter(getActivity());
         exerciseCourseListAdapter.setData(exerciseCourseItemList);
@@ -72,8 +65,8 @@ public class MainFragment extends Fragment {
 
     @OnClick(R.id.startBtn)
     public void exerciseStart() {
-        Intent exerciseIntent = new Intent(this.getActivity(), ExerciseActivity.class);
-        exerciseIntent.putExtra("userCourseList", (Serializable) userCourseList);
+        Intent exerciseIntent = new Intent(this.getActivity(), NFCReadActivity.class);
+        exerciseIntent.putExtra("userCourseList", (Serializable) exerciseCourseItemList);
         startActivity(exerciseIntent);
     }
 }

@@ -23,14 +23,13 @@ public class ExerciseActivity extends Activity {
 
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
     private List<UserCourse> nowExerciseCourseItemList;
-    private List<UserCourse> userCourseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fitsy_main_exercise);
         ButterKnife.bind(this);
-        userCourseList = (ArrayList<UserCourse>) this.getIntent().getSerializableExtra("userCourseList");
+        nowExerciseCourseItemList = (ArrayList<UserCourse>) this.getIntent().getSerializableExtra("userCourseList");
         setExerciseCourseList();
     }
 
@@ -40,12 +39,6 @@ public class ExerciseActivity extends Activity {
     }
 
     private void setExerciseCourseList() {
-
-        nowExerciseCourseItemList = new ArrayList<UserCourse>();
-
-        for(UserCourse userCourse : userCourseList){
-            nowExerciseCourseItemList.add(userCourse);
-        }
 
         nowExerciseCourseListAdapter = new ExerciseCourseListAdapter(this);
         nowExerciseCourseListAdapter.setData(nowExerciseCourseItemList);
