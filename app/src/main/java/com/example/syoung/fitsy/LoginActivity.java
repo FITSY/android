@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.syoung.fitsy.main.server.FITSYService;
 import com.example.syoung.fitsy.main.server.UserCourse;
@@ -24,7 +25,7 @@ import retrofit.converter.GsonConverter;
 
 public class LoginActivity extends Activity {
 
-    @Bind(R.id.loginBtn) Button loginBtn;
+    @Bind(R.id.loginBtn) ImageButton loginBtn;
 
     RestAdapter restAdapter;
     FITSYService service;
