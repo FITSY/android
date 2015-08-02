@@ -135,15 +135,31 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <Button
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@null"
-                            android:gravity="left|center"
-                            android:text="PT 추천 코스"
-                            android:textSize="15dp" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@null"
+                                android:gravity="left|center"
+                                android:text="PT 추천 코스"
+                                android:textSize="15dp" />
+
+                            <ImageButton
+                                android:id="@+id/pt_confirm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:layout_marginTop="2dp"
+                                android:src="@drawable/confirm"
+                                android:background="@null" />
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -157,15 +173,31 @@
 
                         </LinearLayout>
 
-                        <Button
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@null"
-                            android:gravity="left|center"
-                            android:text="코끼리 탈출"
-                            android:textSize="15dp" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@null"
+                                android:gravity="left|center"
+                                android:text="코끼리 탈출"
+                                android:textSize="15dp" />
+
+                            <ImageButton
+                                android:id="@+id/elephant_confirm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:layout_marginTop="2dp"
+                                android:src="@drawable/confirm"
+                                android:background="@null" />
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -179,15 +211,31 @@
 
                         </LinearLayout>
 
-                        <Button
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@null"
-                            android:gravity="left|center"
-                            android:text="지방 안녕!"
-                            android:textSize="15dp" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@null"
+                                android:gravity="left|center"
+                                android:text="지방 안녕!"
+                                android:textSize="15dp" />
+
+                            <ImageButton
+                                android:id="@+id/bye_fat_confirm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:layout_marginTop="2dp"
+                                android:src="@drawable/confirm"
+                                android:background="@null" />
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"

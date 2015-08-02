@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -26,12 +27,10 @@ import com.example.syoung.fitsy.R;
  */
 
 
-
 // TODO : recommend_course_list에서 해당 코스의 이름을 클릭했을 시 http request
 // TODO : 검색 기능 완성
-// TODO : MakeDynamicList에서 로딩 애니메이션 추가
-// TODO :
-
+// TODO : 길게 드래그 시 운동 순서변경 / 삭제 가능하게 하기
+// TODO : recommend_course_list들에다가 운동 관련 정보들 모두 제대로 담기
 
 public class CourseFragment extends android.support.v4.app.Fragment{
     private static View rootView;
@@ -174,13 +173,11 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private void buttonClick(){
 
         if(add_course_view.isShown()){
-            //slide_up(thisActivity,add_course_view);
             anim.slide_up(thisActivity, rootView.findViewById(R.id.add_course_open));
             anim.translate_to_up(thisActivity, rootView.findViewById(R.id.recommend_course_vertical_list));
             open_button.setText("운동 수정 열기 ∨");
             rootView.findViewById(R.id.add_course_open).setVisibility(View.GONE);
         }else{
-            //slide_down(thisActivity,add_course_view);
             anim.slide_down(thisActivity,rootView.findViewById(R.id.add_course_open));
             anim.translate_to_down(thisActivity,rootView.findViewById(R.id.recommend_course_vertical_list));
             open_button.setText("운동 수정 닫기 ∧");
@@ -196,6 +193,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         current_course_view.setAdapter(current_adapter);
         add_course_view.setAdapter(add_adapter);
 
+
+        // 리스트 아이템을 터치 했을 떄 이벤트 발생
         current_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast toast = Toast.makeText(thisActivity, "currennt_course : " + current_array_list.get(position), Toast.LENGTH_SHORT);
@@ -203,6 +202,20 @@ public class CourseFragment extends android.support.v4.app.Fragment{
                 toast.show();
             }
         });
+
+        // 리스트 아이템을 길게 터치 했을 떄 이벤트 발생
+        current_course_view.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast toast = Toast.makeText(thisActivity, "Long Clicked", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+                // 터치 시 해당 아이템 이름 출력
+                return true;
+            }
+
+        });
+
         add_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
