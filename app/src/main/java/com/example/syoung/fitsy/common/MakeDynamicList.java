@@ -37,6 +37,8 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
     static final String TAG_ID = "id";
     static final String TAG_CID = "cid";
     static final String TAG_CPW = "cpw";
+    static final String TAG_OTYPE = "otype";
+    static final String TAG_OPART = "opart";
     static final String TAG_OOPTION1 = "ooption1";
     static final String TAG_OOPTION2 = "ooption2";
     static final String TAG_EXERCISE_NAME = "exercise_name";
@@ -76,54 +78,22 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
 
         if (jsonStr != null) {
             try {
-                /*JSONArray jsonArr = new JSONArray(jsonStr);
-                JSONObject temp_JSONobj = null;
-
-                int temp_id;
-                String temp_cid;
-                String temp_cpw;
-                int temp_ooption1;
-                int temp_ooption2;
-                String exercise_name;
-
-                for (int i = 0; i < jsonArr.length(); i++) {
-                    temp_JSONobj = jsonArr.getJSONObject(i);
-
-                    temp_id = temp_JSONobj.getInt(TAG_ID);
-                    temp_cid = temp_JSONobj.getString(TAG_CID);
-                    temp_cpw = temp_JSONobj.getString(TAG_CPW);
-                    temp_ooption1 = temp_JSONobj.getInt(TAG_OOPTION1);
-                    temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);
-                    exercise_name = temp_JSONobj.getString(TAG_EXERCISE_NAME);
-
-                    Log.e(TAG, "index : " + i);
-                    Log.e(TAG, "temp_id" + temp_id);
-                    Log.e(TAG, "temp_cid" + temp_cid);
-                    Log.e(TAG, "temp_cpw" + temp_cpw);
-                    Log.e(TAG, "temp_ooption1" + temp_ooption1);
-                    Log.e(TAG, "temp_ooption2" + temp_ooption2);
-                    Log.e(TAG, "exercise_name" + exercise_name);
-
-                }*/
-                JSONObject jsonObj = new JSONObject(jsonStr);
-
-                // JSON Array 노드 얻음
-                JSONArray jsonArr = jsonObj.getJSONArray(TAG_ALL);
-                JSONObject temp_JSONobj = null;
+                JSONArray jsonArr = new JSONArray(jsonStr);
+                JSONArray temp_JSONArr = null;
 
                 // jsonArr 의 모든 Object 들을 loop
                 for (int i = 0; i < jsonArr.length(); i++) {
 
-                    temp_JSONobj = jsonArr.getJSONObject(i);
+                    temp_JSONArr = jsonArr.getJSONArray(i);
 
                     switch (i) {
                         case 0:
                             // current_course
-                            get_courses(i, temp_JSONobj);
+                            get_courses(i, temp_JSONArr);
                             break;
                         case 1:
                             // add_course
-                            get_courses(i, temp_JSONobj);
+                            get_courses(i, temp_JSONArr);
                             break;
                     }
                 }
@@ -151,57 +121,53 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
 
     }
 
-    protected void get_courses(int index, JSONObject jsonObj) {
+    protected void get_courses(int index, JSONArray jsonArray) {
         JSONArray jsonArr = null;
         JSONObject temp_JSONobj = null;
 
         int temp_id;
         String temp_cid;
         String temp_cpw;
+        int temp_otype;
+        int temp_opart;
         int temp_ooption1;
         int temp_ooption2;
         String exercise_name;
 
+
+
         int temp_image_id = 0;
 
         try {
-            // JSON Array 노드 얻음
-            switch (index) {
-                case 0:
-                    jsonArr = jsonObj.getJSONArray(TAG_CURRENT);
-                    break;
-                case 1:
-                    jsonArr = jsonObj.getJSONArray(TAG_ADD);
-                    break;
-            }
 
-            // jsonArr 의 모든 Object 들을 loop
-            for (int i = 0; i < jsonArr.length(); i++) {
+            Log.e(TAG, "jsonARR : " + jsonArray);
 
-                temp_JSONobj = jsonArr.getJSONObject(i);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                temp_JSONobj = jsonArray.getJSONObject(i);
 
-                /*temp_id = temp_JSONobj.getInt(TAG_ID);
+                temp_id = temp_JSONobj.getInt(TAG_ID);
                 temp_cid = temp_JSONobj.getString(TAG_CID);
                 temp_cpw = temp_JSONobj.getString(TAG_CPW);
+                temp_opart = temp_JSONobj.getInt(TAG_OPART);
+                temp_otype = temp_JSONobj.getInt(TAG_OTYPE);
                 temp_ooption1 = temp_JSONobj.getInt(TAG_OOPTION1);
-                temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);*/
+                temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);
                 exercise_name = temp_JSONobj.getString(TAG_EXERCISE_NAME);
 
-                // adding contact to contact list
                 if (index == 0) {
                     //current_array
                     temp_image_id = sRid.getImageID(exercise_name);
-                    //RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_ooption1, temp_ooption2, temp_image_id);
-                    RowItem temp_row_item = new RowItem(temp_image_id);
+                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id);
                     CourseFragment.current_array_list.add(temp_row_item);
+                    Log.e(TAG, i + "번째 CourseFragment.current_array_list.id : " + CourseFragment.current_array_list.get(i).getId());
                 }
                 else {
                     //add_array
                     temp_image_id = sRid.getImageID(exercise_name + "2");
-                    //RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_ooption1, temp_ooption2, temp_image_id);
-                    RowItem temp_row_item = new RowItem(temp_image_id);
+                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id);
                     CourseFragment.add_array_list.add(temp_row_item);
                 }
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
