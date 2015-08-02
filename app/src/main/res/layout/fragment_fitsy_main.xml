@@ -5,13 +5,23 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-
-    <ImageView
-        android:id="@+id/bodyImage"
+    <FrameLayout
         android:layout_width="304dp"
         android:layout_height="303dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:background="@drawable/blue_woman_background">
+        <LinearLayout
+            android:layout_width="304dp"
+            android:layout_height="303dp">
+            <ImageView
+                android:id="@+id/bodyImage"
+                android:layout_width="304dp"
+                android:layout_height="303dp"
+                android:layout_gravity="center"
+                android:src="@drawable/blue_woman" />
+        </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +30,12 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <TextView
-            android:id="@+id/exerciseWord"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Exercise"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/exerciseWord"
+            android:layout_marginLeft="51.35dp"
+            android:src="@drawable/exercise_word"/>
 
         <View
             android:layout_width="0dp"
@@ -37,8 +46,8 @@
             android:id="@+id/soundONOFFBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="20dp"
-            android:background="@mipmap/ic_launcher" />
+            android:layout_marginRight="50dp"
+            android:src="@drawable/btn_sound_off" />
     </LinearLayout>
 
     <com.example.syoung.fitsy.common.HorizontalListView
@@ -51,6 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_launcher" />
+        android:src="@drawable/btn_start" />
 
 </LinearLayout>

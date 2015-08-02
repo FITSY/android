@@ -86,7 +86,7 @@ public class MainFragment extends Fragment {
 
     @OnClick(R.id.startBtn)
     public void exerciseStart() {
-        Intent exerciseIntent = new Intent(this.getActivity(), ExerciseActivity.class);
+        Intent exerciseIntent = new Intent(this.getActivity(), NFCReadActivity.class);
         startActivity(exerciseIntent);
     }
 }
