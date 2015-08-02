@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/layer_background"
     android:weightSum="1">
 
     <TextView
@@ -14,16 +15,18 @@
         android:text="런닝머신"/>
 
     <ImageView
-        android:layout_width="199dp"
-        android:layout_height="199dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_launcher" />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="운동 방법"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/exercise_circle" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/exercise_method_btn"
+        android:layout_gravity="center"
+        android:src = "@drawable/btn_exercise_method"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,12 +35,12 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Exercise"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_gravity="center_vertical"
+            android:src ="@drawable/details_word"
+            android:layout_marginLeft="20dp"/>
 
         <View
             android:layout_width="0dp"
@@ -45,10 +48,11 @@
             android:layout_weight="1" />
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:background="@mipmap/ic_launcher" />
+            android:background="@null"
+            android:src="@drawable/btn_sound_off" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,16 +102,17 @@
     </LinearLayout>
 
     <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
+        android:background="@null"
         android:id = "@+id/exerciseFinishBtn"
-        android:background="@mipmap/ic_launcher" />
+        android:src="@drawable/exit" />
 
     <com.example.syoung.fitsy.common.HorizontalListView
         android:id="@+id/main_now_exercise_course_list"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="120dp"/>
 
 </LinearLayout>

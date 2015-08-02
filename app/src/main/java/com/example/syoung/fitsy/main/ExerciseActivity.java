@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
 import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
-import com.example.syoung.fitsy.main.data.CourseItem;
+import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +22,14 @@ public class ExerciseActivity extends Activity {
     @Bind(R.id.main_now_exercise_course_list) HorizontalListView nowExerciseCourseHorizontalListView;
 
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
-    private List<CourseItem> nowExerciseCourseItemList;
+    private List<UserCourse> nowExerciseCourseItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fitsy_main_exercise);
         ButterKnife.bind(this);
-
+        nowExerciseCourseItemList = (ArrayList<UserCourse>) this.getIntent().getSerializableExtra("userCourseList");
         setExerciseCourseList();
     }
 
@@ -39,19 +39,6 @@ public class ExerciseActivity extends Activity {
     }
 
     private void setExerciseCourseList() {
-
-        nowExerciseCourseItemList = new ArrayList<CourseItem>();
-        String exerciseName = "leg_press";
-        int exerciseId = this.getResources().getIdentifier(exerciseName, "drawable", this.getPackageName());
-        CourseItem rowItem = new CourseItem(exerciseId, exerciseName);
-        nowExerciseCourseItemList.add(rowItem);
-        nowExerciseCourseItemList.add(rowItem);
-        nowExerciseCourseItemList.add(rowItem);
-        nowExerciseCourseItemList.add(rowItem);
-        nowExerciseCourseItemList.add(rowItem);
-        nowExerciseCourseItemList.add(rowItem);
-        nowExerciseCourseItemList.add(rowItem);
-        nowExerciseCourseItemList.add(rowItem);
 
         nowExerciseCourseListAdapter = new ExerciseCourseListAdapter(this);
         nowExerciseCourseListAdapter.setData(nowExerciseCourseItemList);

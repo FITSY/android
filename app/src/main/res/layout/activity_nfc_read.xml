@@ -4,13 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/layer_background"
     tools:context="com.example.simplenfc.ReadActivity"
     tools:ignore="MergeRootFrame" >
-    <TextView 
-        android:id="@+id/readResult"
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="nfc show"/>
+        android:id="@+id/nfcTag"
+        android:src="@drawable/tag"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:id = "@+id/exerciseFinishBtn"
+        android:background="@null"
+        android:src="@drawable/exit" />
+
+    <com.example.syoung.fitsy.common.HorizontalListView
+        android:id="@+id/main_now_exercise_course_list"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"/>
 </LinearLayout>
 

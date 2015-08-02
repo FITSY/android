@@ -8,13 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.example.syoung.fitsy.R;
-import com.example.syoung.fitsy.main.data.CourseItem;
+import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.util.List;
 
 public class ExerciseCourseListAdapter extends BaseAdapter {
 
-    private List<CourseItem> data;
+    private List<UserCourse> data;
     private Context context;
 
     public ExerciseCourseListAdapter(Context context) {
@@ -27,7 +27,7 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
     }
 
     @Override
-    public CourseItem getItem(int position) {
+    public UserCourse getItem(int position) {
         return data.get(position);
     }
 
@@ -47,7 +47,7 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        CourseItem item = data.get(position);
+        UserCourse item = data.get(position);
 
         holder.setData(item);
 
@@ -61,16 +61,16 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
             image = (ImageView) parent.findViewById(R.id.item_main_course_image);
         }
 
-        private void setData(CourseItem data) {
-            image.setImageResource(data.getImageId());
+        private void setData(UserCourse data) {
+            image.setImageResource(context.getResources().getIdentifier(data.getEname(), "drawable", context.getPackageName()));
         }
     }
 
-    public List<CourseItem> getData() {
+    public List<UserCourse> getData() {
         return data;
     }
 
-    public void setData(List<CourseItem> data) {
+    public void setData(List<UserCourse> data) {
         this.data = data;
     }
 }
