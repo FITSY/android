@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@null"
-        android:src="@drawable/btn_start"
+        android:src="@drawable/start"
         android:layout_marginBottom="25dp"/>
 
 </LinearLayout>

@@ -39,7 +39,6 @@ public class ExerciseActivity extends Activity {
     }
 
     private void setExerciseCourseList() {
-
         nowExerciseCourseListAdapter = new ExerciseCourseListAdapter(this);
         nowExerciseCourseListAdapter.setData(nowExerciseCourseItemList);
         nowExerciseCourseHorizontalListView.setAdapter(nowExerciseCourseListAdapter);
