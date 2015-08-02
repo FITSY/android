@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/layer_background">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -12,7 +13,7 @@
 
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:id="@+id/centerId"
         android:hint="센터 아이디"
@@ -20,7 +21,7 @@
         android:layout_gravity="center_horizontal" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:id="@+id/userId"
         android:hint="사용자 아이디"
@@ -28,18 +29,20 @@
         android:layout_gravity="center_horizontal" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:hint = "비밀번호"
-        android:gravity="center"
-        android:id="@+id/userPassword" />
+        android:gravity="center_horizontal"
+        android:id="@+id/userPassword"
+        android:layout_gravity="center_horizontal" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/loginBtn"
+        android:background="@null"
         android:src="@drawable/btn_login"
         android:layout_marginBottom="93.67dp"
         android:layout_gravity="center_horizontal" />

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/layer_background"
     tools:context="com.example.simplenfc.ReadActivity"
     tools:ignore="MergeRootFrame" >
 
@@ -21,6 +22,7 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
         android:id = "@+id/exerciseFinishBtn"
+        android:background="@null"
         android:src="@drawable/btn_exercise_exit" />
 
     <com.example.syoung.fitsy.common.HorizontalListView
