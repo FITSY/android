@@ -2,6 +2,7 @@ package com.example.syoung.fitsy.course;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -75,6 +76,10 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     public static ProgressBar bar;
     public static LinearLayout backgrd;
 
+    private ImageButton pt_confirm;
+    private ImageButton elephant_confirm;
+    private ImageButton bye_fat_confirm;
+
     public CourseFragment() {
 
     }
@@ -106,7 +111,11 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         // 버튼 등록
         open_button = (Button) rootView.findViewById(R.id.open_add_course);
+        pt_confirm = (ImageButton) rootView.findViewById(R.id.pt_confirm);
+        elephant_confirm = (ImageButton) rootView.findViewById(R.id.elephant_confirm);
+        bye_fat_confirm = (ImageButton) rootView.findViewById(R.id.bye_fat_confirm);
 
+        // custom progress circle 등록
         bar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         backgrd = (LinearLayout) rootView.findViewById(R.id.progress_layout);
 
@@ -118,32 +127,32 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         elephant_recommend_list = new ArrayList<RowItem>();
         bye_fat_recommend_list = new ArrayList<RowItem>();
 
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_press2")));
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_extension2")));
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("let_pull_down2")));
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("pec_deck_flyes2")));
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("shoulder_press2")));
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("running2")));
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("cycle2")));
-        pt_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_curl2")));
+        pt_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
+        pt_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2")));
+        pt_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2")));
+        pt_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2")));
+        pt_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2")));
+        pt_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
+        pt_recommend_list.add(new RowItem(7, 20, 10, searchImageRID.getImageID("cycle2")));
+        pt_recommend_list.add(new RowItem(8, 10, 20, searchImageRID.getImageID("leg_curl2")));
 
 
-        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("shoulder_press2")));
-        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("running2")));
-        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("let_pull_down2")));
-        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_extension2")));
-        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_press2")));
-        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("pec_deck_flyes2")));
-        elephant_recommend_list.add(new RowItem(searchImageRID.getImageID("cycle2")));
+        elephant_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2")));
+        elephant_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
+        elephant_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2")));
+        elephant_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2")));
+        elephant_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
+        elephant_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2")));
+        elephant_recommend_list.add(new RowItem(7, 20, 10, searchImageRID.getImageID("cycle2")));
 
 
-        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("cycle2")));
-        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_extension2")));
-        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("running2")));
-        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("pec_deck_flyes2")));
-        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("shoulder_press2")));
-        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("let_pull_down2")));
-        bye_fat_recommend_list.add(new RowItem(searchImageRID.getImageID("leg_press2")));
+        bye_fat_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
+        bye_fat_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2")));
+        bye_fat_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
+        bye_fat_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2")));
+        bye_fat_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2")));
+        bye_fat_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2")));
+        bye_fat_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
 
 
         LazyAdapter pt_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, pt_recommend_list);
@@ -154,15 +163,35 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         elephant_recommend_course_view.setAdapter(elepahnt_adapter);
         bye_fat_recommend_course_view.setAdapter(bye_fat_adapter);
 
-
+        // 버튼 리스터 등록
         open_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                buttonClick();
+                openButtonClick();
             }
 
         });
+
+        pt_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        elephant_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        bye_fat_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
         MakeDynamicList makeList = new MakeDynamicList(getActivity());
         makeList.execute();
@@ -170,7 +199,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         return rootView;
     }
 
-    private void buttonClick(){
+    private void openButtonClick(){
 
         if(add_course_view.isShown()){
             anim.slide_up(thisActivity, rootView.findViewById(R.id.add_course_open));
@@ -192,7 +221,6 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         current_course_view.setAdapter(current_adapter);
         add_course_view.setAdapter(add_adapter);
-
 
         // 리스트 아이템을 터치 했을 떄 이벤트 발생
         current_course_view.setOnItemClickListener(new OnItemClickListener() {
