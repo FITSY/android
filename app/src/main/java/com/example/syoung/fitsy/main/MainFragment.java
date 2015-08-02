@@ -3,6 +3,7 @@ package com.example.syoung.fitsy.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
 import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
 import com.example.syoung.fitsy.main.data.CourseItem;
+import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class MainFragment extends Fragment {
 
     private ExerciseCourseListAdapter exerciseCourseListAdapter;
     private List<CourseItem> exerciseCourseItemList;
+    private List<UserCourse> userCourseList;
 
     public MainFragment() {
 
@@ -46,8 +49,13 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_fitsy_main, container, false);
         ButterKnife.bind(this, rootView);
-
         setExerciseCourseList();
+
+        userCourseList = (ArrayList<UserCourse>) getActivity().getIntent().getSerializableExtra("userCourseList");
+
+        for(UserCourse userCourse : userCourseList){
+            Log.e("userCourse",userCourse.getId());
+        }
 
         return rootView;
     }

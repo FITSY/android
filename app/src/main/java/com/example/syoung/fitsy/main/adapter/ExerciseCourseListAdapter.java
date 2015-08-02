@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.main.data.CourseItem;
@@ -57,16 +56,13 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
 
     private class Holder {
         private ImageView image;
-        private TextView name;
 
         private Holder(View parent) {
             image = (ImageView) parent.findViewById(R.id.item_main_course_image);
-            name = (TextView) parent.findViewById(R.id.item_main_course_name);
         }
 
         private void setData(CourseItem data) {
             image.setImageResource(data.getImageId());
-            name.setText(data.getImageName());
         }
     }
 

@@ -7,8 +7,11 @@ import android.util.Log;
 import android.widget.Button;
 
 import com.example.syoung.fitsy.main.server.FITSYService;
-import com.example.syoung.fitsy.main.server.Login;
+import com.example.syoung.fitsy.main.server.UserCourse;
 import com.google.gson.Gson;
+
+import java.io.Serializable;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,8 +39,8 @@ public class LoginActivity extends Activity {
     @OnClick(R.id.loginBtn)
     public void login() {
 
+        final Intent mainIntent = new Intent(this, MainActivity.class);
         Gson gson = new Gson();
-
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://ebsud89.iptime.org:8022")
                 .setConverter(new GsonConverter(gson))
@@ -45,19 +48,19 @@ public class LoginActivity extends Activity {
 
         FITSYService service = restAdapter.create(FITSYService.class);
 
-        service.getResponse(new Callback<Login>() {
+        service.getResponse(new Callback<List<UserCourse>>() {
             @Override
-            public void success(Login login, Response response) {
-                Log.e("success", login.getUid() + ", " + login.getUpw() + ", " + login.getUheight() + ", " + login.getUweight());
+            public void success(List<UserCourse> userCourseList, Response response) {
+                Log.e("success", userCourseList.size() + "");
+                mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
+                startActivity(mainIntent);
+                finish();
             }
+
             @Override
             public void failure(RetrofitError error) {
-                Log.e("failure", error.getMessage());
+                Log.e("fail", "");
             }
         });
-
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
-        finish();
     }
 }
