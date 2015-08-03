@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.syoung.fitsy.main.data.NowCourse;
 import com.example.syoung.fitsy.main.server.FITSYService;
 import com.example.syoung.fitsy.main.server.UserCourse;
 import com.google.gson.Gson;
@@ -50,23 +51,44 @@ public class LoginActivity extends Activity {
 
         FITSYService service = restAdapter.create(FITSYService.class);
 
-        service.getResponse(new Callback<List<UserCourse>>() {
-            @Override
-            public void success(List<UserCourse> userCourseList, Response response) {
-                Log.e("success", userCourseList.size() + "");
-                mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
-                startActivity(mainIntent);
-                finish();
-            }
+//        service.getResponse(new Callback<List<UserCourse>>() {
+//            @Override
+//            public void success(List<UserCourse> userCourseList, Response response) {
+//                Log.e("success", userCourseList.size() + "");
+//                mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
+//                startActivity(mainIntent);
+//                finish();
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                Log.e("fail", "");
+//            }
+//        });
 
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("fail", "");
-            }
-        });
+        List<UserCourse> userCourseList = new ArrayList<UserCourse>();
+        UserCourse userCourse = new UserCourse();
+        userCourse.setEname("leg_curl");
+        userCourse.setCid("1");
+        userCourse.setCorder(1);
+        userCourse.setEintro("1");
+        userCourse.setId("1");
+        userCourse.setOdid("1");
+        userCourse.setOoption1(1);
 
-//        mainIntent.putExtra("userCourseList", (Serializable) new ArrayList<UserCourse>());
-//        startActivity(mainIntent);
-//        finish();
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+        userCourseList.add(userCourse);
+
+
+        mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
+        startActivity(mainIntent);
+        finish();
     }
 }

@@ -8,15 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.example.syoung.fitsy.R;
-import com.example.syoung.fitsy.main.server.UserCourse;
+import com.example.syoung.fitsy.main.data.NowCourse;
 
 import java.util.List;
 
-//TODO : NowCourse로 적용 시키기
-
 public class ExerciseCourseListAdapter extends BaseAdapter {
 
-    private List<UserCourse> data;
+    private List<NowCourse> data;
     private Context context;
 
     public ExerciseCourseListAdapter(Context context) {
@@ -29,7 +27,7 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
     }
 
     @Override
-    public UserCourse getItem(int position) {
+    public NowCourse getItem(int position) {
         return data.get(position);
     }
 
@@ -49,7 +47,7 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        UserCourse item = data.get(position);
+        NowCourse item = data.get(position);
 
         holder.setData(item);
 
@@ -63,16 +61,16 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
             image = (ImageView) parent.findViewById(R.id.item_main_course_image);
         }
 
-        private void setData(UserCourse data) {
-            image.setImageResource(context.getResources().getIdentifier(data.getEname(), "drawable", context.getPackageName()));
+        private void setData(NowCourse data) {
+            image.setImageResource(data.getImageId());
         }
     }
 
-    public List<UserCourse> getData() {
+    public List<NowCourse> getData() {
         return data;
     }
 
-    public void setData(List<UserCourse> data) {
+    public void setData(List<NowCourse> data) {
         this.data = data;
     }
 }

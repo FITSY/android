@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
 import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
+import com.example.syoung.fitsy.main.data.NowCourse;
 import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.io.Serializable;
@@ -22,8 +23,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
-//TODO : onstartActivityResult 함수 만들어서 nowExerciseCourseItemList 초기화 시키기
-//TODO : NowCourse클래스 만든거 적용하기
 public class MainFragment extends Fragment {
 
     private View rootView;
@@ -33,8 +32,8 @@ public class MainFragment extends Fragment {
     @Bind(R.id.main_exercise_course_list) HorizontalListView exerciseCourseHorizontalListView;
 
     private ExerciseCourseListAdapter exerciseCourseListAdapter;
-    private List<UserCourse> exerciseCourseItemList;
-    private List<UserCourse> nowExerciseCourseItemList;
+    private List<NowCourse> exerciseCourseList;
+    private List<NowCourse> nowExerciseCourseList;
 
     public MainFragment() {
 
@@ -51,16 +50,29 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_fitsy_main, container, false);
         ButterKnife.bind(this, rootView);
-        nowExerciseCourseItemList = new ArrayList<UserCourse>();
-        exerciseCourseItemList = (ArrayList<UserCourse>) getActivity().getIntent().getSerializableExtra("userCourseList");
-        setExerciseCourseList();
+
+        List<UserCourse> userCourseList = (ArrayList<UserCourse>) getActivity().getIntent().getSerializableExtra("userCourseList");
+        setCourseList(userCourseList);
+        setExerciseCourseHorizontalListView();
         return rootView;
     }
 
-    private void setExerciseCourseList() {
+    private void setCourseList(List<UserCourse> userCourseList) {
+        exerciseCourseList = new ArrayList<NowCourse>();
+        nowExerciseCourseList = new ArrayList<NowCourse>();
+        for(UserCourse userCourse : userCourseList){
+            NowCourse nowCourse = new NowCourse();
+            nowCourse.setUserCourse(userCourse);
+            nowCourse.setCheck(false);
+            nowCourse.setResult(0);
+            nowCourse.setImageId(getActivity().getResources().getIdentifier(userCourse.getEname(), "drawable", getActivity().getPackageName()));
+            exerciseCourseList.add(nowCourse);
+        }
+    }
 
+    private void setExerciseCourseHorizontalListView() {
         exerciseCourseListAdapter = new ExerciseCourseListAdapter(getActivity());
-        exerciseCourseListAdapter.setData(exerciseCourseItemList);
+        exerciseCourseListAdapter.setData(exerciseCourseList);
         exerciseCourseHorizontalListView.setAdapter(exerciseCourseListAdapter);
     }
 
@@ -71,13 +83,13 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.startBtn)
     public void exerciseStart() {
         Intent exerciseIntent = new Intent(this.getActivity(), NFCReadActivity.class);
-        exerciseIntent.putExtra("userCourseList", (Serializable) nowExerciseCourseItemList);
+        exerciseIntent.putExtra("userCourseList", (Serializable) nowExerciseCourseList);
         startActivity(exerciseIntent);
     }
 
     @OnItemClick(R.id.main_exercise_course_list)
     void OnItemClicked(int position){
         //TODO : 선택되면 이미지 바뀌게 하기 (opacity or color)
-        nowExerciseCourseItemList.add(exerciseCourseItemList.get(position));
+        nowExerciseCourseList.add(exerciseCourseList.get(position));
     }
 }

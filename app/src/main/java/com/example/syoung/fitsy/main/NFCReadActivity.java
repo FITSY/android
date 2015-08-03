@@ -14,15 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.syoung.fitsy.MainActivity;
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
 import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
+import com.example.syoung.fitsy.main.data.NowCourse;
 import com.example.syoung.fitsy.main.nfc.NdefMessageParser;
 import com.example.syoung.fitsy.main.nfc.ParsedRecord;
 import com.example.syoung.fitsy.main.nfc.TextRecord;
 import com.example.syoung.fitsy.main.nfc.UriRecord;
-import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class NFCReadActivity extends AppCompatActivity {
     @Bind(R.id.main_now_exercise_course_list) HorizontalListView nowExerciseCourseHorizontalListView;
 
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
-    private List<UserCourse> nowExerciseCourseItemList;
+    private List<NowCourse> nowExerciseCourseItemList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,8 @@ public class NFCReadActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_nfc_read);
 
         ButterKnife.bind(this);
-        nowExerciseCourseItemList = (ArrayList<UserCourse>) this.getIntent().getSerializableExtra("userCourseList");
-        setExerciseCourseList();
+        nowExerciseCourseItemList = (ArrayList<NowCourse>) this.getIntent().getSerializableExtra("userCourseList");
+        setNowExerciseCourseHorizontalListView();
 
 		mAdapter = NfcAdapter.getDefaultAdapter(this);
 		Intent targetIntent = new Intent(this, NFCReadActivity.class);
@@ -157,8 +156,7 @@ public class NFCReadActivity extends AppCompatActivity {
 		return size;
 	}
 
-    private void setExerciseCourseList() {
-
+    private void setNowExerciseCourseHorizontalListView() {
         nowExerciseCourseListAdapter = new ExerciseCourseListAdapter(this);
         nowExerciseCourseListAdapter.setData(nowExerciseCourseItemList);
         nowExerciseCourseHorizontalListView.setAdapter(nowExerciseCourseListAdapter);

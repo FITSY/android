@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
 import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
-import com.example.syoung.fitsy.main.server.UserCourse;
+import com.example.syoung.fitsy.main.data.NowCourse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,15 +26,15 @@ public class ExerciseActivity extends Activity {
     @Bind(R.id.main_now_exercise_course_list) HorizontalListView nowExerciseCourseHorizontalListView;
 
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
-    private List<UserCourse> nowExerciseCourseItemList;
+    private List<NowCourse> nowExerciseCourseItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fitsy_main_exercise);
         ButterKnife.bind(this);
-        nowExerciseCourseItemList = (ArrayList<UserCourse>) this.getIntent().getSerializableExtra("userCourseList");
-        setExerciseCourseList();
+        nowExerciseCourseItemList = (ArrayList<NowCourse>) this.getIntent().getSerializableExtra("userCourseList");
+        setNowExerciseCourseHorizontalListView();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ExerciseActivity extends Activity {
         //super.onBackPressed();
     }
 
-    private void setExerciseCourseList() {
+    private void setNowExerciseCourseHorizontalListView() {
         nowExerciseCourseListAdapter = new ExerciseCourseListAdapter(this);
         nowExerciseCourseListAdapter.setData(nowExerciseCourseItemList);
         nowExerciseCourseHorizontalListView.setAdapter(nowExerciseCourseListAdapter);
