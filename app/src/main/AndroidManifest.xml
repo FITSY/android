@@ -39,6 +39,9 @@
         <activity
             android:name=".main.NFCReadActivity">
         </activity>
+        <activity
+            android:name=".main.ExerciseMethodActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@ import butterknife.OnItemClick;
 public class ExerciseActivity extends Activity {
 
     @Bind(R.id.exerciseFinishBtn) ImageButton exerciseFinishBtn;
+    @Bind(R.id.exercise_method_btn) ImageButton exerciseMethodBtn;
     @Bind(R.id.main_now_exercise_course_list) HorizontalListView nowExerciseCourseHorizontalListView;
     @Bind(R.id.exercise_name) TextView exerciseName;
 
@@ -69,7 +70,7 @@ public class ExerciseActivity extends Activity {
     }
 
     @Override
-    public void onBackPressed() {
+     public void onBackPressed() {
         //super.onBackPressed();
     }
 
@@ -84,10 +85,16 @@ public class ExerciseActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.exercise_method_btn)
+    public void showExerciseMethod() {
+        Intent exerciseIntent = new Intent(this, ExerciseMethodActivity.class);
+        startActivity(exerciseIntent);
+    }
+
     @OnItemClick(R.id.main_now_exercise_course_list)
     void OnItemClicked(int position){
         Intent exerciseIntent = new Intent(this, NFCReadActivity.class);
-        exerciseIntent.putExtra("userCourseList", (Serializable) nowExerciseCourseItemList);
+        exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseItemList);
         startActivity(exerciseIntent);
         finish();
     }
