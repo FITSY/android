@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
+//OnActivityResult 해서 nowExerciseCourseList 값 초기화 시키기
 public class MainFragment extends Fragment {
 
     private View rootView;

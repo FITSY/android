@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".Main">
 
     <item android:id="@+id/hand_device" android:title="@string/hand_device"
-        app:showAsAction="withText|ifRoom" android:icon="@mipmap/ic_launcher"/>
+        app:showAsAction="withText|ifRoom" android:icon="@drawable/hand_bluetooth_on"/>
 
     <item android:id="@+id/foot_device" android:title="@string/foot_device"
-        app:showAsAction="withText|ifRoom" android:icon="@mipmap/ic_launcher"/>
+        app:showAsAction="withText|ifRoom" android:icon="@drawable/foot_bluetooth_on"/>
 </menu>
