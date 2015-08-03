@@ -90,6 +90,7 @@
                             android:layout_centerVertical="true"
                             android:layout_margin="5dp"
                             android:layout_marginLeft="0dp"
+                            android:background="@null"
                             android:src="@drawable/search_button" />
 
                     </LinearLayout>
