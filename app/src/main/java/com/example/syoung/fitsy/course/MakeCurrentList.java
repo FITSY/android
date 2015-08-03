@@ -1,7 +1,6 @@
-package com.example.syoung.fitsy.common;
+package com.example.syoung.fitsy.course;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,14 +8,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-
-import com.example.syoung.fitsy.R;
-import com.example.syoung.fitsy.course.CourseFragment;
-
-import java.util.ArrayList;
-
+import com.example.syoung.fitsy.common.RowItem;
+import com.example.syoung.fitsy.common.SearchImageRID;
+import com.example.syoung.fitsy.common.ServiceHandler;
 /**
  * Created by HyunJoo on 15. 7. 9..
  *
@@ -26,9 +20,9 @@ import java.util.ArrayList;
 
 // TODO : 준형오빠가 주는 JSON형태에 맞춰서 다시 JSON 파싱하기
 
-public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
+public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
 
-    static final String TAG = "MakeDynamicList";
+    static final String TAG = "MakeCurrentList";
 
     static final String TAG_ALL = "all_courses";
     static final String TAG_CURRENT = "current_course";
@@ -55,7 +49,7 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
     SearchImageRID sRid;
 
     // 생성자
-    public MakeDynamicList(Activity activity) {
+    public MakeCurrentList(Activity activity) {
         this.activity = activity;
         sRid = new SearchImageRID(this.activity);
 
@@ -73,7 +67,7 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
         // Service Handler Instance 생성
         ServiceHandler sh = new ServiceHandler();
 
-        Log.e("MakeDynamicList", URL);
+        Log.e(TAG, URL);
         String jsonStr = sh.makeServiceCall(URL, ServiceHandler.POST);
 
         if (jsonStr != null) {
@@ -102,7 +96,7 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
         } else {
-            Log.e(TAG, "해당 URL 로부터 아무런 정보를 얻을 수 없습니다.");
+            //Log.e(TAG, "해당 URL 로부터 아무런 정보를 얻을 수 없습니다.");
         }
 
         return null;
@@ -157,13 +151,13 @@ public class MakeDynamicList extends AsyncTask<Void, Void, Void> {
                 if (index == 0) {
                     //current_array
                     temp_image_id = sRid.getImageID(exercise_name);
-                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id);
+                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
                     CourseFragment.current_array_list.add(temp_row_item);
                 }
                 else {
                     //add_array
                     temp_image_id = sRid.getImageID(exercise_name + "2");
-                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id);
+                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
                     CourseFragment.add_array_list.add(temp_row_item);
                 }
 
