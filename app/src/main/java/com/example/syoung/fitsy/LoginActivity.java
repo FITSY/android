@@ -68,22 +68,12 @@ public class LoginActivity extends Activity {
 
         List<UserCourse> userCourseList = new ArrayList<UserCourse>();
         UserCourse userCourse = new UserCourse();
-        userCourse.setEname("leg_curl");
-        userCourse.setCid("1");
-        userCourse.setCorder(1);
-        userCourse.setEintro("1");
         userCourse.setId("1");
-        userCourse.setOdid("1");
-        userCourse.setOoption1(1);
-
-        userCourseList.add(userCourse);
-        userCourseList.add(userCourse);
-        userCourseList.add(userCourse);
-        userCourseList.add(userCourse);
-        userCourseList.add(userCourse);
-        userCourseList.add(userCourse);
-        userCourseList.add(userCourse);
-        userCourseList.add(userCourse);
+        userCourse.setOtype(2);
+        userCourse.setEname("leg_curl");
+        userCourse.setOdid("04526E52863680");
+        userCourse.setOoption1(8);
+        userCourse.setOoption2(10);
         userCourseList.add(userCourse);
 
 

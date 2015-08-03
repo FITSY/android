@@ -18,6 +18,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/exercise_name"
             android:text="런닝머신"/>
 
         <FrameLayout
@@ -34,25 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="1"
-                android:id="@+id/exerciseFirstWord"
-                android:layout_gravity="center_vertical|left" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=" : "
-                android:id="@+id/exerciseSecondWord"
+                android:text="Large Text"
+                android:id="@+id/nowNumber"
                 android:layout_gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="20"
-                android:id="@+id/exerciseThirdWord"
-                android:layout_gravity="right|center_vertical" />
 
 
         </FrameLayout>
@@ -105,8 +90,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="Speed"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/exercise_option_one_key" />
 
             <View
                 android:layout_width="0dp"
@@ -116,9 +102,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
                 android:layout_marginRight="20dp"
-                android:text="8km/h"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:id="@+id/exercise_option_one_value" />
+
 
         </LinearLayout>
 
@@ -129,12 +117,14 @@
             android:orientation="horizontal"
             android:weightSum="1">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="running time"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/exercise_option_two_key"
+                android:layout_marginLeft="20dp" />
 
             <View
                 android:layout_width="0dp"
@@ -144,9 +134,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="35:03min"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/exercise_option_two_value"
+                android:layout_marginRight="20dp" />
+
 
         </LinearLayout>
 

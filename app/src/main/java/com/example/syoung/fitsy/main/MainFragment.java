@@ -1,11 +1,13 @@
 package com.example.syoung.fitsy.main;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 
 import com.example.syoung.fitsy.R;
@@ -23,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
-//OnActivityResult 해서 nowExerciseCourseList 값 초기화 시키기
+//TODO : OnActivityResult 해서 nowExerciseCourseList 값 초기화 시키기
 public class MainFragment extends Fragment {
 
     private View rootView;
@@ -84,7 +86,7 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.startBtn)
     public void exerciseStart() {
         Intent exerciseIntent = new Intent(this.getActivity(), NFCReadActivity.class);
-        exerciseIntent.putExtra("userCourseList", (Serializable) nowExerciseCourseList);
+        exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseList);
         startActivity(exerciseIntent);
     }
 

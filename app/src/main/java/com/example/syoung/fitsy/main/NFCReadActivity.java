@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
 import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
+import com.example.syoung.fitsy.main.data.ExerciseData;
 import com.example.syoung.fitsy.main.data.NowCourse;
 import com.example.syoung.fitsy.main.nfc.NdefMessageParser;
 import com.example.syoung.fitsy.main.nfc.ParsedRecord;
@@ -46,6 +47,7 @@ public class NFCReadActivity extends AppCompatActivity {
 
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
     private List<NowCourse> nowExerciseCourseItemList;
+    private ExerciseData exerciseData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,9 @@ public class NFCReadActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_nfc_read);
 
         ButterKnife.bind(this);
-        nowExerciseCourseItemList = (ArrayList<NowCourse>) this.getIntent().getSerializableExtra("userCourseList");
+        exerciseData = new ExerciseData();
+        nowExerciseCourseItemList = (ArrayList<NowCourse>) this.getIntent().getSerializableExtra("nowExerciseCourseList");
+        exerciseData.setNowCourseList(nowExerciseCourseItemList);
         setNowExerciseCourseHorizontalListView();
 
 		mAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -101,9 +105,11 @@ public class NFCReadActivity extends AppCompatActivity {
 		Tag tag = passedIntent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 		if (tag != null) {
 			byte[] tagId = tag.getId();
-            Toast.makeText(this, toHexString(tagId), Toast.LENGTH_SHORT).show();
+            String tagString = toHexString(tagId);
+            Toast.makeText(this, tagString, Toast.LENGTH_SHORT).show();
+            exerciseData.setTagId(tagString);
             Intent exerciseIntent = new Intent(this, ExerciseActivity.class);
-            exerciseIntent.putExtra("userCourseList", (Serializable) nowExerciseCourseItemList);
+            exerciseIntent.putExtra("exerciseData", (Serializable) exerciseData);
             startActivity(exerciseIntent);
             finish();
 		}
