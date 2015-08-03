@@ -12,6 +12,8 @@ import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.util.List;
 
+//TODO : NowCourse로 적용 시키기
+
 public class ExerciseCourseListAdapter extends BaseAdapter {
 
     private List<UserCourse> data;

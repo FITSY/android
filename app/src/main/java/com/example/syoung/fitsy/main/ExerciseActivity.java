@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
+//TODO : ExerciseActivity 와 NFCFeadActivity footer에 layout inflater하기
 public class ExerciseActivity extends Activity {
 
     @Bind(R.id.exerciseFinishBtn) ImageButton exerciseFinishBtn;

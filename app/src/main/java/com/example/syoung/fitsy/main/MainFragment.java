@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
+//TODO : onstartActivityResult 함수 만들어서 nowExerciseCourseItemList 초기화 시키기
+//TODO : NowCourse클래스 만든거 적용하기
 public class MainFragment extends Fragment {
 
     private View rootView;
@@ -75,7 +77,7 @@ public class MainFragment extends Fragment {
 
     @OnItemClick(R.id.main_exercise_course_list)
     void OnItemClicked(int position){
-        //TODO : 선택되면 바뀌게 하기
+        //TODO : 선택되면 이미지 바뀌게 하기 (opacity or color)
         nowExerciseCourseItemList.add(exerciseCourseItemList.get(position));
     }
 }
