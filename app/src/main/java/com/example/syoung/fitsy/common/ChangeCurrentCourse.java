@@ -32,23 +32,38 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
     static final String TAG_OOPTION2 = "ooption2";
     static final String TAG_EXERCISE_NAME = "exercise_name";
 
-    String URL;
+    static final int SUCCESS = 1;
+
+    private int response;
+
+    static final int RECOMMEND = 1;
+    static final int HISTORY = 2;
+
+    String URL = "http://192.168.0.21:8080/sgen_test/change_course.php";
 
     Activity activity;
 
+    private int whichClass;
+
     // 생성자
-    public ChangeCurrentCourse(Activity activity, ArrayList<RowItem> data, String url) {
+    public ChangeCurrentCourse(Activity activity, ArrayList<RowItem> data, int whichClass) {
         this.activity = activity;
-        URL = url;
+        this.whichClass = whichClass;
+        response = 0;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
-        // TODO : recommend_course를 전송할 때랑 history에서 전송할 때랑 아래 것이 달라야 한다.
-        CourseFragment.backgrd.setVisibility(View.VISIBLE);
-        CourseFragment.bar.setVisibility(View.VISIBLE);
+        if(whichClass == RECOMMEND) {
+            // recommend_course로 현재 코스를 바꿀 경우
+            CourseFragment.backgrd.setVisibility(View.VISIBLE);
+            CourseFragment.bar.setVisibility(View.VISIBLE);
+        }else{
+            // history_course로 현재 코스를 바꿀 경우
+
+        }
     }
 
     @Override
@@ -56,17 +71,14 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
         // Service Handler Instance 생성
         ServiceHandler sh = new ServiceHandler();
 
-        Log.e("MakeDynamicList", URL);
+        Log.e(TAG, URL);
         String jsonStr = sh.makeServiceCall(URL, ServiceHandler.POST);
 
         if (jsonStr != null) {
             try {
                 JSONObject jsonObj = new JSONObject(jsonStr);
 
-                // JSON Array 노드 얻음
-                JSONArray jsonArr = jsonObj.getJSONArray(TAG_SUCCESS);
-
-
+                response = jsonObj.getInt("success");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -82,15 +94,17 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute (Void result) {
         super.onPostExecute(result);
 
-        // TODO : current_course를 다시 받아야 한다.
-        // TODO : recommend_course를 전송할 때랑 history에서 전송할 때랑 아래 것이 달라야 한다.
-        CourseFragment.backgrd.setVisibility(View.GONE);
-        CourseFragment.bar.setVisibility(View.GONE);
+        if(response == SUCCESS){
+            if(whichClass == RECOMMEND) {
+                CourseFragment.startConnection();
+            }else{
 
-        CourseFragment.setOnClickLisenter();
+            }
+        }else{
+            Log.e(TAG, "서버쪽에서 동작을 정상적으로 처리하지 못했습니다");
+        }
 
         return;
-
     }
 
 }

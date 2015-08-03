@@ -12,8 +12,9 @@ public class RowItem {
     private int ooption1;
     private int ooption2;
     private int imageId; // exercise_name으로부터 얻은 해당 이름과 매치되는 이미지의 리소스 아이디
+    private String exerciseName;
 
-    public RowItem(int id, String cid, String cpw, int otype, int opart,  int ooption1, int ooption2, int imageId) {
+    public RowItem(int id, String cid, String cpw, int otype, int opart,  int ooption1, int ooption2, int imageId, String exerciseName) {
         this.id = id;
         this.cid = cid;
         this.cpw = cpw;
@@ -22,13 +23,15 @@ public class RowItem {
         this.ooption1 = ooption1;
         this.ooption2 = ooption2;
         this.imageId = imageId;
+        this.exerciseName = exerciseName;
     }
 
-    public RowItem(int id, int ooption1, int ooption2, int imageId) {
+    public RowItem(int id, int ooption1, int ooption2, int imageId, String exerciseName) {
         this.id = id;
         this.ooption1 = ooption1;
         this.ooption2 = ooption2;
         this.imageId = imageId;
+        this.exerciseName = exerciseName;
     }
 
     public RowItem(){
@@ -40,9 +43,7 @@ public class RowItem {
     public void setId(int id) {this.id = id; }
 
     // 사용자 아이디
-    public String getCid() {
-        return cid;
-    }
+    public String getCid() {return cid;}
     public void setCid(String cid) {this.cid = cid;}
 
     // 사용자 비밀번호
@@ -92,5 +93,9 @@ public class RowItem {
     public void setImageId(int imageId) {
         this.imageId = imageId;
     }
+
+    // 운동 이름
+    public String getExerciseName() {return exerciseName;}
+    public void setExerciseName(String exerciseName) {this.exerciseName = exerciseName;}
 
 }

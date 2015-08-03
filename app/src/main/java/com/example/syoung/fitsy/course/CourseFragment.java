@@ -3,7 +3,6 @@ package com.example.syoung.fitsy.course;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -38,10 +37,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     static final String TAG = "CourseFragment";
     private final int exercise_number = 7;
 
-    // 정보를 가져올 페이지 정보
-    static final String CURRENT_URL = "http://192.168.0.21:8080/sgen_test/current_course.php"; // 현재 운동정보 관련 URL
-    static final String ADD_URL = "http://192.168.0.21:8080/sgen_test/add_course.php"; // 검색/추가 운동 관련 URL
-    static final String RECOMMEND_URL = "http://192.168.0.21:8080/sgen_test/recommend_course.php"; // 추천 운동정보 관련 URL
+    static final int RECOMMEND = 1;
 
     public static HorizontalListView current_course_view;
     public static HorizontalListView add_course_view;
@@ -73,6 +69,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     Action_Anim anim;
     SearchImageRID searchImageRID;
+    ChangeCurrentCourse changeCurrentCourse;
     private static SearchConverter searchConverter;
 
     public static ProgressBar bar;
@@ -106,7 +103,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         // 클래스 초기화
         anim = new Action_Anim();
         searchImageRID = new SearchImageRID(thisActivity);
-        searchConverter = new SearchConverter();
+        searchConverter = new SearchConverter(thisActivity);
 
         // ListView 등록
         current_course_view = (HorizontalListView) rootView.findViewById (R.id.current_course_list);
@@ -143,32 +140,32 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         bye_fat_recommend_list = new ArrayList<RowItem>();
 
         // 추천 운동 코스 리스트들에 아이템 등록하기
-        pt_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
-        pt_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2")));
-        pt_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2")));
-        pt_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2")));
-        pt_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2")));
-        pt_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
-        pt_recommend_list.add(new RowItem(7, 20, 10, searchImageRID.getImageID("cycle2")));
-        pt_recommend_list.add(new RowItem(8, 10, 20, searchImageRID.getImageID("leg_curl2")));
+        pt_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2"),"leg_press"));
+        pt_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension"));
+        pt_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down"));
+        pt_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes"));
+        pt_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press"));
+        pt_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2"),"running"));
+        pt_recommend_list.add(new RowItem(7, 20, 10, searchImageRID.getImageID("cycle2"),"cycle"));
+        pt_recommend_list.add(new RowItem(8, 10, 20, searchImageRID.getImageID("leg_curl2"),"leg_curl"));
 
 
-        elephant_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2")));
-        elephant_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
-        elephant_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2")));
-        elephant_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2")));
-        elephant_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
-        elephant_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2")));
-        elephant_recommend_list.add(new RowItem(7, 20, 10, searchImageRID.getImageID("cycle2")));
+        elephant_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press"));
+        elephant_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2"),"running"));
+        elephant_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down"));
+        elephant_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension"));
+        elephant_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2"),"leg_press"));
+        elephant_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes"));
+        elephant_recommend_list.add(new RowItem(7, 20, 10, searchImageRID.getImageID("cycle2"),"cycle"));
 
 
-        bye_fat_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
-        bye_fat_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2")));
-        bye_fat_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2")));
-        bye_fat_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2")));
-        bye_fat_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2")));
-        bye_fat_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2")));
-        bye_fat_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
+        bye_fat_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2"),"running"));
+        bye_fat_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension"));
+        bye_fat_recommend_list.add(new RowItem(6, 1, 6, searchImageRID.getImageID("running2"),"running"));
+        bye_fat_recommend_list.add(new RowItem(4, 10, 20, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes"));
+        bye_fat_recommend_list.add(new RowItem(5, 10, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press"));
+        bye_fat_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down"));
+        bye_fat_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2"),"leg_press"));
 
 
         // 추천 운동 코스 리스트를 Adapter에 등록하기
@@ -198,23 +195,22 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         });
 
-        // TODO : 해당 list의 정보들을 JSON 형태로 만들어서 서버로 전송, current_couese_list를 갱신해 준다
         pt_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), pt_recommend_list, RECOMMEND);
             }
         });
         elephant_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), elephant_recommend_list, RECOMMEND);
             }
         });
         bye_fat_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), bye_fat_recommend_list, RECOMMEND);
             }
         });
 
@@ -237,10 +233,14 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         });
 
         // 리스트 아이템들을 받아오는 서버 통신 시작
-        MakeDynamicList makeList = new MakeDynamicList(getActivity());
-        makeList.execute();
+        startConnection();
 
         return rootView;
+    }
+
+    public static void startConnection(){
+        MakeCurrentList makeList = new MakeCurrentList(thisActivity);
+        makeList.execute();
     }
 
     /**
