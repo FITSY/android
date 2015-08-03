@@ -33,12 +33,6 @@ import com.example.syoung.fitsy.R;
  * Created by HyunJoo on 2015. 7. 27..
  */
 
-
-// TODO : recommend_course_list에서 해당 코스의 이름을 클릭했을 시 http request
-// TODO : 검색 기능 완성
-// TODO : 길게 드래그 시 운동 순서변경 / 삭제 가능하게 하기
-// TODO : recommend_course_list들에다가 운동 관련 정보들 모두 제대로 담기
-
 public class CourseFragment extends android.support.v4.app.Fragment{
     private static View rootView;
     static final String TAG = "CourseFragment";
@@ -63,8 +57,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     public static ArrayList<RowItem> elephant_recommend_list;
     public static ArrayList<RowItem> bye_fat_recommend_list;
 
-    LazyAdapter current_course_adapter;
-    LazyAdapter add_course_adapter;
+    private static LazyAdapter current_adapter;
+    private static LazyAdapter add_adapter;
 
     LazyAdapter pt_recommend_adapter;
     LazyAdapter elephant_recommend_adapter;
@@ -106,8 +100,10 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_course, container, false);
 
+        // 액티비티 저장
         thisActivity = getActivity();
 
+        // 클래스 초기화
         anim = new Action_Anim();
         searchImageRID = new SearchImageRID(thisActivity);
         searchConverter = new SearchConverter();
@@ -146,6 +142,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         elephant_recommend_list = new ArrayList<RowItem>();
         bye_fat_recommend_list = new ArrayList<RowItem>();
 
+        // 추천 운동 코스 리스트들에 아이템 등록하기
         pt_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
         pt_recommend_list.add(new RowItem(2, 10, 20, searchImageRID.getImageID("leg_extension2")));
         pt_recommend_list.add(new RowItem(3, 30, 20, searchImageRID.getImageID("let_pull_down2")));
@@ -174,6 +171,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         bye_fat_recommend_list.add(new RowItem(1, 10, 10, searchImageRID.getImageID("leg_press2")));
 
 
+        // 추천 운동 코스 리스트를 Adapter에 등록하기
         LazyAdapter pt_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, pt_recommend_list);
         LazyAdapter elepahnt_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, elephant_recommend_list);
         LazyAdapter bye_fat_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, bye_fat_recommend_list);
@@ -191,7 +189,6 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             }
 
         });
-
         search_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -201,6 +198,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         });
 
+        // TODO : 해당 list의 정보들을 JSON 형태로 만들어서 서버로 전송, current_couese_list를 갱신해 준다
         pt_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,46 +218,64 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             }
         });
 
+        // 검색 입력창 이벤트
         search_input.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         search_input.setInputType(InputType.TYPE_CLASS_TEXT);
-
         search_input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId) {
                     case EditorInfo.IME_ACTION_SEARCH:
                         // 엔터 눌렀을 시에 검색되게 함
-
-                        // 키보드 감추기
-                        keyboard.hideSoftInputFromWindow(search_input.getWindowToken(), 0);
-
-                        Toast.makeText(getActivity(), "검색", Toast.LENGTH_SHORT).show();
+                        searchButtonClick();
                         break;
                     default:
-                        Toast.makeText(getActivity(), "기본", Toast.LENGTH_SHORT).show();
                         return false;
                 }
                 return true;
             }
         });
 
-
+        // 리스트 아이템들을 받아오는 서버 통신 시작
         MakeDynamicList makeList = new MakeDynamicList(getActivity());
         makeList.execute();
 
         return rootView;
     }
 
+    /**
+     * 검색 버튼 클릭했을 시
+     */
     private void searchButtonClick(){
 
-        //Toast.makeText(getActivity(), search_input.getText(), Toast.LENGTH_SHORT).show();
         ArrayList<RowItem> temp_add_course_list = new ArrayList<RowItem>();
-        //temp_add_course_list =
-        keyboard.hideSoftInputFromWindow(search_input.getWindowToken(), 0);
-        searchConverter.getSearchResult(search_input.getText().toString());
 
+        // 키보드 감추기
+        keyboard.hideSoftInputFromWindow(search_input.getWindowToken(), 0);
+
+        // 검색어를 searchConverter로 보내서 검색 시작. 결과값을 temp_add_course_list로 받는다.
+        temp_add_course_list = searchConverter.getSearchResult(search_input.getText().toString());
+
+        // 받은 값을 add_adapter에 추가해 준다.
+        add_array_list = temp_add_course_list;
+        add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
+        add_course_view.setAdapter(add_adapter);
+
+        // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
+        // 아이템 리스너 등록
+        add_course_view.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // 터치 시 해당 아이템 이름 출력
+                Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        });
     }
 
+    /**
+     * 운동수정 열기/닫기 버튼 클릭했을 시
+     */
     private void openButtonClick(){
 
         if(add_course_view.isShown()){
@@ -275,16 +291,21 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         }
     }
 
-    public static void setOnClickLisenter() {
+    /**
+     * 서버에서 current_list와 add_list 받아온 거를 Adapter에 적용시켜 주고, 각 아이템의 Listener 를 등록해 준다
+     */
+    public static void setOnClickListener() {
 
-        LazyAdapter current_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, current_array_list);
-        LazyAdapter add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
+        current_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, current_array_list);
+        add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
 
         current_course_view.setAdapter(current_adapter);
         add_course_view.setAdapter(add_adapter);
 
-        searchConverter.setArrayList(add_array_list);
+        // 처음 받은 전체 운동 코스 리스트를 searchConverter에 저장해 둔다.
+       searchConverter.setArrayList(add_array_list);
 
+        // TODO : 아이템 순서 변경 이벤트 시작
         // 리스트 아이템을 터치 했을 떄 이벤트 발생
         current_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -294,14 +315,15 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             }
         });
 
+        // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
         // 리스트 아이템을 길게 터치 했을 떄 이벤트 발생
         current_course_view.setOnItemLongClickListener(new OnItemLongClickListener() {
 
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // 터치 시 해당 아이템 이름 출력
                 Toast toast = Toast.makeText(thisActivity, "Long Clicked", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
-                // 터치 시 해당 아이템 이름 출력
                 return true;
             }
 
@@ -309,6 +331,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         add_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // 터치 시 해당 아이템 이름 출력
                 Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
