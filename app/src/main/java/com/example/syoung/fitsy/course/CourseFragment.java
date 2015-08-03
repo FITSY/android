@@ -81,6 +81,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private EditText search_input;
     private ImageButton search_button;
     private InputMethodManager keyboard;
+    private TextView search_part;
 
     public CourseFragment() {
 
@@ -120,6 +121,9 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         elephant_confirm = (ImageButton) rootView.findViewById(R.id.elephant_confirm);
         bye_fat_confirm = (ImageButton) rootView.findViewById(R.id.bye_fat_confirm);
         search_button = (ImageButton) rootView.findViewById(R.id.search_button);
+
+        // 텍스트뷰 등록
+        search_part = (TextView) rootView.findViewById(R.id.search_part);
 
         // 키보드 등록
         keyboard = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
@@ -257,20 +261,31 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         temp_add_course_list = searchConverter.getSearchResult(search_input.getText().toString());
 
         // 받은 값을 add_adapter에 추가해 준다.
-        add_array_list = temp_add_course_list;
-        add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
-        add_course_view.setAdapter(add_adapter);
+        if(temp_add_course_list != null) {
+            // EditText 내용을 제목으로 만들기
+            search_part.setText(search_input.getText().toString());
 
-        // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
-        // 아이템 리스너 등록
-        add_course_view.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // 터치 시 해당 아이템 이름 출력
-                Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
-            }
-        });
+            add_array_list = temp_add_course_list;
+            add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
+            add_course_view.setAdapter(add_adapter);
+
+            // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
+            // 아이템 리스너 등록
+            add_course_view.setOnItemClickListener(new OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    // 터치 시 해당 아이템 이름 출력
+                    Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                }
+            });
+
+        }else{
+            search_part.setText("검색어가 잘못 되었습니다");
+        }
+
+        // EditText 초기화
+        search_input.setText(null);
     }
 
     /**
