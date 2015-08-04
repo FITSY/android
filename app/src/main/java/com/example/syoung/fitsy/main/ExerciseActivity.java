@@ -66,7 +66,6 @@ public class ExerciseActivity extends Activity {
                 }
                 //TODO : nowNumber에 숫자가 올라감 (블루투스 연결한 숫자)
                 nowNumber.setText(String.valueOf(0));
-                break;
             }
         }
 

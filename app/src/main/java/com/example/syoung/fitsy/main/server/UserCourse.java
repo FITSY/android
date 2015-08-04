@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class UserCourse implements Serializable{
 
-    private String id;
-    private String cid;
-    private String oid;
-    private String onmae;
+    private String id; //key
+    private String cid; //
+    private String oid; //
+    private String onmae; //
     private String odid;
     private int otype;
     private int opart;
-    private int ooption1;
+    private int ooption1; //무산소 :
     private int ooption2;
     private String ename;
     private String eintro;

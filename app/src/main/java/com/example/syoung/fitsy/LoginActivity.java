@@ -76,6 +76,22 @@ public class LoginActivity extends Activity {
         userCourse.setOoption2(10);
         userCourseList.add(userCourse);
 
+        UserCourse userCourse2 = new UserCourse();
+        userCourse2.setId("1");
+        userCourse2.setOtype(2);
+        userCourse2.setEname("leg_press");
+        userCourse2.setOdid("0000000");
+        userCourse2.setOoption1(8);
+        userCourse2.setOoption2(10);
+
+        userCourseList.add(userCourse2);
+        userCourseList.add(userCourse2);
+        userCourseList.add(userCourse2);
+        userCourseList.add(userCourse2);
+        userCourseList.add(userCourse2);
+        userCourseList.add(userCourse2);
+
+
 
         mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
         startActivity(mainIntent);
