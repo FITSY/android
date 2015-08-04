@@ -51,51 +51,19 @@ public class LoginActivity extends Activity {
 
         FITSYService service = restAdapter.create(FITSYService.class);
 
-//        service.getResponse(new Callback<List<UserCourse>>() {
-//            @Override
-//            public void success(List<UserCourse> userCourseList, Response response) {
-//                Log.e("success", userCourseList.size() + "");
-//                mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
-//                startActivity(mainIntent);
-//                finish();
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                Log.e("fail", "");
-//            }
-//        });
+        service.getResponse(new Callback<List<UserCourse>>() {
+            @Override
+            public void success(List<UserCourse> userCourseList, Response response) {
+                Log.e("success", userCourseList.size() + "");
+                mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
+                startActivity(mainIntent);
+                finish();
+            }
 
-        List<UserCourse> userCourseList = new ArrayList<UserCourse>();
-        UserCourse userCourse = new UserCourse();
-        userCourse.setOtype(2);
-        userCourse.setEname("leg_curl");
-        userCourse.setOdid("04526E52863680");
-        userCourse.setOoption1(8);
-        userCourse.setOoption2(10);
-        List<String> method = new ArrayList<String>();
-        method.add("앞으로");
-        method.add("뒤로");
-        method.add("끝");
-        userCourse.setEintro(method);
-        userCourseList.add(userCourse);
-
-        UserCourse userCourse2 = new UserCourse();
-        userCourse2.setOtype(2);
-        userCourse2.setEname("leg_press");
-        userCourse2.setOdid("0000000");
-        userCourse2.setOoption1(3);
-        userCourse2.setOoption2(4);
-
-        userCourseList.add(userCourse2);
-        userCourseList.add(userCourse2);
-        userCourseList.add(userCourse2);
-        userCourseList.add(userCourse2);
-        userCourseList.add(userCourse2);
-        userCourseList.add(userCourse2);
-
-        mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
-        startActivity(mainIntent);
-        finish();
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("fail", "");
+            }
+        });
     }
 }

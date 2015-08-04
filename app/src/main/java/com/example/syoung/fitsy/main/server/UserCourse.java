@@ -14,9 +14,18 @@ public class UserCourse implements Serializable{
     private int opart; //1 : 복부, 2: 팔, 3. 다리
     private int ooption1; //무산소 : 무게, 운동시간 : 속도
     private int ooption2; //무산소 : 횟수, 운동시간 : 시간
+    private String eid;
     private String ename; //운동이름
-    private List<String> eintro; //운동 방법
     private int corder; //코스내 있는 운동들에 대한 순서
+    private List<String> eintro; //운동 방법
+
+    public String getEid() {
+        return eid;
+    }
+
+    public void setEid(String eid) {
+        this.eid = eid;
+    }
 
     public String getId() {
         return id;
