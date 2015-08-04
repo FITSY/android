@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class UserCourse implements Serializable{
 
     private String id; //key
-    private String cid; //
-    private String oid; //
-    private String onmae; //
-    private String odid;
-    private int otype;
-    private int opart;
-    private int ooption1; //무산소 :
-    private int ooption2;
-    private String ename;
-    private String eintro;
-    private int corder;
+    private String cid; //?
+    private String oid; //운동기구 id
+    private String onmae; //운동기구 이름?
+    private String odid; //nfc 태그 id
+    private int otype; //1 : 유산소, 2 : 무산소
+    private int opart; //1 : 복부, 2: 팔, 3. 다리
+    private int ooption1; //무산소 : 무게, 운동시간 : 속도
+    private int ooption2; //무산소 : 횟수, 운동시간 : 시간
+    private String ename; //운동이름
+    private String eintro; //운동 방법
+    private int corder; //코스내 있는 운동들에 대한 순서
 
     public String getId() {
         return id;

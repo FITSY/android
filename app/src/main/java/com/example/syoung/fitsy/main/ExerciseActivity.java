@@ -21,27 +21,20 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
+//TODO : 운동 방법 보기 버튼 누르면 현 운동에 대한 정보 전송하기
+
 public class ExerciseActivity extends Activity {
 
-    @Bind(R.id.exerciseFinishBtn)
-    ImageButton exerciseFinishBtn;
-    @Bind(R.id.exercise_method_btn)
-    ImageButton exerciseMethodBtn;
-    @Bind(R.id.main_now_exercise_course_list)
-    HorizontalListView nowExerciseCourseHorizontalListView;
-    @Bind(R.id.exercise_name)
-    TextView exerciseName;
+    @Bind(R.id.exerciseFinishBtn) ImageButton exerciseFinishBtn;
+    @Bind(R.id.exercise_method_btn) ImageButton exerciseMethodBtn;
+    @Bind(R.id.main_now_exercise_course_list) HorizontalListView nowExerciseCourseHorizontalListView;
+    @Bind(R.id.exercise_name) TextView exerciseName;
 
-    @Bind(R.id.exercise_option_one_key)
-    TextView optionOneKey;
-    @Bind(R.id.exercise_option_two_key)
-    TextView optionTwoKey;
-    @Bind(R.id.exercise_option_one_value)
-    TextView optionOneValue;
-    @Bind(R.id.exercise_option_two_value)
-    TextView optionTwoValue;
-    @Bind(R.id.nowNumber)
-    TextView nowNumber;
+    @Bind(R.id.exercise_option_one_key) TextView optionOneKey;
+    @Bind(R.id.exercise_option_two_key) TextView optionTwoKey;
+    @Bind(R.id.exercise_option_one_value) TextView optionOneValue;
+    @Bind(R.id.exercise_option_two_value) TextView optionTwoValue;
+    @Bind(R.id.nowNumber) TextView nowNumber;
 
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
     private ExerciseData exerciseData;
