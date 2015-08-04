@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.course.CourseFragment;
+import com.example.syoung.fitsy.history.HistoryFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by HyunJoo on 2015. 8. 4..
@@ -22,7 +25,7 @@ public class PopupFragment extends DialogFragment {
 
     private static final int CHANGE_ALERT = 1; // 현재 코스가 변경된 상태인데 다른 창을 가려고 할 때 경고를 띄워주는 알림
     private static final int ADD_ALERT = 2; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
-    private static final int USUAL_ALERT = 3; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
+    private static final int HISTORY_ALERT = 3; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
     private static final int RECOMMEND_ALERT = 4; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
 
     private static final int PT = 5;
@@ -37,6 +40,7 @@ public class PopupFragment extends DialogFragment {
     RowItem data;
 
     private int which_recommend;
+    private ArrayList<RowItem> items;
 
     private int which_alert;
 
@@ -47,6 +51,11 @@ public class PopupFragment extends DialogFragment {
     public PopupFragment(int which_alert, RowItem data) {
         this.which_alert = which_alert;
         this.data = data;
+    }
+
+    public PopupFragment(int which_alert, ArrayList<RowItem> items) {
+        this.which_alert = which_alert;
+        this.items = items;
     }
 
     public PopupFragment(int which_alert, int which_recommend) {
@@ -68,14 +77,14 @@ public class PopupFragment extends DialogFragment {
 
         switch (which_alert){
             case CHANGE_ALERT:
-                question.setText("운동 코스가 변경 되었습니다.\n저장하시겠습니까?");
+                question.setText("변경 사항 저장");
                 usualChange();
                 break;
             case ADD_ALERT:
                 addChange();
                 break;
-            case USUAL_ALERT:
-                usualChange();
+            case HISTORY_ALERT:
+                historyChange();
                 break;
             case RECOMMEND_ALERT:
                 recommendChange();
@@ -90,6 +99,22 @@ public class PopupFragment extends DialogFragment {
         );
 
         return rootView;
+    }
+
+    private void historyChange(){
+        ok.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View v) {
+                                      HistoryFragment.makeChange(items);
+                                  }}
+        );
+        no.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View v) {
+                                      getDialog().dismiss();
+                                  }
+                              }
+        );
     }
 
     private void recommendChange(){

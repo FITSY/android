@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.example.syoung.fitsy.R;
+import com.example.syoung.fitsy.common.RowItem;
 
 import java.util.List;
 

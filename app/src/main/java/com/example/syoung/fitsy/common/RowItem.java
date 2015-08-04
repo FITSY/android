@@ -37,7 +37,6 @@ public class RowItem {
     public RowItem(){
 
     }
-
     // 운동 순번
     public int getId() {return imageId;}
     public void setId(int id) {this.id = id; }

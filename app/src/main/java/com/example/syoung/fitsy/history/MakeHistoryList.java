@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by HyunJoo on 2015. 8. 3..
  */
@@ -21,11 +23,9 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
 
     static final String TAG = "MakeHistoryList";
 
-    static final String TAG_ALL = "all_courses";
-    static final String TAG_CURRENT = "current_course";
-    static final String TAG_ADD = "add_course";
-
     static final String TAG_DATE = "date";
+    static final String TAG_COURSE = "course";
+
     static final String TAG_ID = "id";
     static final String TAG_CID = "cid";
     static final String TAG_CPW = "cpw";
@@ -37,8 +37,8 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
 
     //static String URL = "http://192.168.0.10:8080/sgen_test/history.php"; // 굿 카페 (or 하하) ip
     //static String URL = "http://192.168.0.21:8080/sgen_test/history.php"; // 정보를 가져올 페이지 정보 (연구실 ip)
-    static String URL = "http://192.168.1.41:8080/sgen_test/history.php"; // WIFI 이름 : '엔젤리너스2층'
-    //static String URL = "http://192.168.0.5:8080/sgen_test/history.php";
+    //static String URL = "http://192.168.1.41:8080/sgen_test/history.php"; // WIFI 이름 : '엔젤리너스2층'
+    static String URL = "http://192.168.0.5:8080/sgen_test/history.php";
 
     Activity activity;
 
@@ -54,8 +54,8 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        CourseFragment.backgrd.setVisibility(View.VISIBLE);
-        CourseFragment.bar.setVisibility(View.VISIBLE);
+        HistoryFragment.backgrd.setVisibility(View.VISIBLE);
+        HistoryFragment.bar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -76,16 +76,8 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
 
                     temp_JSONArr = jsonArr.getJSONArray(i);
 
-                    switch (i) {
-                        case 0:
-                            // current_course
-                            get_courses(i, temp_JSONArr);
-                            break;
-                        case 1:
-                            // add_course
-                            get_courses(i, temp_JSONArr);
-                            break;
-                    }
+                    doJSONParsing(temp_JSONArr);
+
                 }
 
             } catch (JSONException e) {
@@ -102,18 +94,16 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute (Void result) {
         super.onPostExecute(result);
 
-        CourseFragment.backgrd.setVisibility(View.GONE);
-        CourseFragment.bar.setVisibility(View.GONE);
+        HistoryFragment.backgrd.setVisibility(View.GONE);
+        HistoryFragment.bar.setVisibility(View.GONE);
 
-        CourseFragment.setOnClickListener();
-        CourseFragment.addSetOnclickLister();
+        HistoryFragment.setOnClickListener();
 
         return;
 
     }
 
-    protected void get_courses(int index, JSONArray jsonArray) {
-        JSONArray jsonArr = null;
+    protected void doJSONParsing (JSONArray jsonArray){
         JSONObject temp_JSONobj = null;
 
         int temp_id;
@@ -125,43 +115,51 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
         int temp_ooption2;
         String exercise_name;
 
-
-
         int temp_image_id = 0;
 
         try {
+            for(int i = 0; i < jsonArray.length(); i++) {
+                ArrayList<RowItem> temp_list = new ArrayList<RowItem>();
+                String temp_date;
 
-            Log.e(TAG, "jsonARR : " + jsonArray);
+                JSONObject temp1 = jsonArray.getJSONObject(0);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                temp_JSONobj = jsonArray.getJSONObject(i);
+                temp_date = temp1.getString(TAG_DATE);
 
-                temp_id = temp_JSONobj.getInt(TAG_ID);
-                temp_cid = temp_JSONobj.getString(TAG_CID);
-                temp_cpw = temp_JSONobj.getString(TAG_CPW);
-                temp_opart = temp_JSONobj.getInt(TAG_OPART);
-                temp_otype = temp_JSONobj.getInt(TAG_OTYPE);
-                temp_ooption1 = temp_JSONobj.getInt(TAG_OOPTION1);
-                temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);
-                exercise_name = temp_JSONobj.getString(TAG_EXERCISE_NAME);
+                JSONObject temp2 = jsonArray.getJSONObject(1);
+                JSONArray jsonArr = temp2.getJSONArray(TAG_COURSE);
 
-                if (index == 0) {
-                    //current_array
+                for (int j = 0; j < jsonArr.length(); j++) {
+                    temp_JSONobj = jsonArr.getJSONObject(j);
+
+                    temp_id = temp_JSONobj.getInt(TAG_ID);
+                    temp_cid = temp_JSONobj.getString(TAG_CID);
+                    temp_cpw = temp_JSONobj.getString(TAG_CPW);
+                    temp_opart = temp_JSONobj.getInt(TAG_OPART);
+                    temp_otype = temp_JSONobj.getInt(TAG_OTYPE);
+                    temp_ooption1 = temp_JSONobj.getInt(TAG_OOPTION1);
+                    temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);
+                    exercise_name = temp_JSONobj.getString(TAG_EXERCISE_NAME);
+
                     temp_image_id = sRid.getImageID(exercise_name);
-                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
-                    CourseFragment.current_array_list.add(temp_row_item);
+
+                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype,
+                            temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
+                    temp_list.add(temp_row_item);
+
+
                 }
-                else {
-                    //add_array
-                    temp_image_id = sRid.getImageID(exercise_name + "2");
-                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
-                    CourseFragment.add_array_list.add(temp_row_item);
-                }
+
+                HistoryRowItem temp_history_row_item = new HistoryRowItem(temp_date, temp_list);
+                HistoryFragment.history_array_list.add(temp_history_row_item);
+
+                i++;
 
             }
-        } catch (JSONException e) {
+        }catch (JSONException e){
             e.printStackTrace();
         }
 
     }
+
 }

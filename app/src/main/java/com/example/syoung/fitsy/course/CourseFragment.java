@@ -3,7 +3,6 @@ package com.example.syoung.fitsy.course;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,7 +36,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     private static final int CHANGE_ALERT = 1; // 현재 코스가 변경된 상태인데 다른 창을 가려고 할 때 경고를 띄워주는 알림
     private static final int ADD_ALERT = 2; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
-    private static final int USUAL_ALERT = 3; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
+    private static final int HISTORY_ALERT = 3; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
     private static final int RECOMMEND_ALERT = 4; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
 
     private static final int PT = 5;
@@ -241,7 +239,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         change_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupFragment = new PopupFragment(USUAL_ALERT);
+                popupFragment = new PopupFragment(CHANGE_ALERT);
                 popupFragment.show(thisActivity.getFragmentManager(), TAG);
             }
         });

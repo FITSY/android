@@ -76,8 +76,9 @@
                     android:id="@+id/add_course_open"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#f2f2f2"
+                    android:background="@drawable/border"
                     android:orientation="vertical"
+                    android:padding="5dp"
                     android:visibility="gone">
 
                     <LinearLayout
@@ -124,6 +125,7 @@
                     <com.example.syoung.fitsy.common.HorizontalListView
                         android:id="@+id/add_course_list"
                         android:layout_width="wrap_content"
+                        android:padding="5dp"
                         android:layout_height="70dp" />
 
                 </LinearLayout>

@@ -31,14 +31,14 @@
                 android:padding="5dp"
                 android:src="@drawable/change_confirm"/>
 
-            <!--<ImageButton
+            <ImageButton
                 android:id="@+id/change_cancle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:layout_gravity="center"
                 android:padding="5dp"
-                android:src="@drawable/change_cancle"/>-->
+                android:src="@drawable/change_cancle"/>
 
         </LinearLayout>
 

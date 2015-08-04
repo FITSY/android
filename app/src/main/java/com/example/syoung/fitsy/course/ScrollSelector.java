@@ -25,6 +25,7 @@ public class ScrollSelector extends DialogFragment{
     private static ScrollSelector instance;
     private RowItem item;
     private ImageButton change_confirm;
+    private ImageButton cancle;
 
     private NumberPicker picker1;
     private NumberPicker picker2;
@@ -50,6 +51,7 @@ public class ScrollSelector extends DialogFragment{
 
         ImageView exercise_image = (ImageView) rootView.findViewById(R.id.exercise_image);
         change_confirm = (ImageButton) rootView.findViewById(R.id.change_confirm);
+        cancle = (ImageButton) rootView.findViewById(R.id.change_cancle);
 
         picker1 = (NumberPicker) rootView.findViewById(R.id.numPick1);
         picker2 = (NumberPicker) rootView.findViewById(R.id.numPick2);
@@ -104,11 +106,18 @@ public class ScrollSelector extends DialogFragment{
 
         exercise_image.setImageResource(item.getImageId());
         change_confirm.setOnClickListener(new View.OnClickListener() {
+                                              @Override
+                                              public void onClick(View v) {
+                                                  clickConfirm();
+                                              }
+                                          }
+        );
+        cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickConfirm();
-            }}
-        );
+                getDialog().dismiss();
+            }
+        });
 
         return rootView;
     }
