@@ -14,6 +14,10 @@ import com.example.syoung.fitsy.R;
 public class HistoryFragment extends Fragment {
     private View rootView;
 
+    private static final int CHANGE_ALERT = 1; // 현재 코스가 변경된 상태인데 다른 창을 가려고 할 때 경고를 띄워주는 알림
+    private static final int ADD_ALERT = 2; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
+    private static final int TRANSFER_ALERT = 3; // 변경된 current_course를 전송할 때 전송할지 말지 물어보는 알림
+
     private static HistoryFragment instance;
 
     public HistoryFragment() {

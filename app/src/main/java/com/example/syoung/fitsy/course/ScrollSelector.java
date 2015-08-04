@@ -1,23 +1,17 @@
 package com.example.syoung.fitsy.course;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.syoung.fitsy.R;
-import com.example.syoung.fitsy.common.ChangeCurrentCourse;
 import com.example.syoung.fitsy.common.RowItem;
 
 /**
@@ -47,8 +41,6 @@ public class ScrollSelector extends DialogFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_scrollview, container, false);
         getDialog().setTitle("운동 횟수/시간 수정");
-
-        //getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         change_confirm = (ImageButton) rootView.findViewById(R.id.change_confirm);
 
@@ -152,15 +144,5 @@ public class ScrollSelector extends DialogFragment{
 
     public void onStop(){
         super.onStop();
-    }
-
-    public int getData(){
-        int temp = 0;
-
-        if(picker1.getDisplayedValues().equals(0)){
-            //picker2.getDisplayedValues()
-        }
-
-        return temp;
     }
 }

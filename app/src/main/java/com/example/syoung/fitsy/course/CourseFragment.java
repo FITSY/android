@@ -17,7 +17,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,6 +35,11 @@ import com.example.syoung.fitsy.R;
 public class CourseFragment extends android.support.v4.app.Fragment{
     private static View rootView;
     static final String TAG = "CourseFragment";
+
+    private static final int CHANGE_ALERT = 1; // 현재 코스가 변경된 상태인데 다른 창을 가려고 할 때 경고를 띄워주는 알림
+    private static final int ADD_ALERT = 2; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
+    private static final int TRANSFER_ALERT = 3; // 변경된 current_course를 전송할 때 전송할지 말지 물어보는 알림
+
     private final int exercise_number = 7;
 
     static final int RECOMMEND = 1;
@@ -67,6 +71,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     private static CourseFragment instance;
     private static Activity thisActivity;
+    private static PopupFragment popupFragment;
 
     Action_Anim anim;
     SearchImageRID searchImageRID;
@@ -85,7 +90,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private TextView search_part;
     public static ImageButton change_save;
 
-    public boolean isChanged;
+    public static boolean isChanged;
 
     public CourseFragment() {
 
@@ -228,8 +233,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         change_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                change_save.setVisibility(View.GONE);
-                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), current_array_list, RECOMMEND);
+                popupFragment = new PopupFragment(CHANGE_ALERT);
+                popupFragment.show(thisActivity.getFragmentManager(), TAG);
             }
         });
 
@@ -255,6 +260,19 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         startConnection();
 
         return rootView;
+    }
+
+    public static void changeSave(){
+        if(isChanged) {
+            isChanged = false;
+            change_save.setVisibility(View.GONE);
+            popupFragment.dismiss();
+            //changeCurrentCourse = new ChangeCurrentCourse(getActivity(), current_array_list, RECOMMEND);
+        }else{
+            change_save.setVisibility(View.GONE);
+            popupFragment.dismiss();
+            startConnection();
+        }
     }
 
     public static void startConnection(){
@@ -348,7 +366,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         add_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // 터치 시 해당 아이템 이름 출력
+                PopupFragment popupFragment = new PopupFragment(ADD_ALERT);
             }
         });
 

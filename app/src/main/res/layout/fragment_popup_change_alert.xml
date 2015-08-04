@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/blue_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/blue_back"/>
+
+
+        <ImageButton
+            android:id="@+id/cancle_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/blue_background"
+            android:layout_alignTop="@id/blue_background"
+            android:padding="15dp"
+            android:background="@null"
+            android:src="@drawable/btn_x"/>
+
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cancle_btn"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_alignRight="@id/blue_background"
+            android:layout_alignLeft="@id/blue_background"
+            android:text="현재 운동 코스로 저장"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="18dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/blue_background"
+            android:layout_alignRight="@id/blue_background"
+            android:layout_alignLeft="@id/blue_background"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:background="@null"
+                android:src="@drawable/btn_yes"/>
+
+            <ImageButton
+                android:id="@+id/btn_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:background="@null"
+                android:src="@drawable/btn_no"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
