@@ -38,7 +38,7 @@ public class ExerciseActivity extends Activity {
     private List<NowCourse> nowExerciseCourseItemList;
 
     //TODO : 운동을 한 정보는 NowCourse check 에 했는지 안 했는지에 대한 정보와 NowCourse에 result에 무산소 운동 횟수와 유산소운동 시간을 입력
-    //TODO : 한 운동은 list 에서 색칠되고 클릭 안되게 하기
+    //TODO : 한 운동은 list 에서 색칠되고 클릭 안되게 하기(처음 화면 킬 때NowCourse가 check인 것들 setting 해주기)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
