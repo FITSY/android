@@ -25,6 +25,10 @@ public class BluetoothListAdapter extends BaseAdapter {
         this.data = data;
     }
 
+    public List<BluetoothDevice> getData() {
+        return data;
+    }
+
     @Override
     public int getCount() {
         return data.size();
