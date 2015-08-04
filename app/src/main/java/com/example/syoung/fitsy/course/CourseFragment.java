@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -82,6 +83,9 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private ImageButton search_button;
     private InputMethodManager keyboard;
     private TextView search_part;
+    public static ImageButton change_save;
+
+    public boolean isChanged;
 
     public CourseFragment() {
 
@@ -106,6 +110,9 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         searchImageRID = new SearchImageRID(thisActivity);
         searchConverter = new SearchConverter(thisActivity);
 
+        // 변수 초기화
+        isChanged = false;
+
         // ListView 등록
         current_course_view = (HorizontalListView) rootView.findViewById (R.id.current_course_list);
         add_course_view = (HorizontalListView) rootView.findViewById (R.id.add_course_list);
@@ -121,6 +128,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         elephant_confirm = (ImageButton) rootView.findViewById(R.id.elephant_confirm);
         bye_fat_confirm = (ImageButton) rootView.findViewById(R.id.bye_fat_confirm);
         search_button = (ImageButton) rootView.findViewById(R.id.search_button);
+        change_save = (ImageButton) rootView.findViewById(R.id.change_save);
 
         // 텍스트뷰 등록
         search_part = (TextView) rootView.findViewById(R.id.search_part);
@@ -206,15 +214,22 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             }
         });
         elephant_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), elephant_recommend_list, RECOMMEND);
-            }
+                @Override
+                public void onClick(View v) {
+                    changeCurrentCourse = new ChangeCurrentCourse(getActivity(), elephant_recommend_list, RECOMMEND);
+                }
         });
         bye_fat_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 changeCurrentCourse = new ChangeCurrentCourse(getActivity(), bye_fat_recommend_list, RECOMMEND);
+            }
+        });
+        change_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                change_save.setVisibility(View.GONE);
+                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), current_array_list, RECOMMEND);
             }
         });
 
@@ -293,11 +308,13 @@ public class CourseFragment extends android.support.v4.app.Fragment{
      */
     private void openButtonClick(){
 
-        if(add_course_view.isShown()){
+        if (add_course_view.isShown()) {
             anim.slide_up(thisActivity, rootView.findViewById(R.id.add_course_open));
             anim.translate_to_up(thisActivity, rootView.findViewById(R.id.recommend_course_vertical_list));
             open_button.setText("운동 수정 열기 ∨");
             rootView.findViewById(R.id.add_course_open).setVisibility(View.GONE);
+            // 키보드 감추기
+            keyboard.hideSoftInputFromWindow(search_input.getWindowToken(), 0);
         }else{
             anim.slide_down(thisActivity,rootView.findViewById(R.id.add_course_open));
             anim.translate_to_down(thisActivity,rootView.findViewById(R.id.recommend_course_vertical_list));
@@ -324,33 +341,27 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         // 리스트 아이템을 터치 했을 떄 이벤트 발생
         current_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast toast = Toast.makeText(thisActivity, "currennt_course : " + current_array_list.get(position), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
+                ScrollSelector scrollSelector = new ScrollSelector(current_array_list.get(position), position);
+                scrollSelector.show(thisActivity.getFragmentManager(), TAG);
             }
-        });
-
-        // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
-        // 리스트 아이템을 길게 터치 했을 떄 이벤트 발생
-        current_course_view.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                // 터치 시 해당 아이템 이름 출력
-                Toast toast = Toast.makeText(thisActivity, "Long Clicked", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
-                return true;
-            }
-
         });
 
         add_course_view.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 터치 시 해당 아이템 이름 출력
-                Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
             }
+        });
+
+        // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
+        //TouchListView tlv= (TouchListView) current_course_view;
+        // 리스트 아이템을 길게 터치 했을 떄 이벤트 발생
+        current_course_view.setOnItemLongClickListener(new OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // 터치 시 해당 아이템 이름 출력
+                //current_course_view.setOnItemDragListener();
+                return true;
+            }
+
         });
 
     }

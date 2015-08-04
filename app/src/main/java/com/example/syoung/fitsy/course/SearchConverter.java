@@ -40,6 +40,8 @@ public class SearchConverter {
         ArrayList<RowItem> temp = new ArrayList<RowItem>();
 
         switch (searchKeyWord){
+            case "전체":
+                return data;
             case "복부":
                 temp = doSearchPart(BELLY);
                 return temp;

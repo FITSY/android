@@ -2,20 +2,28 @@ package com.example.syoung.fitsy.common;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Scroller;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class HorizontalListView extends AdapterView<ListAdapter> {
+public class HorizontalListView extends AdapterView<ListAdapter>{
 
     public boolean mAlwaysOverrideTouch = true;
     protected ListAdapter mAdapter;
@@ -356,8 +364,5 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             return viewRect.contains((int) e.getRawX(), (int) e.getRawY());
         }
     };
-
-
-
 }
 

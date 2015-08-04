@@ -152,6 +152,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
                     //current_array
                     temp_image_id = sRid.getImageID(exercise_name);
                     RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
+
                     CourseFragment.current_array_list.add(temp_row_item);
                 }
                 else {
