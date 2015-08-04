@@ -15,8 +15,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50.6dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/exercise_name"
             android:text="런닝머신"/>
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/exercise_method_btn_off"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8.33dp"
             android:layout_marginBottom="20dp"
             android:background="@null"
             android:src = "@drawable/exercise_method_btn_off"/>
@@ -54,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
             android:weightSum="1">
 
             <ImageView
@@ -61,14 +63,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:src ="@drawable/details_word"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="50.6dp"/>
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/line"
+            android:src="@drawable/line"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
             <ListView
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="162dp"
                 android:id="@+id/exercise_method_list_view" />
         </LinearLayout>

@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
+//TODO : Exercise Name 대문자로 변환 _ => ' '로 변환
 public class ExerciseActivity extends Activity {
 
     @Bind(R.id.exerciseFinishBtn) ImageButton exerciseFinishBtn;

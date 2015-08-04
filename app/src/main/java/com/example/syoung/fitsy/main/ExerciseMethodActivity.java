@@ -19,6 +19,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+//TODO : Exercise Name 대문자로 변환 _ => ' '로 변환
+//TODO : list view 밑에 라인 없애기
 public class ExerciseMethodActivity extends Activity {
 
     @Bind(R.id.exercise_method_btn_off) ImageButton exerciseMethodOffBtn;
