@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     private NavigationDrawerFragment navigationDrawerFragment;
     private CharSequence title;
     private static final int REQUEST_ENABLE_BT = 0;
+    private static final int REQUEST_MAIN_FRAGMENT = 1;
 
     private BluetoothAdapter bluetoothAdapter;
     private List<BluetoothDevice> bluetoothDeviceData = new ArrayList<>();
@@ -188,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         switch (requestCode) {
             case REQUEST_ENABLE_BT:
                 setBluetoothList();
+                break;
+            case REQUEST_MAIN_FRAGMENT:
+                MainFragment.getInstance().initListAndSet();
                 break;
         }
     }

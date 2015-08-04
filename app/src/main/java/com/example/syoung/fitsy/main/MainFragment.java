@@ -30,6 +30,8 @@ import butterknife.OnItemClick;
 
 public class MainFragment extends Fragment {
 
+    private static final int REQUEST_MAIN_FRAGMENT = 1;
+
     private View rootView;
     private static MainFragment instance;
 
@@ -64,8 +66,7 @@ public class MainFragment extends Fragment {
     }
 
     private void setCourseList(List<UserCourse> userCourseList) {
-        nowExerciseCourseSet = new HashSet<NowCourse>();
-        exerciseCourseList = new ArrayList<NowCourse>();
+        initListAndSet();
         nowExerciseCourseList = new ArrayList<NowCourse>();
         for(UserCourse userCourse : userCourseList){
             NowCourse nowCourse = new NowCourse();
@@ -75,6 +76,11 @@ public class MainFragment extends Fragment {
             nowCourse.setImageId(getActivity().getResources().getIdentifier(userCourse.getEname(), "drawable", getActivity().getPackageName()));
             exerciseCourseList.add(nowCourse);
         }
+    }
+
+    public void initListAndSet() {
+        nowExerciseCourseSet = new HashSet<NowCourse>();
+        exerciseCourseList = new ArrayList<NowCourse>();
     }
 
     private void setExerciseCourseHorizontalListView() {
@@ -97,7 +103,7 @@ public class MainFragment extends Fragment {
         nowExerciseCourseList.addAll(nowExerciseCourseSet);
         exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseList);
         startActivity(exerciseIntent);
-        //TODO : 되돌아 왔을 때 nowExerciseCourseList와 nowExerciseCourseSet 데이터 초기화 시키기
+//        startActivityForResult(exerciseIntent, REQUEST_MAIN_FRAGMENT);
     }
 
     @OnItemClick(R.id.main_exercise_course_list)
