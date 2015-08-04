@@ -80,7 +80,7 @@ public class RowItem {
 
     // ooption2 : 횟수(무산소) / 속도(유산소)
     public int getOoption2() {
-        return imageId;
+        return ooption2;
     }
     public void setOoption2(int ooption2) {
         this.ooption2 = ooption2;

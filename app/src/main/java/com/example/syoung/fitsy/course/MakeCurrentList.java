@@ -38,8 +38,8 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
     static final String TAG_EXERCISE_NAME = "exercise_name";
 
     //static String URL = "http://192.168.0.10:8080/sgen_test/get_all_course.php"; // 굿 카페 (or 하하) ip
-    static String URL = "http://192.168.0.21:8080/sgen_test/get_all_course.php"; // 정보를 가져올 페이지 정보 (연구실 ip)
-    //static String URL = "http://192.168.1.41:8080/sgen_test/get_all_course.php"; // WIFI 이름 : '엔젤리너스2층'
+    //static String URL = "http://192.168.0.21:8080/sgen_test/get_all_course.php"; // 정보를 가져올 페이지 정보 (연구실 ip)
+    static String URL = "http://192.168.1.41:8080/sgen_test/get_all_course.php"; // WIFI 이름 : '엔젤리너스2층'
     //static String URL = "http://192.168.0.5:8080/sgen_test/get_all_course.php";
 
     //static String URL = "http://ebsud89.iptime.org:8022/getAllCourse.php";
@@ -110,6 +110,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
         CourseFragment.bar.setVisibility(View.GONE);
 
         CourseFragment.setOnClickListener();
+        CourseFragment.addSetOnclickLister();
 
         return;
 
@@ -152,7 +153,6 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
                     //current_array
                     temp_image_id = sRid.getImageID(exercise_name);
                     RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
-
                     CourseFragment.current_array_list.add(temp_row_item);
                 }
                 else {

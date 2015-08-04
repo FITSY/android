@@ -38,7 +38,12 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     private static final int CHANGE_ALERT = 1; // 현재 코스가 변경된 상태인데 다른 창을 가려고 할 때 경고를 띄워주는 알림
     private static final int ADD_ALERT = 2; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
-    private static final int TRANSFER_ALERT = 3; // 변경된 current_course를 전송할 때 전송할지 말지 물어보는 알림
+    private static final int USUAL_ALERT = 3; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
+    private static final int RECOMMEND_ALERT = 4; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
+
+    private static final int PT = 5;
+    private static final int ELE = 6;
+    private static final int FAT = 7;
 
     private final int exercise_number = 7;
 
@@ -74,7 +79,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private static PopupFragment popupFragment;
 
     Action_Anim anim;
-    SearchImageRID searchImageRID;
+    private static SearchImageRID searchImageRID;
     ChangeCurrentCourse changeCurrentCourse;
     private static SearchConverter searchConverter;
 
@@ -215,25 +220,28 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         pt_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), pt_recommend_list, RECOMMEND);
+                popupFragment = new PopupFragment(RECOMMEND_ALERT, PT);
+                popupFragment.show(thisActivity.getFragmentManager(), TAG);
             }
         });
         elephant_confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    changeCurrentCourse = new ChangeCurrentCourse(getActivity(), elephant_recommend_list, RECOMMEND);
+                    popupFragment = new PopupFragment(RECOMMEND_ALERT, ELE);
+                    popupFragment.show(thisActivity.getFragmentManager(), TAG);
                 }
         });
         bye_fat_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeCurrentCourse = new ChangeCurrentCourse(getActivity(), bye_fat_recommend_list, RECOMMEND);
+                popupFragment = new PopupFragment(RECOMMEND_ALERT, FAT);
+                popupFragment.show(thisActivity.getFragmentManager(), TAG);
             }
         });
         change_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupFragment = new PopupFragment(CHANGE_ALERT);
+                popupFragment = new PopupFragment(USUAL_ALERT);
                 popupFragment.show(thisActivity.getFragmentManager(), TAG);
             }
         });
@@ -262,17 +270,46 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         return rootView;
     }
 
+    public static void recommendSave(int whichRecommend){
+        ChangeCurrentCourse changeCurrentCourse;
+
+        switch (whichRecommend){
+            case PT:
+                changeCurrentCourse = new ChangeCurrentCourse(thisActivity,pt_recommend_list, RECOMMEND);
+                changeCurrentCourse.execute();
+                break;
+            case ELE:
+                changeCurrentCourse = new ChangeCurrentCourse(thisActivity,elephant_recommend_list, RECOMMEND);
+                changeCurrentCourse.execute();
+                break;
+            case FAT:
+                changeCurrentCourse = new ChangeCurrentCourse(thisActivity,bye_fat_recommend_list, RECOMMEND);
+                changeCurrentCourse.execute();
+                break;
+        }
+    }
+
     public static void changeSave(){
         if(isChanged) {
-            isChanged = false;
             change_save.setVisibility(View.GONE);
             popupFragment.dismiss();
+            isChanged = false;
             //changeCurrentCourse = new ChangeCurrentCourse(getActivity(), current_array_list, RECOMMEND);
         }else{
             change_save.setVisibility(View.GONE);
             popupFragment.dismiss();
+            current_array_list = new ArrayList<RowItem>();
             startConnection();
         }
+    }
+
+    public static void addToCurrent(RowItem data){
+        isChanged = true;
+        change_save.setVisibility(View.VISIBLE);
+        popupFragment.dismiss();
+        data.setImageId(searchImageRID.getImageID(data.getExerciseName()));
+        current_array_list.add(data);
+        setOnClickListener();
     }
 
     public static void startConnection(){
@@ -302,14 +339,11 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
             add_course_view.setAdapter(add_adapter);
 
-            // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
             // 아이템 리스너 등록
             add_course_view.setOnItemClickListener(new OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // 터치 시 해당 아이템 이름 출력
-                    Toast toast = Toast.makeText(thisActivity, "add_course : " + add_array_list.get(position), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                    toast.show();
+                    popupFragment = new PopupFragment(ADD_ALERT, add_array_list.get(position));
+                    popupFragment.show(thisActivity.getFragmentManager(), TAG);
                 }
             });
 
@@ -347,13 +381,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     public static void setOnClickListener() {
 
         current_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, current_array_list);
-        add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
-
         current_course_view.setAdapter(current_adapter);
-        add_course_view.setAdapter(add_adapter);
-
-        // 처음 받은 전체 운동 코스 리스트를 searchConverter에 저장해 둔다.
-       searchConverter.setArrayList(add_array_list);
 
         // TODO : 아이템 순서 변경 이벤트 시작
         // 리스트 아이템을 터치 했을 떄 이벤트 발생
@@ -364,13 +392,6 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             }
         });
 
-        add_course_view.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PopupFragment popupFragment = new PopupFragment(ADD_ALERT);
-            }
-        });
-
-        // TODO : 아이템 속성 (시간/분) 수정 및 현재 코스에 추가 이벤트 시작
         //TouchListView tlv= (TouchListView) current_course_view;
         // 리스트 아이템을 길게 터치 했을 떄 이벤트 발생
         current_course_view.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -382,6 +403,23 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
         });
 
+    }
+
+    public static void addSetOnclickLister(){
+
+        add_adapter = new LazyAdapter(thisActivity, R.layout.course_list_node, add_array_list);
+
+        add_course_view.setAdapter(add_adapter);
+
+        // 처음 받은 전체 운동 코스 리스트를 searchConverter에 저장해 둔다.
+        searchConverter.setArrayList(add_array_list);
+
+        add_course_view.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popupFragment = new PopupFragment(ADD_ALERT, add_array_list.get(position));
+                popupFragment.show(thisActivity.getFragmentManager(), TAG);
+            }
+        });
     }
 
 }

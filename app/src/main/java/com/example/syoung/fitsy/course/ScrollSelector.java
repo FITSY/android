@@ -1,11 +1,13 @@
 package com.example.syoung.fitsy.course;
 
 import android.app.DialogFragment;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -41,6 +43,8 @@ public class ScrollSelector extends DialogFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_scrollview, container, false);
         getDialog().setTitle("운동 횟수/시간 수정");
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
         change_confirm = (ImageButton) rootView.findViewById(R.id.change_confirm);
 
@@ -71,8 +75,9 @@ public class ScrollSelector extends DialogFragment{
 
             if(temp >= 10){
                 int temp2 = temp/10;
+                int temp3 = temp%10;
                 picker1.setValue(temp2);
-                picker2.setValue(temp);
+                picker2.setValue(temp3);
             }else{
                 picker1.setValue(0);
                 picker2.setValue(temp);
@@ -85,8 +90,9 @@ public class ScrollSelector extends DialogFragment{
 
             if(temp >= 10){
                 int temp2 = temp/10;
+                int temp3 = temp%10;
                 picker1.setValue(temp2);
-                picker2.setValue(temp);
+                picker2.setValue(temp3);
             }else{
                 picker1.setValue(0);
                 picker2.setValue(temp);
