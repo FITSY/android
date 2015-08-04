@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
@@ -18,14 +19,15 @@ import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
-//TODO : OnActivityResult 해서 nowExerciseCourseList 값 초기화 시키기
 public class MainFragment extends Fragment {
 
     private View rootView;
@@ -37,6 +39,7 @@ public class MainFragment extends Fragment {
     private ExerciseCourseListAdapter exerciseCourseListAdapter;
     private List<NowCourse> exerciseCourseList;
     private List<NowCourse> nowExerciseCourseList;
+    private Set<NowCourse> nowExerciseCourseSet;
 
     public MainFragment() {
 
@@ -61,6 +64,7 @@ public class MainFragment extends Fragment {
     }
 
     private void setCourseList(List<UserCourse> userCourseList) {
+        nowExerciseCourseSet = new HashSet<NowCourse>();
         exerciseCourseList = new ArrayList<NowCourse>();
         nowExerciseCourseList = new ArrayList<NowCourse>();
         for(UserCourse userCourse : userCourseList){
@@ -85,14 +89,20 @@ public class MainFragment extends Fragment {
 
     @OnClick(R.id.startBtn)
     public void exerciseStart() {
+        if(nowExerciseCourseSet.size() == 0){
+            Toast.makeText(getActivity(), "empty list", Toast.LENGTH_LONG).show();
+            return;
+        }
         Intent exerciseIntent = new Intent(this.getActivity(), NFCReadActivity.class);
+        nowExerciseCourseList.addAll(nowExerciseCourseSet);
         exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseList);
         startActivity(exerciseIntent);
+        //TODO : 되돌아 왔을 때 nowExerciseCourseList와 nowExerciseCourseSet 데이터 초기화 시키기
     }
 
     @OnItemClick(R.id.main_exercise_course_list)
     void OnItemClicked(int position){
         //TODO : 선택되면 이미지 바뀌게 하기 (opacity or color)
-        nowExerciseCourseList.add(exerciseCourseList.get(position));
+        nowExerciseCourseSet.add(exerciseCourseList.get(position));
     }
 }

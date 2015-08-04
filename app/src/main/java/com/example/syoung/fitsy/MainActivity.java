@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+//TODO : bluetooth list data 중복되지 않게 하기
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private NavigationDrawerFragment navigationDrawerFragment;
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         int id = item.getItemId();
 
         if (item.getItemId() == R.id.hand_device) {
-            AlertDialog.Builder handDeviceBuilder = getDeviceAlertDialogBuilder("Foot Device");
+            AlertDialog.Builder handDeviceBuilder = getDeviceAlertDialogBuilder("Hand Device");
             handDeviceBuilder.setAdapter(bluetoothListAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
