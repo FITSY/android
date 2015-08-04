@@ -1,6 +1,7 @@
 package com.example.syoung.fitsy.main.server;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserCourse implements Serializable{
 
@@ -14,7 +15,7 @@ public class UserCourse implements Serializable{
     private int ooption1; //무산소 : 무게, 운동시간 : 속도
     private int ooption2; //무산소 : 횟수, 운동시간 : 시간
     private String ename; //운동이름
-    private String eintro; //운동 방법
+    private List<String> eintro; //운동 방법
     private int corder; //코스내 있는 운동들에 대한 순서
 
     public String getId() {
@@ -97,11 +98,11 @@ public class UserCourse implements Serializable{
         this.ename = ename;
     }
 
-    public String getEintro() {
+    public List<String> getEintro() {
         return eintro;
     }
 
-    public void setEintro(String eintro) {
+    public void setEintro(List<String> eintro) {
         this.eintro = eintro;
     }
 

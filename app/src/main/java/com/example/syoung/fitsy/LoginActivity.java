@@ -68,21 +68,24 @@ public class LoginActivity extends Activity {
 
         List<UserCourse> userCourseList = new ArrayList<UserCourse>();
         UserCourse userCourse = new UserCourse();
-        userCourse.setId("1");
         userCourse.setOtype(2);
         userCourse.setEname("leg_curl");
         userCourse.setOdid("04526E52863680");
         userCourse.setOoption1(8);
         userCourse.setOoption2(10);
+        List<String> method = new ArrayList<String>();
+        method.add("앞으로");
+        method.add("뒤로");
+        method.add("끝");
+        userCourse.setEintro(method);
         userCourseList.add(userCourse);
 
         UserCourse userCourse2 = new UserCourse();
-        userCourse2.setId("1");
         userCourse2.setOtype(2);
         userCourse2.setEname("leg_press");
         userCourse2.setOdid("0000000");
-        userCourse2.setOoption1(8);
-        userCourse2.setOoption2(10);
+        userCourse2.setOoption1(3);
+        userCourse2.setOoption2(4);
 
         userCourseList.add(userCourse2);
         userCourseList.add(userCourse2);
@@ -90,8 +93,6 @@ public class LoginActivity extends Activity {
         userCourseList.add(userCourse2);
         userCourseList.add(userCourse2);
         userCourseList.add(userCourse2);
-
-
 
         mainIntent.putExtra("userCourseList", (Serializable) userCourseList);
         startActivity(mainIntent);

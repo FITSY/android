@@ -1,7 +1,6 @@
 package com.example.syoung.fitsy.main;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -21,8 +20,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
-//TODO : 운동 방법 보기 버튼 누르면 현 운동에 대한 정보 전송하기
-
 public class ExerciseActivity extends Activity {
 
     @Bind(R.id.exerciseFinishBtn) ImageButton exerciseFinishBtn;
@@ -39,6 +36,7 @@ public class ExerciseActivity extends Activity {
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
     private ExerciseData exerciseData;
     private List<NowCourse> nowExerciseCourseItemList;
+    private NowCourse nowExercise;
 
     //TODO : 운동을 한 정보는 NowCourse check 에 했는지 안 했는지에 대한 정보와 NowCourse에 result에 무산소 운동 횟수와 유산소운동 시간을 입력
     //TODO : 한 운동은 list 에서 색칠되고 클릭 안되게 하기(처음 화면 킬 때NowCourse가 check인 것들 setting 해주기)
@@ -50,9 +48,14 @@ public class ExerciseActivity extends Activity {
         ButterKnife.bind(this);
         exerciseData = (ExerciseData) this.getIntent().getSerializableExtra("exerciseData");
         nowExerciseCourseItemList = exerciseData.getNowCourseList();
+        setViewComponent();
+        setNowExerciseCourseHorizontalListView();
+    }
 
+    private void setViewComponent() {
         for (NowCourse nowCourse : nowExerciseCourseItemList) {
             if (nowCourse.getUserCourse().getOdid().equals(exerciseData.getTagId())) {
+                nowExercise = nowCourse;
                 exerciseName.setText(nowCourse.getUserCourse().getEname());
                 if (nowCourse.getUserCourse().getOtype() == 1) {
                     //유산소
@@ -69,10 +72,9 @@ public class ExerciseActivity extends Activity {
                 }
                 //TODO : nowNumber에 숫자가 올라감 (블루투스 연결한 숫자)
                 nowNumber.setText(String.valueOf(0));
+                return;
             }
         }
-
-        setNowExerciseCourseHorizontalListView();
     }
 
     @Override
@@ -94,6 +96,7 @@ public class ExerciseActivity extends Activity {
     @OnClick(R.id.exercise_method_btn)
     public void showExerciseMethod() {
         Intent exerciseIntent = new Intent(this, ExerciseMethodActivity.class);
+        exerciseIntent.putExtra("nowExercise", (Serializable) nowExercise);
         startActivity(exerciseIntent);
     }
 

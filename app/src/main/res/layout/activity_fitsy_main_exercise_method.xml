@@ -31,15 +31,11 @@
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/exercise_circle" />
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/nowNumber"
-                android:layout_gravity="center" />
-
-
+                android:layout_gravity="center"
+                android:src="@drawable/leg_curl" />
         </FrameLayout>
 
 

@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.syoung.fitsy.R;
-import com.example.syoung.fitsy.main.adapter.ExerciseCourseListAdapter;
 import com.example.syoung.fitsy.main.adapter.ExerciseMethodListAdapter;
+import com.example.syoung.fitsy.main.data.NowCourse;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +19,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-//TODO : ExerciseActiviy에서 정보 받아와서 setting 하기
 public class ExerciseMethodActivity extends Activity {
 
     @Bind(R.id.exercise_method_btn_off) ImageButton exerciseMethodOffBtn;
     @Bind(R.id.exercise_method_list_view) ListView exerciseMethodListView;
+    @Bind(R.id.exercise_name) TextView exerciseName;
 
     private ExerciseMethodListAdapter exerciseMethodListAdapter;
     private List<String> exerciseMethodItemList;
+    private NowCourse nowExercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +35,9 @@ public class ExerciseMethodActivity extends Activity {
         setContentView(R.layout.activity_fitsy_main_exercise_method);
         ButterKnife.bind(this);
 
-        exerciseMethodItemList = new ArrayList<String>();
-        exerciseMethodItemList.add("앞으로");
-        exerciseMethodItemList.add("앞으로");
-        exerciseMethodItemList.add("앞으로");
-        exerciseMethodItemList.add("앞으로");
-
+        nowExercise = (NowCourse) this.getIntent().getSerializableExtra("nowExercise");
+        exerciseMethodItemList = nowExercise.getUserCourse().getEintro();
+        exerciseName.setText(nowExercise.getUserCourse().getEname());
         setNowExerciseCourseHorizontalListView();
     }
 
