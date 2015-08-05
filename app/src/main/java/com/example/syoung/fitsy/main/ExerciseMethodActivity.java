@@ -19,7 +19,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-//TODO : Exercise Name 대문자로 변환 _ => ' '로 변환
 public class ExerciseMethodActivity extends Activity {
 
     @Bind(R.id.exercise_method_btn_off) ImageButton exerciseMethodOffBtn;
@@ -38,7 +37,7 @@ public class ExerciseMethodActivity extends Activity {
 
         nowExercise = (NowCourse) this.getIntent().getSerializableExtra("nowExercise");
         exerciseMethodItemList = nowExercise.getUserCourse().getEintro();
-        exerciseName.setText(nowExercise.getUserCourse().getEname());
+        exerciseName.setText(nowExercise.getUserCourse().getEname().replace("_"," ").toUpperCase());
         setNowExerciseCourseHorizontalListView();
     }
 

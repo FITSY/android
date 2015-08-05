@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
-//TODO : Exercise Name 대문자로 변환 _ => ' '로 변환
 //TODO : 운동중 원 유산소 일때 무산소 일때 나오는 모양 적용하기
 //TODO : 운동중 운동 된거는 이미지 파란색으로 하고 선택하면 이미 한 운동입니다 토스트 띄우기
 public class ExerciseActivity extends Activity {
@@ -60,7 +59,7 @@ public class ExerciseActivity extends Activity {
         for (NowCourse nowCourse : nowExerciseCourseItemList) {
             if (nowCourse.getUserCourse().getOdid() != null && nowCourse.getUserCourse().getOdid().equals(exerciseData.getTagId())) {
                 nowExercise = nowCourse;
-                exerciseName.setText(nowCourse.getUserCourse().getEname());
+                exerciseName.setText(nowCourse.getUserCourse().getEname().replace("_"," ").toUpperCase());
                 if (nowCourse.getUserCourse().getOtype() == 1) {
                     //무산소
                     optionOneKey.setText("weight");
