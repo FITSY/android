@@ -503,7 +503,7 @@ public class DragSortListView extends ListView {
                         0);
                 int bgColor = a.getColor(
                         R.styleable.DragSortListView_float_background_color,
-                        Color.BLACK);
+                        R.color.color_fitsy_blue);
 
                 DragSortController controller = new DragSortController(
                         this, dragHandleId, dragInitMode, removeMode,

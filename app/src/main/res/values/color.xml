@@ -3,5 +3,6 @@
     <color name="color_preloader_start">#0fffffff</color>
     <color name="color_preloader_center">#23ffff</color>
     <color name="color_preloader_end">#2300ff</color>
-
+    <color name="color_fitsy_blue">#2300ff</color>
+    <color name="color_fitsy_gray">#f2f2f2</color>
 </resources>
