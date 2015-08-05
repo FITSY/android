@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     };
 
     private void startConnect() {
-        connectThread = new ConnectThread(selectedDevice);
+        connectThread = new ConnectThread(selectedDevice, bluetoothAdapter);
         connectThread.start();
     }
 

@@ -1,5 +1,6 @@
 package com.example.syoung.fitsy.main.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
@@ -13,11 +14,14 @@ public class ConnectThread extends Thread {
     private final BluetoothDevice mmDevice;
     private final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    public ConnectThread(BluetoothDevice device) {
+    private BluetoothAdapter adapter;
+
+    public ConnectThread(BluetoothDevice device, BluetoothAdapter adapter) {
         // Use a temporary object that is later assigned to mmSocket,
         // because mmSocket is final
         BluetoothSocket tmp = null;
         mmDevice = device;
+        this.adapter = adapter;
 
         // Get a BluetoothSocket to connect with the given BluetoothDevice
         try {
@@ -32,6 +36,7 @@ public class ConnectThread extends Thread {
     @Override
     public void run() {
         try {
+            adapter.cancelDiscovery();
             mmSocket.connect();
         } catch (IOException connectException) {
             connectException.printStackTrace();
