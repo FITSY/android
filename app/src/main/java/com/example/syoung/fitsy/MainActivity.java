@@ -1,5 +1,6 @@
 package com.example.syoung.fitsy;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     private List<BluetoothDevice> bluetoothDeviceData = new ArrayList<>();
     private BluetoothListAdapter bluetoothListAdapter;
     private ConnectThread connectThread;
-    private BluetoothDevice  selectedDevice;
+    private BluetoothDevice selectedDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     public void onNavigationDrawerItemSelected(int position) {
         Fragment objFragment = null;
 
-        switch (position){
+        switch (position) {
             case 0:
                 objFragment = MainFragment.getInstance();
                 title = getString(R.string.title_section1);
@@ -188,7 +189,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         this.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_ENABLE_BT:
-                setBluetoothList();
+                if (resultCode == Activity.RESULT_OK) {
+                    setBluetoothList();
+                } else {
+                    // User did not enable Bluetooth or an error occured
+                    Toast.makeText(this, "BT is not enabled", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case REQUEST_MAIN_FRAGMENT:
                 MainFragment.getInstance().initListAndSet();
@@ -199,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     private void setBluetoothList() {
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         for (BluetoothDevice device : pairedDevices) {
-            if(!bluetoothListAdapter.getData().contains(device)){
+            if (!bluetoothListAdapter.getData().contains(device)) {
                 bluetoothDeviceData.add(device);
             }
         }
@@ -213,11 +219,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             Log.e("action", action);
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if(!bluetoothListAdapter.getData().contains(device)){
+                if (!bluetoothListAdapter.getData().contains(device)) {
                     bluetoothDeviceData.add(device);
                 }
                 bluetoothListAdapter.notifyDataSetChanged();
-            } else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
             }
         }
     };
@@ -227,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         connectThread.start();
     }
 
-    private void disConnect(){
+    private void disConnect() {
         connectThread.cancel();
     }
 }
