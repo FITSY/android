@@ -249,7 +249,10 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         order_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeNDelete = new ChangeNDelete(current_array_list, thisActivity);
+                // 운동 순서 바꾸는 버튼
+                ArrayList<RowItem> tmp_list = new ArrayList<RowItem>();
+                tmp_list.addAll(current_array_list);
+                changeNDelete = new ChangeNDelete(tmp_list, thisActivity);
                 changeNDelete.show(thisActivity.getFragmentManager(), TAG);
             }
         });
@@ -307,6 +310,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             change_save.setVisibility(View.GONE);
             popupFragment.dismiss();
             current_array_list = new ArrayList<RowItem>();
+            add_array_list = new ArrayList<RowItem>();
             startConnection();
         }
     }
@@ -325,12 +329,15 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         makeList.execute();
     }
 
-    public static void changeOrder(int result){
+    public static void changeOrder(int result, ArrayList<RowItem> data){
         if(result == 0){
             changeNDelete.onStop();
             changeNDelete.getDialog().dismiss();
         }else{
-
+            changeNDelete.onStop();
+            changeNDelete.getDialog().dismiss();
+            current_array_list = data;
+            setOnClickListener();
         }
     }
 

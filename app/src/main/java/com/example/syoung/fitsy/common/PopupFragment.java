@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.syoung.fitsy.R;
+import com.example.syoung.fitsy.course.ChangeNDelete;
 import com.example.syoung.fitsy.course.CourseFragment;
 import com.example.syoung.fitsy.history.HistoryFragment;
 
@@ -25,8 +26,9 @@ public class PopupFragment extends DialogFragment {
 
     private static final int CHANGE_ALERT = 1; // 현재 코스가 변경된 상태인데 다른 창을 가려고 할 때 경고를 띄워주는 알림
     private static final int ADD_ALERT = 2; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
-    private static final int HISTORY_ALERT = 3; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
-    private static final int RECOMMEND_ALERT = 4; // add_course에서 현재 코스에 해당 운동을 추가할지 말지를 물어보는 알림
+    private static final int HISTORY_ALERT = 3; // history_course를 현재 코스로 바꿀 것인지 말지를 물어보는 알림
+    private static final int RECOMMEND_ALERT = 4; // recommend_course 현재 코스로 바꿀 것인지를 물어보는 알림
+    private static final int DELETE_ITEM_ALERT = 5; // 운동 코스 수정에서 해당 아이템을 지울 것인지를 물어보는 알림
 
     private static final int PT = 5;
     private static final int ELE = 6;
@@ -36,6 +38,8 @@ public class PopupFragment extends DialogFragment {
     private ImageButton no;
     private ImageButton cancle;
     private TextView question;
+
+    private int position;
 
     RowItem data;
 
@@ -89,6 +93,10 @@ public class PopupFragment extends DialogFragment {
             case RECOMMEND_ALERT:
                 recommendChange();
                 break;
+            case DELETE_ITEM_ALERT:
+                question.setText("정말 삭제 하시겠습니까?");
+                deleteItem();
+                break;
         }
 
         cancle.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +107,18 @@ public class PopupFragment extends DialogFragment {
         );
 
         return rootView;
+    }
+
+    private void deleteItem(){
+        no.setVisibility(View.GONE);
+        ok.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ChangeNDelete.deleteItem(data);
+                    }
+                }
+        );
     }
 
     private void historyChange(){
