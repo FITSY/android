@@ -36,9 +36,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/nowNumber"
+                android:text="3"
+                android:layout_marginLeft="50dp"
+                android:id="@+id/nowNumber1"
+                android:layout_gravity="left|center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="/"
+                android:id="@+id/numDivider"
                 android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="20"
+                android:layout_marginRight="50dp"
+                android:id="@+id/nowNumber2"
+                android:layout_gravity="right|center_vertical" />
 
 
         </FrameLayout>

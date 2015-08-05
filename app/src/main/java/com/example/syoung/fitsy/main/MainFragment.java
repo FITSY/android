@@ -29,7 +29,6 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 //TODO : 메인프레그먼트의 리스트 클릭하면 테두리 생기게 하기
-//TODO : ExerciseCourseListAdapter holder pattern 없애기
 
 public class MainFragment extends Fragment {
 
@@ -114,5 +113,6 @@ public class MainFragment extends Fragment {
             return;
         }
         nowExerciseCourseList.add(exerciseCourseList.get(position));
+//        exerciseCourseHorizontalListView.getChildAt(position).setBackgroundColor(Color.BLUE);
     }
 }

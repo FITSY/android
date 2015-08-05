@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
-//TODO : 운동중 원 유산소 일때 무산소 일때 나오는 모양 적용하기
 //TODO : 운동중 운동 된거는 이미지 파란색으로 하고 선택하면 이미 한 운동입니다 토스트 띄우기
 public class ExerciseActivity extends Activity {
 
@@ -34,7 +33,9 @@ public class ExerciseActivity extends Activity {
     @Bind(R.id.exercise_option_two_key) TextView optionTwoKey;
     @Bind(R.id.exercise_option_one_value) TextView optionOneValue;
     @Bind(R.id.exercise_option_two_value) TextView optionTwoValue;
-    @Bind(R.id.nowNumber) TextView nowNumber;
+    @Bind(R.id.nowNumber1) TextView nowNumber1;
+    @Bind(R.id.numDivider) TextView numDivider;
+    @Bind(R.id.nowNumber2) TextView nowNumber2;
 
     private ExerciseCourseListAdapter nowExerciseCourseListAdapter;
     private ExerciseData exerciseData;
@@ -59,22 +60,26 @@ public class ExerciseActivity extends Activity {
         for (NowCourse nowCourse : nowExerciseCourseItemList) {
             if (nowCourse.getUserCourse().getOdid() != null && nowCourse.getUserCourse().getOdid().equals(exerciseData.getTagId())) {
                 nowExercise = nowCourse;
-                exerciseName.setText(nowCourse.getUserCourse().getEname().replace("_"," ").toUpperCase());
+                exerciseName.setText(nowCourse.getUserCourse().getEname().replace("_", " ").toUpperCase());
                 if (nowCourse.getUserCourse().getOtype() == 1) {
                     //무산소
                     optionOneKey.setText("weight");
                     optionTwoKey.setText("count");
                     optionOneValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption1()) + "kg");
                     optionTwoValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption2()) + "count");
+                    numDivider.setText("/");
+                    nowNumber2.setText(String.valueOf(nowCourse.getUserCourse().getOoption2()));
                 } else {
                     //유산소
                     optionOneKey.setText("speed");
                     optionTwoKey.setText("running Time");
                     optionOneValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption1()) + " km/h");
                     optionTwoValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption2()) + " min");
+                    numDivider.setText(":");
+                    nowNumber2.setText("00");
                 }
                 //TODO : nowNumber에 숫자가 올라감 (블루투스 연결한 숫자)
-                nowNumber.setText(String.valueOf(0));
+                nowNumber1.setText(String.valueOf(0));
                 return;
             }
         }

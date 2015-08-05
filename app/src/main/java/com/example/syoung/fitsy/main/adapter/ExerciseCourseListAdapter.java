@@ -44,13 +44,20 @@ public class ExerciseCourseListAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_main_course_list, null);
             holder = new Holder(convertView);
             convertView.setTag(holder);
-        } else {
+        }
+        else {
             holder = (Holder) convertView.getTag();
         }
 
         NowCourse item = data.get(position);
 
         holder.setData(item);
+
+//        if (item != null) {
+//            ImageView image = (ImageView) convertView.findViewById(R.id.item_main_course_image);
+//            image.setImageResource(item.getImageId());
+//
+//        }
 
         return convertView;
     }
