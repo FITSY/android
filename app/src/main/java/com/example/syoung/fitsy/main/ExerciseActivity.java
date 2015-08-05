@@ -21,6 +21,8 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 //TODO : Exercise Name 대문자로 변환 _ => ' '로 변환
+//TODO : 운동중 원 유산소 일때 무산소 일때 나오는 모양 적용하기
+//TODO : 운동중 운동 된거는 이미지 파란색으로 하고 선택하면 이미 한 운동입니다 토스트 띄우기
 public class ExerciseActivity extends Activity {
 
     @Bind(R.id.exerciseFinishBtn) ImageButton exerciseFinishBtn;
@@ -59,17 +61,17 @@ public class ExerciseActivity extends Activity {
                 nowExercise = nowCourse;
                 exerciseName.setText(nowCourse.getUserCourse().getEname());
                 if (nowCourse.getUserCourse().getOtype() == 1) {
-                    //유산소
-                    optionOneKey.setText("speed");
-                    optionTwoKey.setText("running Time");
-                    optionOneValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption1()) + " km/h");
-                    optionTwoValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption2()) + " min");
-                } else {
                     //무산소
                     optionOneKey.setText("weight");
                     optionTwoKey.setText("count");
                     optionOneValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption1()) + "kg");
                     optionTwoValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption2()) + "count");
+                } else {
+                    //유산소
+                    optionOneKey.setText("speed");
+                    optionTwoKey.setText("running Time");
+                    optionOneValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption1()) + " km/h");
+                    optionTwoValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption2()) + " min");
                 }
                 //TODO : nowNumber에 숫자가 올라감 (블루투스 연결한 숫자)
                 nowNumber.setText(String.valueOf(0));

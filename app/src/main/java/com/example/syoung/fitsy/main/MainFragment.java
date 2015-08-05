@@ -28,6 +28,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
+//TODO : 메인프레그먼트의 리스트 클릭하면 테두리 생기게 하기
+//TODO : ExerciseCourseListAdapter holder pattern 없애기
+//TODO : set 말고 list쓰고 list 중복 안들어 가게 만들기
+
 public class MainFragment extends Fragment {
 
     private static final int REQUEST_MAIN_FRAGMENT = 1;
