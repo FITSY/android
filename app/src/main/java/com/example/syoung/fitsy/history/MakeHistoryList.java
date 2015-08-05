@@ -8,7 +8,6 @@ import android.view.View;
 import com.example.syoung.fitsy.common.RowItem;
 import com.example.syoung.fitsy.common.SearchImageRID;
 import com.example.syoung.fitsy.common.ServiceHandler;
-import com.example.syoung.fitsy.course.CourseFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,8 +36,8 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
 
     //static String URL = "http://192.168.0.10:8080/sgen_test/history.php"; // 굿 카페 (or 하하) ip
     //static String URL = "http://192.168.0.21:8080/sgen_test/history.php"; // 정보를 가져올 페이지 정보 (연구실 ip)
-    //static String URL = "http://192.168.1.41:8080/sgen_test/history.php"; // WIFI 이름 : '엔젤리너스2층'
-    static String URL = "http://192.168.0.5:8080/sgen_test/history.php";
+    static String URL = "http://192.168.1.41:8080/sgen_test/history.php"; // WIFI 이름 : '엔젤리너스2층'
+    //static String URL = "http://192.168.0.5:8080/sgen_test/history.php";
 
     Activity activity;
 

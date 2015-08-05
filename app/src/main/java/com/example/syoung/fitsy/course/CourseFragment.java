@@ -92,6 +92,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private InputMethodManager keyboard;
     private TextView search_part;
     public static ImageButton change_save;
+    private ImageButton order_change;
 
     public static boolean isChanged;
 
@@ -137,6 +138,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         bye_fat_confirm = (ImageButton) rootView.findViewById(R.id.bye_fat_confirm);
         search_button = (ImageButton) rootView.findViewById(R.id.search_button);
         change_save = (ImageButton) rootView.findViewById(R.id.change_save);
+        order_change = (ImageButton) rootView.findViewById(R.id.order_change);
 
         // 텍스트뷰 등록
         search_part = (TextView) rootView.findViewById(R.id.search_part);
@@ -241,6 +243,13 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             public void onClick(View v) {
                 popupFragment = new PopupFragment(CHANGE_ALERT);
                 popupFragment.show(thisActivity.getFragmentManager(), TAG);
+            }
+        });
+        order_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangeNDelete changeNDelete = new ChangeNDelete(thisActivity);
+                changeNDelete.show(thisActivity.getFragmentManager(), TAG);
             }
         });
 
@@ -389,18 +398,6 @@ public class CourseFragment extends android.support.v4.app.Fragment{
                 scrollSelector.show(thisActivity.getFragmentManager(), TAG);
             }
         });
-
-        //TouchListView tlv= (TouchListView) current_course_view;
-        // 리스트 아이템을 길게 터치 했을 떄 이벤트 발생
-        current_course_view.setOnItemLongClickListener(new OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                // 터치 시 해당 아이템 이름 출력
-                //current_course_view.setOnItemDragListener();
-                return true;
-            }
-
-        });
-
     }
 
     public static void addSetOnclickLister(){

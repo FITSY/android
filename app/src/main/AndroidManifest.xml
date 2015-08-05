@@ -42,6 +42,9 @@
         <activity
             android:name=".main.ExerciseMethodActivity">
         </activity>
+        <activity
+            android:name=".course.ChangeNDelete">
+        </activity>
     </application>
 
 </manifest>
