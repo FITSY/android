@@ -93,6 +93,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private TextView search_part;
     public static ImageButton change_save;
     private ImageButton order_change;
+    private static ChangeNDelete changeNDelete;
 
     public static boolean isChanged;
 
@@ -248,7 +249,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         order_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeNDelete changeNDelete = new ChangeNDelete(thisActivity);
+                changeNDelete = new ChangeNDelete(current_array_list, thisActivity);
                 changeNDelete.show(thisActivity.getFragmentManager(), TAG);
             }
         });
@@ -322,6 +323,15 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     public static void startConnection(){
         MakeCurrentList makeList = new MakeCurrentList(thisActivity);
         makeList.execute();
+    }
+
+    public static void changeOrder(int result){
+        if(result == 0){
+            changeNDelete.onStop();
+            changeNDelete.getDialog().dismiss();
+        }else{
+
+        }
     }
 
     /**

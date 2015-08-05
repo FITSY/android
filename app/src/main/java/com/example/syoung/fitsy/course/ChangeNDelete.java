@@ -33,14 +33,14 @@ public class ChangeNDelete extends DialogFragment {
 
     ArrayList<RowItem> temp_array;
 
-    private Activity activity;
-    private DragSortListView draggableListView;
-    private LazyAdapter lazyAdapter;
+    Activity activity;
+    DragSortListView draggableListView;
+    LazyAdapter lazyAdapter;
 
     public ChangeNDelete(){}
 
-    public ChangeNDelete (Activity activity){
-        this.items = CourseFragment.current_array_list;
+    public ChangeNDelete (ArrayList<RowItem> data, Activity activity){
+        this.items = data;
         this.activity = activity;
     }
 
@@ -52,7 +52,7 @@ public class ChangeNDelete extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
         temp_array = new ArrayList<RowItem>();
-        temp_array.addAll(items);
+        temp_array = items;
 
         cancle = (ImageButton) rootView.findViewById(R.id.btn_cancle);
         save = (ImageButton) rootView.findViewById(R.id.btn_save);
@@ -63,74 +63,77 @@ public class ChangeNDelete extends DialogFragment {
         draggableListView = (DragSortListView) rootView.findViewById(R.id.change_list_layout);
         setting();
 
-        cancle.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        items = new ArrayList<RowItem>();
-                        items.addAll(temp_array);
-                        getDialog().dismiss();
-                    }
-                }
-        );
-
         draggableListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
-                     @Override
-                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                     }
-                 }
+                    }
+                }
 
         );
 
         draggableListView.setDropListener(new DragSortListView.DropListener() {
             @Override
             public void drop(int from, int to) {
-                RowItem temp_from = new RowItem();
-                RowItem temp_to = new RowItem();
-                RowItem temp = new RowItem();
-
-                int deff = Math.abs(from - to);
-
-                if (deff == 1) {
-                    temp_from = items.get(from);
-                    items.set(from, items.get(to));
-                    items.set(to, temp_from);
-                } else if (deff >= 2 && to > from) {
-                    temp_from = items.get(from);
-                    temp_to = items.get(to);
-                    for (int i = to-1; i >= from; i--) {
-                        temp = items.get(i);
-                        items.set(i, temp_to);
-                        temp_to = temp;
-                    }
-                    items.set(to, temp_from);
-                } else if (deff >= 2 && to < from) {
-                    temp_from = items.get(from);
-                    temp_to = items.get(to);
-                    for (int i = to+1; i <= from; i++) {
-                        temp = items.get(i);
-                        items.set(i, temp_to);
-                        temp_to = temp;
-                    }
-                    items.set(to, temp_from);
-                }
-
-                setting();
+                doDropAct(from, to);
             }
         });
 
+        cancle.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CourseFragment.changeOrder(0);
+                    }
+                }
+        );
+
         return rootView;
+    }
+
+    private void doDropAct(int from, int to){
+        RowItem temp_from = new RowItem();
+        RowItem temp_to = new RowItem();
+        RowItem temp = new RowItem();
+
+        int deff = Math.abs(from - to);
+
+        if (deff == 1) {
+            temp_from = temp_array.get(from);
+            temp_array.set(from, temp_array.get(to));
+            temp_array.set(to, temp_from);
+        } else if (deff >= 2 && to > from) {
+            temp_from = temp_array.get(from);
+            temp_to = temp_array.get(to);
+            for (int i = to-1; i >= from; i--) {
+                temp = temp_array.get(i);
+                temp_array.set(i, temp_to);
+                temp_to = temp;
+            }
+            temp_array.set(to, temp_from);
+        } else if (deff >= 2 && to < from) {
+            temp_from = temp_array.get(from);
+            temp_to = temp_array.get(to);
+            for (int i = to+1; i <= from; i++) {
+                temp = temp_array.get(i);
+                temp_array.set(i, temp_to);
+                temp_to = temp;
+            }
+            temp_array.set(to, temp_from);
+        }
+
+        setting();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
     }
 
     private void setting(){
         lazyAdapter = new LazyAdapter(activity, R.layout.draggable_node, items);
         draggableListView.setAdapter(lazyAdapter);
-    }
-
-    private void initialize(){
-        items = null;
     }
 
 }
