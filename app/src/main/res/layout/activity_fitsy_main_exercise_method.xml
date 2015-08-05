@@ -81,6 +81,8 @@
             <ListView
                 android:layout_width="300dp"
                 android:layout_height="162dp"
+                android:dividerHeight="0px"
+                android:divider="#ffffff"
                 android:id="@+id/exercise_method_list_view" />
         </LinearLayout>
     </LinearLayout>

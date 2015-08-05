@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.syoung.fitsy.R;
 import com.example.syoung.fitsy.common.HorizontalListView;
@@ -57,7 +58,7 @@ public class ExerciseActivity extends Activity {
 
     private void setViewComponent() {
         for (NowCourse nowCourse : nowExerciseCourseItemList) {
-            if (nowCourse.getUserCourse().getOdid().equals(exerciseData.getTagId())) {
+            if (nowCourse.getUserCourse().getOdid() != null && nowCourse.getUserCourse().getOdid().equals(exerciseData.getTagId())) {
                 nowExercise = nowCourse;
                 exerciseName.setText(nowCourse.getUserCourse().getEname());
                 if (nowCourse.getUserCourse().getOtype() == 1) {
@@ -78,6 +79,15 @@ public class ExerciseActivity extends Activity {
                 return;
             }
         }
+        Toast.makeText(this, "운동코스에 없는 NFC ID 입니다.", Toast.LENGTH_SHORT).show();
+        intentNFCReadActivity();
+    }
+
+    private void intentNFCReadActivity() {
+        Intent exerciseIntent = new Intent(this, NFCReadActivity.class);
+        exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseItemList);
+        startActivity(exerciseIntent);
+        finish();
     }
 
     @Override
@@ -105,9 +115,6 @@ public class ExerciseActivity extends Activity {
 
     @OnItemClick(R.id.main_now_exercise_course_list)
     void OnItemClicked(int position) {
-        Intent exerciseIntent = new Intent(this, NFCReadActivity.class);
-        exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseItemList);
-        startActivity(exerciseIntent);
-        finish();
+        intentNFCReadActivity();
     }
 }
