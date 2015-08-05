@@ -30,7 +30,6 @@ import butterknife.OnItemClick;
 
 //TODO : 메인프레그먼트의 리스트 클릭하면 테두리 생기게 하기
 //TODO : ExerciseCourseListAdapter holder pattern 없애기
-//TODO : set 말고 list쓰고 list 중복 안들어 가게 만들기
 
 public class MainFragment extends Fragment {
 
@@ -45,7 +44,6 @@ public class MainFragment extends Fragment {
     private ExerciseCourseListAdapter exerciseCourseListAdapter;
     private List<NowCourse> exerciseCourseList;
     private List<NowCourse> nowExerciseCourseList;
-    private Set<NowCourse> nowExerciseCourseSet;
 
     public MainFragment() {
 
@@ -83,7 +81,6 @@ public class MainFragment extends Fragment {
     }
 
     public void initListAndSet() {
-        nowExerciseCourseSet = new HashSet<NowCourse>();
         exerciseCourseList = new ArrayList<NowCourse>();
     }
 
@@ -99,12 +96,11 @@ public class MainFragment extends Fragment {
 
     @OnClick(R.id.startBtn)
     public void exerciseStart() {
-        if(nowExerciseCourseSet.size() == 0){
+        if(nowExerciseCourseList.size() == 0){
             Toast.makeText(getActivity(), "empty list", Toast.LENGTH_LONG).show();
             return;
         }
         Intent exerciseIntent = new Intent(this.getActivity(), NFCReadActivity.class);
-        nowExerciseCourseList.addAll(nowExerciseCourseSet);
         exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseList);
         startActivity(exerciseIntent);
 //        startActivityForResult(exerciseIntent, REQUEST_MAIN_FRAGMENT);
@@ -113,6 +109,10 @@ public class MainFragment extends Fragment {
     @OnItemClick(R.id.main_exercise_course_list)
     void OnItemClicked(int position){
         //TODO : 선택되면 이미지 바뀌게 하기 (opacity or color)
-        nowExerciseCourseSet.add(exerciseCourseList.get(position));
+        if(nowExerciseCourseList.contains(exerciseCourseList.get(position))){
+            Toast.makeText(getActivity(), "이미 선택한 운동입니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        nowExerciseCourseList.add(exerciseCourseList.get(position));
     }
 }
