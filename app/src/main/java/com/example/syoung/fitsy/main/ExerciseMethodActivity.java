@@ -3,6 +3,7 @@ package com.example.syoung.fitsy.main;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class ExerciseMethodActivity extends Activity {
     @Bind(R.id.exercise_method_btn_off) ImageButton exerciseMethodOffBtn;
     @Bind(R.id.exercise_method_list_view) ListView exerciseMethodListView;
     @Bind(R.id.exercise_name) TextView exerciseName;
+    @Bind(R.id.exercise_method_image) ImageView exerciseMethodImageView;
 
     private ExerciseMethodListAdapter exerciseMethodListAdapter;
     private List<String> exerciseMethodItemList;
@@ -38,6 +40,7 @@ public class ExerciseMethodActivity extends Activity {
         nowExercise = (NowCourse) this.getIntent().getSerializableExtra("nowExercise");
         exerciseMethodItemList = nowExercise.getUserCourse().getEintro();
         exerciseName.setText(nowExercise.getUserCourse().getEname().replace("_"," ").toUpperCase());
+        exerciseMethodImageView.setImageResource(this.getResources().getIdentifier(nowExercise.getUserCourse().getEname() + "_method", "drawable", this.getPackageName()));
         setNowExerciseCourseHorizontalListView();
     }
 

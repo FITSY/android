@@ -76,7 +76,6 @@ public class ConnectThread extends Thread {
     }
 
     //TODO 연결이 끊기면 그 전에 연결한 기기 다시 연결하게 하기
-
     private void manageData(byte[] data) {
         StringBuilder builder = new StringBuilder();
         int i = 0;
