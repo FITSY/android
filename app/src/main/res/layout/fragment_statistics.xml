@@ -1,13 +1,324 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Statistics"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp" />
-</RelativeLayout>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/background_light">
+
+
+
+
+
+
+            <LinearLayout
+                android:paddingTop="40dp"
+                android:orientation ="vertical"
+                android:layout_width="280dp"
+                android:layout_height="420dp"
+                android:layout_gravity="center_vertical|center_horizontal">
+
+                <FrameLayout
+                    android:layout_width="280dp"
+                    android:layout_height="380dp">
+
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center|top">
+
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="20dp"
+                            android:textColor="@color/realblue"
+                            android:text="나의 변화 모습"
+                            android:gravity="bottom|center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="166dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="left|center"
+                        android:id="@+id/shadow"
+                        android:background="@drawable/shadow"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="280dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:id="@+id/undercount">
+
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="300dp"
+                            android:background="@drawable/gary_w"
+                            android:id="@+id/imagewoman"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="280dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="center"
+                        android:visibility="invisible"
+                        android:gravity="center"
+                        android:id="@+id/overcount">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="300dp"
+                            android:src="@drawable/blue_w"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:orientation ="horizontal"
+                        android:layout_width="280dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center">
+
+                        <LinearLayout
+
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/left_body"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:id="@+id/womanmargin"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                        </LinearLayout>
+
+
+
+
+                        <LinearLayout
+
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/right_body"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="280dp"
+                android:layout_height="400dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="80dp">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:text="운동 기록"
+                        android:textSize="20dp"
+
+                        android:layout_gravity="left"/>
+
+
+                </LinearLayout>
+
+
+                <com.example.syoung.fitsy.statistics.RobotoCalendarView
+                    android:id="@+id/robotoCalendarPicker"
+                    android:layout_width="280dp"
+                    android:layout_height="350dp">
+
+                </com.example.syoung.fitsy.statistics.RobotoCalendarView>
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="280dp"
+                android:layout_height="400dp"
+                android:layout_gravity="center">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="80dp">
+
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:text="인바디 통계"
+                            android:textSize="20dp"
+                            android:layout_gravity="top"/>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="top|center"
+                        android:id="@+id/textview">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="30dp"
+                            android:text="지난 수치 통계"
+                            android:textSize="15dp"
+                            android:layout_gravity="bottom|center"
+                            android:gravity="center"
+                            android:textColor="@color/realblue" />
+
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="300dp"
+                        android:layout_height="400dp"></FrameLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="50dp"
+                        android:layout_height="240dp"
+                        android:layout_gravity="center|left">
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="50dp"
+                            android:layout_height="165dp"
+                            android:gravity="bottom">
+
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:text="근육량"
+                                android:gravity="center"
+                                android:textColor="@color/musclecolor"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="50dp"
+                            android:layout_height="45dp"
+                            android:gravity="bottom"
+                            android:layout_gravity="left|bottom">
+
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:text="BMI"
+                                android:gravity="center"
+                                android:textColor="@color/bmicolor"/>
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="left|bottom"
+                            android:gravity="bottom">
+
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:text="지방량"
+
+                                android:gravity="center"
+                                android:textColor="@color/fatcolor"/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="right|center"
+                        android:gravity="right|center">
+
+
+                        <RelativeLayout
+                            android:id="@+id/mainLayout"
+                            android:layout_width="240dp"
+                            android:layout_height="300dp">
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </FrameLayout>
+
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>

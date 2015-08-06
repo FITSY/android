@@ -33,4 +33,9 @@
 
     <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Set the bluetooth enable at phone settings.</string>
     <string name="bt_cmd_sending_error">Transaction failed</string>
+
+    <string name="monthTitleFont">roboto_condensed_bold</string>
+    <string name="dayOfWeekFont">roboto_condensed_bold</string>
+    <string name="dayOfMonthFont">roboto_regular</string>
+    <string name="currentDayOfMonthFont">roboto_condensed_bold</string>
 </resources>

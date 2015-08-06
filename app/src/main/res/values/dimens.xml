@@ -6,4 +6,20 @@
     <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">240dp</dimen>
+
+
+    <!-- dateTitleLayout -->
+    <dimen name="dateTitleTextSize">18sp</dimen>
+    <dimen name="dateTitlePaddingBottom">5dp</dimen>
+    <!-- weekLayout -->
+    <dimen name="dayOfWeekTextSize">16sp</dimen>
+    <!-- weekRowLayout -->
+    <dimen name="week_bottom_padding">5dp</dimen>
+    <!-- Day of the month -->
+    <dimen name="underline_weight">6dp</dimen>
+    <dimen name="underline_height">2dp</dimen>
+    <dimen name="day_of_month_background_size">32dp</dimen>
+    <dimen name="dayOfMonthIndicatorSize">3dp</dimen>
+    <dimen name="dayOfMonthImageMarginTop">20dp</dimen>
+    <dimen name="padding">8dp</dimen>
 </resources>
