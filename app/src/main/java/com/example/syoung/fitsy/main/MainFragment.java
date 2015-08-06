@@ -1,13 +1,11 @@
 package com.example.syoung.fitsy.main;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -19,9 +17,7 @@ import com.example.syoung.fitsy.main.server.UserCourse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -67,7 +63,7 @@ public class MainFragment extends Fragment {
     }
 
     private void setCourseList(List<UserCourse> userCourseList) {
-        initListAndSet();
+        initList();
         nowExerciseCourseList = new ArrayList<NowCourse>();
         for(UserCourse userCourse : userCourseList){
             NowCourse nowCourse = new NowCourse();
@@ -79,7 +75,7 @@ public class MainFragment extends Fragment {
         }
     }
 
-    public void initListAndSet() {
+    public void initList() {
         exerciseCourseList = new ArrayList<NowCourse>();
     }
 

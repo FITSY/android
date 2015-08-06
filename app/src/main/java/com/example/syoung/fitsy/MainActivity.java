@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 }
                 break;
             case REQUEST_MAIN_FRAGMENT:
-                MainFragment.getInstance().initListAndSet();
+                MainFragment.getInstance().initList();
                 break;
         }
     }

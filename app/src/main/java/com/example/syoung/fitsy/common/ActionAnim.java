@@ -9,9 +9,9 @@ import com.example.syoung.fitsy.R;
 /**
  * Created by HyunJoo on 2015. 8. 1..
  */
-public class Action_Anim {
+public class ActionAnim {
 
-    public Action_Anim(){
+    public ActionAnim(){
 
     }
     public static void slide_down(Context ctx, View v){
