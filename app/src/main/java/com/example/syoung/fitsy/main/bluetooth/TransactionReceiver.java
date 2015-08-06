@@ -17,6 +17,7 @@
 package com.example.syoung.fitsy.main.bluetooth;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.syoung.fitsy.main.contents.ContentObject;
 
@@ -111,7 +112,7 @@ public class TransactionReceiver {
 				case PARSE_MODE_WAIT_START_BYTE:
 					if(buffer[i] == Transaction.TRANSACTION_START_BYTE_2
 							&& mCacheStart == Transaction.TRANSACTION_START_BYTE) {
-						//Logs.d("Read data: TRANSACTION_START_BYTE");
+						Log.d(TAG, "Read data: TRANSACTION_START_BYTE");
 						mParseMode = PARSE_MODE_WAIT_DATA;
 						if(mContentObject == null) {
 							mContentObject = new ContentObject(ContentObject.CONTENT_TYPE_ACCEL, -1, 0);
@@ -121,9 +122,11 @@ public class TransactionReceiver {
 						mCacheStart = buffer[i];
 					}
 					break;
-				/* Disabled: 
+				/**
+				 *  Disabled:
+				*/
 				case PARSE_MODE_WAIT_COMMAND:
-					Logs.d("Read data: PARSE_MODE_WAIT_COMMAND = " + String.format("%02X ", buffer[i]));
+					Log.d(TAG, "Read data: PARSE_MODE_WAIT_COMMAND = " + String.format("%02X ", buffer[i]));
 					switch(buffer[i]) {
 					case Transaction.COMMAND_TYPE_PING:
 						mParseMode = PARSE_MODE_WAIT_END_BYTE;
@@ -138,27 +141,26 @@ public class TransactionReceiver {
 						break;
 					}	// End of switch()
 					break;
-				*/
 				case PARSE_MODE_WAIT_DATA:
 					/*
 					 * TODO: Check end byte (sometimes data byte is same with end byte)
-					 * 
+					 *
+					*/
 					if(buffer[i] == Transaction.TRANSACTION_END_BYTE
 							|| buffer[i] == Transaction.TRANSACTION_END_BYTE_2) {
 						if(buffer[i] == Transaction.TRANSACTION_END_BYTE_2
 								&& mCacheEnd == Transaction.TRANSACTION_END_BYTE) {
-							Logs.d("Read data: TRANSACTION_END_BYTE");
+							Log.d(TAG, "Read data: TRANSACTION_END_BYTE");
 							mParseMode = PARSE_MODE_COMPLETED;
 							break;
 						} else {
 							mCacheEnd = buffer[i];
 						}
 					}
-					*/
 					
 					// Forced to fill 20 accel data
 					if(mContentObject != null && mContentObject.mAccelIndex > ContentObject.DATA_COUNT - 1) {
-						//Logs.d("Read data: TRANSACTION_END_BYTE");
+						Log.d(TAG, "Read data: TRANSACTION_END_BYTE");
 						mParseMode = PARSE_MODE_COMPLETED;
 						break;
 					}
@@ -180,7 +182,7 @@ public class TransactionReceiver {
 						tempData2 |= (buffer[i] & 0x000000ff);
 						tempData = (((mCacheData << 8) | tempData2) & 0x00007FFF);
 						
-						//Logs.d(String.format("%02X ", mCacheData) + String.format("%02X ", tempData2) + String.format("%02X ", tempData));
+						Log.d(TAG, String.format("%02X ", mCacheData) + String.format("%02X ", tempData2) + String.format("%02X ", tempData));
 						
 						// negative number uses 2's complement math. Set first 9 bits as 1.
 						if(isNegative)

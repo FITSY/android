@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -76,7 +75,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     private static Activity thisActivity;
     private static PopupFragment popupFragment;
 
-    Action_Anim anim;
+    ActionAnim anim;
     private static SearchImageRID searchImageRID;
     ChangeCurrentCourse changeCurrentCourse;
     private static SearchConverter searchConverter;
@@ -116,7 +115,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         thisActivity = getActivity();
 
         // 클래스 초기화
-        anim = new Action_Anim();
+        anim = new ActionAnim();
         searchImageRID = new SearchImageRID(thisActivity);
         searchConverter = new SearchConverter(thisActivity);
 
