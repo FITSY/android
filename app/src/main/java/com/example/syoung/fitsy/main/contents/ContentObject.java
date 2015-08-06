@@ -16,6 +16,8 @@
 
 package com.example.syoung.fitsy.main.contents;
 
+import android.util.Log;
+
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -25,7 +27,9 @@ import java.util.Calendar;
  *
  */
 public class ContentObject {
-	
+
+	private final String TAG = "ContentObject";
+
 	public static final int CONTENT_TYPE_ACCEL = 1;
 	
 	public static final int DATA_COUNT = 20;
@@ -45,9 +49,10 @@ public class ContentObject {
 	
 	
 	public ContentObject(int type, int id, long timeInMilli) {
+
 		mContentType = type;
 		mId = id;
-		mTimeInMilli = timeInMilli;
+		//mTimeInMilli = timeInMilli;
 		
 		mAccelData = new int[DATA_COUNT*3];		// DATA_COUNT * 3 axis
 		Arrays.fill(mAccelData, 0x00000000);
@@ -55,11 +60,28 @@ public class ContentObject {
 		mCacheIndex = 0;
 		
 		// Convert date info in milli-time
-		Calendar cal = Calendar.getInstance();
+		/*Calendar cal = Calendar.getInstance();
 		setTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH),
 				cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
 		if(mTimeInMilli < 1)
-			mTimeInMilli = cal.getTimeInMillis();
+			mTimeInMilli = cal.getTimeInMillis();*/
+	}
+
+	public ContentObject() {
+
+		//mTimeInMilli = timeInMilli;
+
+		mAccelData = new int[DATA_COUNT*3];		// DATA_COUNT * 3 axis
+		Arrays.fill(mAccelData, 0x00000000);
+		mAccelIndex = 0;
+		mCacheIndex = 0;
+
+		// Convert date info in milli-time
+		/*Calendar cal = Calendar.getInstance();
+		setTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH),
+				cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
+		if(mTimeInMilli < 1)
+			mTimeInMilli = cal.getTimeInMillis();*/
 	}
 	
 	
@@ -101,11 +123,15 @@ public class ContentObject {
 			mAccelData[mAccelIndex*3 + mCacheIndex] = data;
 			mCacheIndex++;
 			if(mCacheIndex == 3) {
-				//Logs.d("# Accel = "+mAccelData[mAccelIndex*3 + mCacheIndex - 3]+", "+mAccelData[mAccelIndex*3 + mCacheIndex - 2]+", "+mAccelData[mAccelIndex*3 + mCacheIndex - 1]);
+				Log.d(TAG, "# Accel = " + mAccelData[mAccelIndex * 3 + mCacheIndex - 3] + ", " + mAccelData[mAccelIndex * 3 + mCacheIndex - 2] + ", " + mAccelData[mAccelIndex * 3 + mCacheIndex - 1]);
 				mAccelIndex++;
 				mCacheIndex = 0;
 			}
 		}
+	}
+
+	public int[] getmAccelData(){
+		return this.mAccelData;
 	}
 	
 }
