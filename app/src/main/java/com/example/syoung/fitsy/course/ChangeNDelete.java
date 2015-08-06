@@ -42,7 +42,7 @@ public class ChangeNDelete extends DialogFragment {
 
     private static PopupFragment popupFragment;
 
-    public ChangeNDelete(){}
+    public ChangeNDelete (){}
 
     public ChangeNDelete (ArrayList<RowItem> data, Activity activity){
         temp_array = new ArrayList<RowItem>();

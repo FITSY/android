@@ -336,6 +336,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             changeNDelete.onStop();
             changeNDelete.getDialog().dismiss();
             current_array_list = data;
+            isChanged = true;
+            change_save.setVisibility(View.VISIBLE);
             setOnClickListener();
         }
     }
