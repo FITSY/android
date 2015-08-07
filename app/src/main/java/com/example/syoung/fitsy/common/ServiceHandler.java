@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,6 +21,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
@@ -100,19 +103,30 @@ public class ServiceHandler {
             HttpEntity httpEntity = null;
             HttpResponse httpResponse = null;
 
-            StringEntity se = new StringEntity(json);
+            //StringEntity se = new StringEntity(json);
 
-            Log.e(TAG, "보내는 정보 : " + se);
+            //Log.e(TAG, "보내는 정보 : " + se);
 
             URL _url = new URL(url);
 
             HttpPost httpPost = null;
             httpPost = new HttpPost(_url.toURI());
 
-            httpPost.setEntity(se);
+            //httpPost.setEntity(se);
 
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
+            ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("course", json));
+
+            Log.e(TAG, "params : " + params);
+
+            UrlEncodedFormEntity entityRequest = new UrlEncodedFormEntity(params, "utf-8");
+
+            httpPost.setEntity(entityRequest);
+
+            //httpPost.setHeader("Accept", "application");
+            //httpPost.setHeader("Content-type", "application");
+
+            Log.e(TAG, "httpPost : " + httpPost);
 
             httpResponse = (HttpResponse) httpclient.execute(httpPost);
 

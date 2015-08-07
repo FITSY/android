@@ -23,6 +23,15 @@ public class ConnectThread extends Thread {
     private static final int PARSE_MODE_WAIT_END_BYTE = 4;
     private static final int PARSE_MODE_COMPLETED = 101;
 
+    private static final int POINT_WIDTH = 5;		// must be odd number.
+    private static final int POINT_THICKNESS = 5;	// must be odd number.
+    private static final int POINT_WIDTH_HALF = 2;
+    private static final int POINT_THICKNESS_HALF = 2;
+
+    static boolean bStart = true;
+    static int PrevDrawingX;
+    private int mCurrentDrawingX = 1 + POINT_WIDTH_HALF;	// current drawing position
+
     private final BluetoothSocket mmSocket;
     private final BluetoothDevice mmDevice;
     private final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -207,7 +216,7 @@ public class ConnectThread extends Thread {
                             tempData2 |= (buffer[i] & 0x000000ff);
                             tempData = (((mCacheData << 8) | tempData2) & 0x00007FFF);
 
-                            Log.d(TAG, String.format("%02X ", mCacheData) + String.format("%02X ", tempData2) + String.format("%02X ", tempData));
+                            //Log.d(TAG, String.format("%02X ", mCacheData) + String.format("%02X ", tempData2) + String.format("%02X ", tempData));
 
                             // negative number uses 2's complement math. Set first 9 bits as 1.
                             if(isNegative)
@@ -244,6 +253,57 @@ public class ConnectThread extends Thread {
             mObjectQueue.add(mContentObject);
             mContentObject = null;
         }
+/**
+ *
+ drawAccelGraph(getObject().mAccelData);
+ */
+        if(mObjectQueue != null){
+            drawAccelData();
+        }
+    }
+
+    private void drawAccelData(){
+        drawAccelGraph(getObject().mAccelData);
+    }
+
+    private void drawAccelGraph(int[] accelArray){
+        if(accelArray == null || accelArray.length < 3)
+            return;
+
+        if(bStart == true) {
+            PrevDrawingX = mCurrentDrawingX;
+            bStart = false;
+            return;
+        }
+
+        for(int i=3; i<accelArray.length; i+=3) {
+            // x axis value is Red dot
+            /*drawPoint(TYPE_RED, mCurrentDrawingX, accelArray[i]);
+            drawLine(TYPE_RED, PrevDrawingX, mCurrentDrawingX, accelArray[i - 3], accelArray[i]);*/
+
+            //mCurrentDrawingX = accelArray[i];
+            int result = accelArray[i] - accelArray[i-3];
+            Log.e(TAG, "x Axis | Current X - Prev X = " + result);
+
+            // y axis value is Blue dot
+            /*drawPoint(TYPE_GREEN, mCurrentDrawingX, accelArray[i+1]);
+            drawLine(TYPE_GREEN, PrevDrawingX, mCurrentDrawingX, accelArray[i - 2], accelArray[i + 1]);*/
+
+            //mCurrentDrawingX = accelArray[i +1];
+            //Log.e(TAG, "y Axis | Prev Y : " + accelArray[i - 2] + ", Current Y : " + accelArray[i + 1]);
+            int result2 = accelArray[i + 1] - accelArray[i-2];
+            Log.e(TAG, "y Axis | Current Y - Prev Y = " + result2);
+
+            // z axis value is Green dot
+            /*drawPoint(TYPE_BLUE, mCurrentDrawingX, accelArray[i+2]);
+            drawLine(TYPE_BLUE, PrevDrawingX, mCurrentDrawingX, accelArray[i - 1], accelArray[i + 2]);*/
+
+            //Log.e(TAG, "z Axis | Prev Z : " + accelArray[i - 1] + ", Current Z : " + accelArray[i + 2]);
+            int result3 = accelArray[i + 2] - accelArray[i-1];
+            Log.e(TAG, "z Axis | Current Z - Prev Z = " + result3);
+
+        }
+
     }
 
     /**

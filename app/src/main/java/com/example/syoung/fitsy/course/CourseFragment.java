@@ -248,14 +248,17 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         switch (whichRecommend){
             case PT:
                 changeCurrentCourse = new ChangeCurrentCourse(thisActivity,pt_recommend_list, RECOMMEND);
+                popupFragment.dismiss();
                 changeCurrentCourse.execute();
                 break;
             case ELE:
                 changeCurrentCourse = new ChangeCurrentCourse(thisActivity,elephant_recommend_list, RECOMMEND);
+                popupFragment.dismiss();
                 changeCurrentCourse.execute();
                 break;
             case FAT:
                 changeCurrentCourse = new ChangeCurrentCourse(thisActivity,bye_fat_recommend_list, RECOMMEND);
+                popupFragment.dismiss();
                 changeCurrentCourse.execute();
                 break;
         }
@@ -409,32 +412,32 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         //RowItem(int eid, String cid, String cpw, int etype, int epart,  int ooption1, int ooption2, int imageId, String ename, String ehan, int corder)
 
         // 추천 운동 코스 리스트들에 아이템 등록하기
-        pt_recommend_list.add(new RowItem(1, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 15, searchImageRID.getImageID("leg_press2"),"leg_press", "레그프레스",1));
-        pt_recommend_list.add(new RowItem(8, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension", "레그 익스텐션", 2));
-        pt_recommend_list.add(new RowItem(2, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 10, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down", "렛 풀 다운", 3));
-        pt_recommend_list.add(new RowItem(7, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 1, 10, 15, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes","펙덱 플라이",4));
-        pt_recommend_list.add(new RowItem(5, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 15, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press","숄더 프레스",5));
-        pt_recommend_list.add(new RowItem(4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",6));
-        pt_recommend_list.add(new RowItem(3, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 10, searchImageRID.getImageID("cycle2"),"cycle","사이클",7));
-        pt_recommend_list.add(new RowItem(6, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 15, 20, searchImageRID.getImageID("leg_curl2"),"leg_curl","레그컬",8));
+        pt_recommend_list.add(new RowItem("04526E52863680", 1, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 15, searchImageRID.getImageID("leg_press2"),"leg_press", "레그프레스",1));
+        pt_recommend_list.add(new RowItem("04903B72163C80",8, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension", "레그 익스텐션", 2));
+        pt_recommend_list.add(new RowItem("04843B72163C80", 2, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 10, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down", "렛 풀 다운", 3));
+        pt_recommend_list.add(new RowItem("0484C672163C80",7, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 1, 10, 15, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes","펙덱 플라이",4));
+        pt_recommend_list.add(new RowItem("04849372163CB0",5, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 15, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press","숄더 프레스",5));
+        pt_recommend_list.add(new RowItem("04903072163C80",4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",6));
+        pt_recommend_list.add(new RowItem("04832B72163CB0",3, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 10, searchImageRID.getImageID("cycle2"),"cycle","사이클",7));
+        pt_recommend_list.add(new RowItem("048FCA72163C80",6, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 15, 20, searchImageRID.getImageID("leg_curl2"),"leg_curl","레그컬",8));
 
 
-        elephant_recommend_list.add(new RowItem(5, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 15, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press","숄더 프레스",1));
-        elephant_recommend_list.add(new RowItem(4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",2));
-        elephant_recommend_list.add(new RowItem(2, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 10, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down", "렛 풀 다운",3));
-        elephant_recommend_list.add(new RowItem(8, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension", "레그 익스텐션", 4));
-        elephant_recommend_list.add(new RowItem(1, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 15, searchImageRID.getImageID("leg_press2"),"leg_press", "레그프레스",5));
-        elephant_recommend_list.add(new RowItem(7, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 1, 10, 15, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes","펙덱 플라이",6));
-        elephant_recommend_list.add(new RowItem(3, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 10, searchImageRID.getImageID("cycle2"),"cycle","사이클",7));
+        elephant_recommend_list.add(new RowItem("04849372163CB0",5, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 15, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press","숄더 프레스",1));
+        elephant_recommend_list.add(new RowItem("04903072163C80",4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",2));
+        elephant_recommend_list.add(new RowItem("04843B72163C80",2, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 10, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down", "렛 풀 다운",3));
+        elephant_recommend_list.add(new RowItem("04903B72163C80",8, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension", "레그 익스텐션", 4));
+        elephant_recommend_list.add(new RowItem("04526E52863680", 1, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 15, searchImageRID.getImageID("leg_press2"),"leg_press", "레그프레스",5));
+        elephant_recommend_list.add(new RowItem("0484C672163C80",7, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 1, 10, 15, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes","펙덱 플라이",6));
+        elephant_recommend_list.add(new RowItem("04832B72163CB0",3, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 10, searchImageRID.getImageID("cycle2"),"cycle","사이클",7));
 
 
-        bye_fat_recommend_list.add(new RowItem(4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",1));
-        bye_fat_recommend_list.add(new RowItem(8, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension", "레그 익스텐션", 2));
-        bye_fat_recommend_list.add(new RowItem(4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",3));
-        bye_fat_recommend_list.add(new RowItem(7, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 1, 10, 15, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes","펙덱 플라이",4));
-        bye_fat_recommend_list.add(new RowItem(5, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 15, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press","숄더 프레스",5));
-        bye_fat_recommend_list.add(new RowItem(2, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 10, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down", "렛 풀 다운",6));
-        bye_fat_recommend_list.add(new RowItem(1, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 15, searchImageRID.getImageID("leg_press2"),"leg_press", "레그프레스",7));
+        bye_fat_recommend_list.add(new RowItem("04903072163C80",4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",1));
+        bye_fat_recommend_list.add(new RowItem("04903B72163C80",8, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 20, searchImageRID.getImageID("leg_extension2"),"leg_extension", "레그 익스텐션", 2));
+        bye_fat_recommend_list.add(new RowItem("04903072163C80",4, CommonUtilities.ID, CommonUtilities.PASSWORD, 1, 3, 30, 15, searchImageRID.getImageID("running2"),"running","런닝 머신",3));
+        bye_fat_recommend_list.add(new RowItem("0484C672163C80",7, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 1, 10, 15, searchImageRID.getImageID("pec_deck_flyes2"),"pec_deck_flyes","펙덱 플라이",4));
+        bye_fat_recommend_list.add(new RowItem("04849372163CB0",5, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 15, 20, searchImageRID.getImageID("shoulder_press2"),"shoulder_press","숄더 프레스",5));
+        bye_fat_recommend_list.add(new RowItem("04843B72163C80",2, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 2, 10, 20, searchImageRID.getImageID("let_pull_down2"),"let_pull_down", "렛 풀 다운",6));
+        bye_fat_recommend_list.add(new RowItem("04526E52863680", 1, CommonUtilities.ID, CommonUtilities.PASSWORD, 2, 3, 10, 15, searchImageRID.getImageID("leg_press2"),"leg_press", "레그프레스",7));
 
 
         // 추천 운동 코스 리스트를 Adapter에 등록하기
@@ -446,6 +449,14 @@ public class CourseFragment extends android.support.v4.app.Fragment{
         elephant_recommend_course_view.setAdapter(elepahnt_adapter);
         bye_fat_recommend_course_view.setAdapter(bye_fat_adapter);
 
+    }
+
+    public static void initialize(){
+        current_array_list.clear();
+        bye_fat_recommend_list.clear();
+        elephant_recommend_list.clear();
+        pt_recommend_list.clear();
+        add_array_list.clear();
     }
 
 }

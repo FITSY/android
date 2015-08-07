@@ -32,6 +32,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
     static final String TAG_EID = "eid";    // 운동 고유 아이디
     static final String TAG_CID = "cid";    // 사용자 아이디
     static final String TAG_CPW = "cpw";
+    static final String TAG_ODID = "odid";
     static final String TAG_OTYPE = "otype";
     static final String TAG_OPART = "opart";
     static final String TAG_ETYPE = "etype";
@@ -130,6 +131,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
 
         int temp_eid;
         String temp_cid;
+        String temp_odid;
         String temp_cpw;
         int temp_etype;
         int temp_epart;
@@ -156,6 +158,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
                 temp_JSONobj = jsonArray.getJSONObject(i);
 
                 temp_eid = temp_JSONobj.getInt(TAG_EID);
+                temp_odid = temp_JSONobj.getString(TAG_ODID);
                 ename = temp_JSONobj.getString(TAG_ENAME);
                 ehan = temp_JSONobj.getString(TAG_EHAN);
 
@@ -169,7 +172,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
                     CommonUtilities.PASSWORD = temp_JSONobj.getString(TAG_CPW);
                     temp_corder = temp_JSONobj.getInt(TAG_COURSE_ORDER);
                     temp_image_id = sRid.getImageID(ename);
-                    RowItem temp_row_item = new RowItem(temp_eid, CommonUtilities.ID, CommonUtilities.PASSWORD, temp_etype, temp_epart, temp_ooption1,
+                    RowItem temp_row_item = new RowItem(temp_odid,temp_eid, CommonUtilities.ID, CommonUtilities.PASSWORD, temp_etype, temp_epart, temp_ooption1,
                             temp_ooption2, temp_image_id, ename, ehan, temp_corder);
                     CourseFragment.current_array_list.add(temp_row_item);
                 }
@@ -181,7 +184,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
                     temp_ooption1 = temp_JSONobj.getInt(TAG_EOPTION1);
                     temp_ooption2 = temp_JSONobj.getInt(TAG_EOPTION2);
                     temp_image_id = sRid.getImageID(ename + "2");
-                    RowItem temp_row_item = new RowItem(temp_eid, CommonUtilities.ID, CommonUtilities.PASSWORD, temp_etype, temp_epart, temp_ooption1,
+                    RowItem temp_row_item = new RowItem(temp_odid,temp_eid, CommonUtilities.ID, CommonUtilities.PASSWORD, temp_etype, temp_epart, temp_ooption1,
                             temp_ooption2, temp_image_id, ename, ehan, temp_corder);
                     CourseFragment.add_array_list.add(temp_row_item);
                 }

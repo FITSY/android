@@ -7,6 +7,7 @@ public class RowItem {
     private int eid;
     private String cid;
     private String cpw;
+    private String odid;
     private int etype;
     private int epart;
     private int ooption1;
@@ -18,7 +19,8 @@ public class RowItem {
 
     //temp_eid, CommonUtilities.ID, CommonUtilities.PASSWORD, temp_etype, temp_epart, temp_ooption1, temp_ooption2, temp_image_id, ename, ehan, temp_corder
 
-    public RowItem(int eid, String cid, String cpw, int etype, int epart,  int ooption1, int ooption2, int imageId, String ename, String ehan, int corder) {
+    public RowItem(String odid, int eid, String cid, String cpw, int etype, int epart,  int ooption1, int ooption2, int imageId, String ename, String ehan, int corder) {
+        this.odid = odid;
         this.eid = eid;
         this.cid = cid;
         this.cpw = cpw;
@@ -44,6 +46,11 @@ public class RowItem {
     public RowItem(){
 
     }
+
+    // 운동 nfc 태그
+    public String getOdid() {return this.odid;}
+    public void setOdid(String odid) {this.odid = odid;}
+
     // 운동 순번
     public int getEid() {return this.eid;}
     public void setEid(int eid) {this.eid = eid; }

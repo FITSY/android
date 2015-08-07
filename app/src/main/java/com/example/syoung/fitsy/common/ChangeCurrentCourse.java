@@ -2,18 +2,25 @@ package com.example.syoung.fitsy.common;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
 import com.example.syoung.fitsy.course.CourseFragment;
 import com.example.syoung.fitsy.history.HistoryFragment;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by HyunJoo on 2015. 8. 2..
@@ -47,6 +54,7 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
     static final String TAG_ENAME = "ename";
     static final String TAG_EHAN = "ehan";
     static final String TAG_CORDER = "corder";
+    static final String TAG_ODID = "odid";
 
     static final int SUCCESS = 1;
 
@@ -59,6 +67,7 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
 
     //String URL = "http://192.168.0.21:8080/sgen_test/change_course.php";
     String URL = "http://ebsud89.iptime.org:8022/updateCourse.php";
+    //String URL = "http://ebsud89.iptime.org:8022/test.php";
 
     Activity activity;
 
@@ -100,6 +109,7 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
                 JSONObject temp_object = new JSONObject();
                 temp_object.put(TAG_CID, data.get(i).getCid());
                 temp_object.put(TAG_CPW, data.get(i).getCpw());
+                temp_object.put(TAG_ODID, data.get(i).getOdid());
                 temp_object.put(TAG_OTYPE, String.valueOf(data.get(i).getEtype()));
                 temp_object.put(TAG_OPART, String.valueOf(data.get(i).getEpart()));
                 temp_object.put(TAG_OOPTION1, String.valueOf(data.get(i).getOoption1()));
@@ -116,6 +126,7 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
         }
 
         String json = jsonArray.toString();
+
 
         Log.e(TAG, "보내는 정보 : " + json);
 
@@ -145,8 +156,10 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
 
         if(response == SUCCESS){
             if(whichClass == RECOMMEND) {
+                CourseFragment.initialize();
                 CourseFragment.startConnection();
             }else{
+                HistoryFragment.history_array_list.clear();
                 HistoryFragment.startConnection();
             }
         }else{

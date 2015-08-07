@@ -158,7 +158,7 @@ public class PopupFragment extends DialogFragment {
         ok.setOnClickListener(new View.OnClickListener() {
                                   @Override
                                   public void onClick(View v) {
-                                      RowItem temp = new RowItem(data.getEid(),data.getCid(),data.getCpw(),
+                                      RowItem temp = new RowItem(data.getOdid(), data.getEid(),data.getCid(),data.getCpw(),
                                               data.getEtype(),data.getEpart(),data.getOoption1(),data.getOoption2(),data.getImageId(),data.getEname(), data.getEhan(), data.getCorder());
                                       CourseFragment.isChanged = true;
                                       CourseFragment.addToCurrent(temp);
