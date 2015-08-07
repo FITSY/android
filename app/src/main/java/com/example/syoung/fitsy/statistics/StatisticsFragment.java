@@ -57,7 +57,7 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
     private Calendar currentCalendar;
 
     Date now = new Date();
-    String dumi = "1995-01-01";
+    String dumi = "19950101";
 
     List<String> sKey = new ArrayList<String>();
     List<String> sDate = new ArrayList<String>();
@@ -65,6 +65,8 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
     int count = 0;
+
+    int where;
 
 
     private View myView;
@@ -167,9 +169,60 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
         // Mark current day
         robotoCalendarView.markDayAsCurrentDay(now);
 
+        String dd0 = "20150801";
+        sDate.add("0");
+        sKey.add(dd0);
 
-        /*
-        String dd5 = "2015-08-07";
+        try {
+            robotoCalendarView.CheckDayZero(format.parse(dd0));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String dd1 = "20150802";
+        sDate.add("0");
+        sKey.add(dd1);
+
+        try {
+            robotoCalendarView.CheckDayZero(format.parse(dd1));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        String dd2 = "20150803";
+        sDate.add("100");
+        sKey.add(dd2);
+
+        try {
+            robotoCalendarView.CheckDayPft(format.parse(dd2));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        String dd3 = "20150804";
+        sDate.add("0");
+        sKey.add(dd3);
+
+        try {
+            robotoCalendarView.CheckDayZero(format.parse(dd3));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String dd4 = "20150805";
+        sDate.add("50");
+        sKey.add(dd4);
+
+        try {
+            robotoCalendarView.CheckDayHalf(format.parse(dd4));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        String dd5 = "20150806";
         sDate.add("0");
         sKey.add(dd5);
 
@@ -179,91 +232,18 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
             e.printStackTrace();
         }
 
-        String dd6 = "2015-08-08";
-        sDate.add("50");
+        String dd6 = "20150807";
+        sDate.add("0");
         sKey.add(dd6);
 
         try {
-            robotoCalendarView.CheckDayHalf(format.parse(dd6));
+            robotoCalendarView.CheckDayZero(format.parse(dd6));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        String dd = "2015-08-09";
-        sDate.add("0");
-        sKey.add(dd);
-
-        try {
-            robotoCalendarView.CheckDayZero(format.parse(dd));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String dd2 = "2015-08-10";
-        sDate.add("0");
-        sKey.add(dd2);
-
-        try {
-            robotoCalendarView.CheckDayZero(format.parse(dd2));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        String dd3 = "2015-08-11";
-        sDate.add("50");
-        sKey.add(dd3);
-
-        try {
-            robotoCalendarView.CheckDayHalf(format.parse(dd3));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String dd4 = "2015-08-12";
-        sDate.add("100");
-        sKey.add(dd4);
-
-        try {
-            robotoCalendarView.CheckDayPft(format.parse(dd4));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        */
-
-        Gson gson = new Gson();
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://ebsud89.iptime.org:8022")
-                .setConverter(new GsonConverter(gson))
-                .build();
-
-        StatisticsInterface service = restAdapter.create(StatisticsInterface.class);
-
-        service.getExerciseRatio(new Callback<List<UserData>>() {
-            @Override
-            public void success(List<UserData> userDatas, Response response) {
-                Log.e("SERVER", userDatas.get(0).getCid());
-                for (UserData userData : userDatas) {
-                    sDate.add(userData.getRatio());
-                    sKey.add(userData.getDate());
-                }
-                saveArray();
-                loadArray(getActivity());
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("SEVER", error.toString());
-
-            }
-        });
-
-//        saveArray();
-//        loadArray(getActivity());
+        saveArray();
+        loadArray(getActivity());
 
 
 
@@ -287,6 +267,10 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
         Entry v1e4 = new Entry(24, 3); // Apr
         valueSet1.add(v1e4);
 
+        // bmi
+
+
+
         ArrayList<Entry> valueSet2 = new ArrayList<>();
         Entry v2e1 = new Entry(5, 0); // Jan
         valueSet2.add(v2e1);
@@ -296,6 +280,8 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
         valueSet2.add(v2e3);
         Entry v2e4 = new Entry(20, 3); // Apr
         valueSet2.add(v2e4);
+
+        // 지방
 
         ArrayList<Entry> valueSet3 = new ArrayList<>();
         Entry v3e1 = new Entry(18, 0); // Jan
@@ -307,7 +293,7 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
         Entry v3e4 = new Entry(26, 3); // Apr
         valueSet3.add(v3e4);
 
-
+        // 근육량
 
         LineDataSet LineDataSet1 = new LineDataSet(valueSet1, null); // "BMI");
 
@@ -393,7 +379,28 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
                                     .setConfirmClickListener(null)
                                     .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
 
-                            robotoCalendarView.markDayAsSelectedDay(date);
+                            if (sKey.contains("20150808")) {
+                                where = sKey.indexOf("20150808");
+
+                                if (sDate.get(where).equals("0")) {
+                                    sDate.set(where,"50");
+                                }
+                                else if (sDate.get(where).equals("50")) {
+                                    sDate.set(where,"100");
+                                }
+                                else if (sDate.get(where).equals("100")) {
+                                    sDate.remove(where);
+                                    sKey.remove(where);
+                                    robotoCalendarView.markDayAsCurrentDay(date);
+                                }
+
+                            } else {
+                                sKey.add(format.format(date));
+                                sDate.add("0");
+                            }
+
+                            saveArray();
+                            loadArray(getActivity());
 
                         }
                     }).show();
@@ -441,7 +448,12 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor mEdit1 = sp.edit();
+
+        mEdit1.clear();
+
         mEdit1.putInt("DataNumber", sKey.size()); /* sKey is an array */
+
+
 
         for(int i=0;i<sKey.size();i++)
         {
@@ -463,7 +475,9 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
 
         LinearLayout bluewoman = (LinearLayout) myView.findViewById(R.id.overcount);
 
-        ImageView view = (ImageView) myView.findViewById(R.id.imagewoman);
+        bluewoman.setVisibility(View.INVISIBLE);
+
+        ImageView view = (ImageView) myView.findViewById(R.id.imagewoman1);
 
 
         int month = currentCalendar.get(Calendar.MONTH);
@@ -476,55 +490,54 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
 
         int size = mSharedPreference1.getInt("DataNumber", 0);
 
-        for(int i=0;i<size;i++)
-        {
+        for(int i=0;i<size;i++) {
             sKey.add(mSharedPreference1.getString("Data" + i, null));
-            sDate.add(mSharedPreference1.getString("DataPg" + i , null));
+            sDate.add(mSharedPreference1.getString("DataPg" + i, null));
+
+            Date formatdate = null;
             try {
-                Date formatdate = format.parse(sKey.get(i));
-                String formdatadate = sDate.get(i);
-
-                if (month == formatdate.getMonth() && 2015 == year) {
-
-                    if (formdatadate.equals("0")) {
-                        count++;
-                        robotoCalendarView.CheckDayZero(formatdate);
-                    } else if (formdatadate.equals("50")) {
-                        if (count > 0) {
-                            count--;
-                        }
-                        robotoCalendarView.CheckDayHalf(formatdate);
-                    }
-                    else if (formdatadate.equals("100")) {
-                        if (count > 2) {
-                            count -= 2;
-                        }
-                        else {
-                            count = 0;
-                        }
-                        robotoCalendarView.CheckDayPft(formatdate);
-                    }
-                    if (count == 0) {
-                        graywoman.setVisibility(View.INVISIBLE);
-                        bluewoman.setVisibility(View.VISIBLE);
-                    }
-                    else
-                    {
-                        graywoman.setVisibility(View.VISIBLE);
-                        if (count < 4) {
-                            count = 3;
-                        }
-                        view.getLayoutParams().width = 280 + (count * 50);
-                        bluewoman.setVisibility(View.INVISIBLE);
-                    }
-                }
-
+                formatdate = format.parse(sKey.get(i));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            String formdatadate = sDate.get(i);
+
+            if (month == formatdate.getMonth() && 2015 == year) {
+
+                if (formdatadate.equals("0")) {
+                    count++;
+                    robotoCalendarView.CheckDayZero(formatdate);
+                } else if (formdatadate.equals("50")) {
+                    if (count > 0) {
+                        count--;
+                    }
+                    robotoCalendarView.CheckDayHalf(formatdate);
+                } else if (formdatadate.equals("100")) {
+                    count = 0;
+
+                    robotoCalendarView.CheckDayPft(formatdate);
+                }
+            }
+
+
+
+            if (count == 0) {
+                graywoman.setVisibility(View.INVISIBLE);
+                bluewoman.setVisibility(View.VISIBLE);
+            } else {
+                graywoman.setVisibility(View.VISIBLE);
+                bluewoman.setVisibility(View.INVISIBLE);
+
+                if (count > 4) {
+                    count = 3;
+                }
+
+
+                LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(260 + 40 * count, LinearLayout.LayoutParams.FILL_PARENT);
+                view.setLayoutParams(parms);
+            }
 
         }
-
     }
 
     @Override

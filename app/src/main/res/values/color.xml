@@ -25,6 +25,7 @@
     <color name="dayOfWeekColor">#161d20</color>
     <color name="dayOfMonthColor">#808080</color>
     <color name="currentDayOfMonthColor">#33b5e5</color>
+    <color name="sunday">#c96565</color>
 
 
     <!-- General -->
@@ -42,4 +43,5 @@
     <color name="day_of_month">#849ba9</color>
     <color name="current_day_of_month">#33b5e5</color>
     <color name="currentDayOfMonthSelectorColor">#33b5e5</color>
+
 </resources>

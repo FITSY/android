@@ -18,6 +18,7 @@ package com.example.syoung.fitsy.statistics;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -119,7 +120,7 @@ public class RobotoCalendarView extends LinearLayout {
         initializeComponentBehavior();
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/Roboto-Regular.ttf")
+                        .setDefaultFontPath("fonts/Roboto-Regular.otf")
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
@@ -242,6 +243,8 @@ public class RobotoCalendarView extends LinearLayout {
             //secondUnderline.setVisibility(View.INVISIBLE);
 
             // Apply styles
+
+
             dayOfMonthText.setTextColor(color);
             dayOfMonthText.setBackgroundResource(android.R.color.transparent);
             dayOfMonthContainer.setBackgroundResource(android.R.color.transparent);
@@ -258,6 +261,7 @@ public class RobotoCalendarView extends LinearLayout {
         TextView dayOfMonthText;
         ViewGroup dayOfMonthContainer;
 
+
         // Calculate dayOfMonthIndex
         int dayOfMonthIndex = getWeekIndex(firstDayOfMonth, auxCalendar);
 
@@ -270,6 +274,45 @@ public class RobotoCalendarView extends LinearLayout {
             dayOfMonthContainer.setOnClickListener(onDayOfMonthClickListener);
             dayOfMonthText.setVisibility(View.VISIBLE);
             dayOfMonthText.setText(String.valueOf(i));
+
+
+            if (firstDayOfMonth == 7) {
+                if (i % 7 == 2) {
+                    dayOfMonthText.setTextColor(Color.rgb(201,101,101));
+                }
+            }
+            else if (firstDayOfMonth == 6) {
+                if (i % 7 == 3) {
+                    dayOfMonthText.setTextColor(Color.rgb(201,101,101));
+                }
+            }
+            else if (firstDayOfMonth == 5) {
+                if (i % 7 == 4) {
+                    dayOfMonthText.setTextColor(Color.rgb(201,101,101));
+                }
+            }
+            else if (firstDayOfMonth == 4) {
+                if (i % 7 == 5) {
+                    dayOfMonthText.setTextColor(Color.rgb(201,101,101));
+                }
+            }
+            else if (firstDayOfMonth == 3) {
+                if (i % 7 == 6) {
+                    dayOfMonthText.setTextColor(Color.rgb(201,101,101));
+                }
+            }
+            else if (firstDayOfMonth == 2) {
+                if (i % 7 == 0) {
+                    dayOfMonthText.setTextColor(Color.rgb(201,101,101));
+                }
+            }
+            else if (firstDayOfMonth == 1) {
+                if (i % 7 == 1) {
+                    dayOfMonthText.setTextColor(Color.rgb(201,101,101));
+                }
+            }
+
+
         }
 
         // If the last week row has no visible days, hide it or show it in case
@@ -395,6 +438,7 @@ public class RobotoCalendarView extends LinearLayout {
             TextView dayOfMonth = getDayOfMonthText(currentCalendar);
             dayOfMonth.setTextColor(context.getResources().getColor(R.color.current_day_of_month));
             ViewGroup dayOfMonthBackground = getDayOfMonthBackground(currentCalendar);
+            dayOfMonthBackground.setBackgroundResource(R.color.calendar_background);
         }
     }
 
@@ -454,6 +498,8 @@ public class RobotoCalendarView extends LinearLayout {
         ViewGroup dayOfMonthBackground = getDayOfMonthBackground(currentCalendar);
         storeLastValues(currentDate);
         dayOfMonthBackground.setBackgroundResource(R.drawable.circle);
+        TextView dayOfMonth = getDayOfMonthText(currentCalendar);
+        dayOfMonth.setTextColor(R.color.day_of_month);
     }
 
     public void CheckDayHalf(Date currentDate) {
