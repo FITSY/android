@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import android.view.View;
+
+import com.example.syoung.fitsy.common.CommonUtilities;
 import com.example.syoung.fitsy.common.RowItem;
 import com.example.syoung.fitsy.common.SearchImageRID;
 import com.example.syoung.fitsy.common.ServiceHandler;
@@ -24,25 +26,30 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
 
     static final String TAG = "MakeCurrentList";
 
-    static final String TAG_ALL = "all_courses";
-    static final String TAG_CURRENT = "current_course";
-    static final String TAG_ADD = "add_course";
+    static final String TAG_ALL = "all";
+    static final String TAG_CURRENT = "current";
 
-    static final String TAG_ID = "id";
-    static final String TAG_CID = "cid";
+    static final String TAG_EID = "eid";    // 운동 고유 아이디
+    static final String TAG_CID = "cid";    // 사용자 아이디
     static final String TAG_CPW = "cpw";
     static final String TAG_OTYPE = "otype";
     static final String TAG_OPART = "opart";
+    static final String TAG_ETYPE = "etype";
+    static final String TAG_EPART = "epart";
     static final String TAG_OOPTION1 = "ooption1";
     static final String TAG_OOPTION2 = "ooption2";
-    static final String TAG_EXERCISE_NAME = "exercise_name";
+    static final String TAG_EOPTION1 = "eoption1";
+    static final String TAG_EOPTION2 = "eoption2";
+    static final String TAG_ENAME = "ename";
+    static final String TAG_EHAN = "ehan";
+    static final String TAG_COURSE_ORDER = "corder";
 
     //static String URL = "http://192.168.0.10:8080/sgen_test/get_all_course.php"; // 굿 카페 (or 하하) ip
     //static String URL = "http://192.168.0.21:8080/sgen_test/get_all_course.php"; // 정보를 가져올 페이지 정보 (연구실 ip)
-    static String URL = "http://192.168.1.41:8080/sgen_test/get_all_course.php"; // WIFI 이름 : '엔젤리너스2층'
+    //static String URL = "http://192.168.1.41:8080/sgen_test/get_all_course.php"; // WIFI 이름 : '엔젤리너스2층'
     //static String URL = "http://192.168.0.5:8080/sgen_test/get_all_course.php";
 
-    //static String URL = "http://ebsud89.iptime.org:8022/getAllCourse.php";
+    static String URL = "http://ebsud89.iptime.org:8022/getAllCourse.php";
 
     Activity activity;
 
@@ -72,21 +79,21 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
 
         if (jsonStr != null) {
             try {
-                JSONArray jsonArr = new JSONArray(jsonStr);
+                JSONObject jsonObject = new JSONObject(jsonStr);
                 JSONArray temp_JSONArr = null;
 
                 // jsonArr 의 모든 Object 들을 loop
-                for (int i = 0; i < jsonArr.length(); i++) {
-
-                    temp_JSONArr = jsonArr.getJSONArray(i);
+                for (int i = 0; i < jsonObject.length(); i++) {
 
                     switch (i) {
                         case 0:
                             // current_course
+                            temp_JSONArr = jsonObject.getJSONArray(TAG_CURRENT);
                             get_courses(i, temp_JSONArr);
                             break;
                         case 1:
                             // add_course
+                            temp_JSONArr = jsonObject.getJSONArray(TAG_ALL);
                             get_courses(i, temp_JSONArr);
                             break;
                     }
@@ -111,6 +118,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
 
         CourseFragment.setOnClickListener();
         CourseFragment.addSetOnclickLister();
+        CourseFragment.setRecommendList();
 
         return;
 
@@ -120,16 +128,23 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
         JSONArray jsonArr = null;
         JSONObject temp_JSONobj = null;
 
-        int temp_id;
+        int temp_eid;
         String temp_cid;
         String temp_cpw;
-        int temp_otype;
-        int temp_opart;
+        int temp_etype;
+        int temp_epart;
         int temp_ooption1;
         int temp_ooption2;
-        String exercise_name;
+        String ename;
+        String ehan;
+        int temp_corder;
 
-
+        /**
+         *
+         static final String TAG_ENAME = "ename";
+         static final String TAG_EHAN = "ehan";
+         static final String TAG_COURSE_ORDER = "corder";
+         */
 
         int temp_image_id = 0;
 
@@ -140,25 +155,34 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
             for (int i = 0; i < jsonArray.length(); i++) {
                 temp_JSONobj = jsonArray.getJSONObject(i);
 
-                temp_id = temp_JSONobj.getInt(TAG_ID);
-                temp_cid = temp_JSONobj.getString(TAG_CID);
-                temp_cpw = temp_JSONobj.getString(TAG_CPW);
-                temp_opart = temp_JSONobj.getInt(TAG_OPART);
-                temp_otype = temp_JSONobj.getInt(TAG_OTYPE);
-                temp_ooption1 = temp_JSONobj.getInt(TAG_OOPTION1);
-                temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);
-                exercise_name = temp_JSONobj.getString(TAG_EXERCISE_NAME);
+                temp_eid = temp_JSONobj.getInt(TAG_EID);
+                ename = temp_JSONobj.getString(TAG_ENAME);
+                ehan = temp_JSONobj.getString(TAG_EHAN);
 
                 if (index == 0) {
                     //current_array
-                    temp_image_id = sRid.getImageID(exercise_name);
-                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
+                    temp_epart = temp_JSONobj.getInt(TAG_OPART);
+                    temp_etype = temp_JSONobj.getInt(TAG_OTYPE);
+                    temp_ooption1 = temp_JSONobj.getInt(TAG_OOPTION1);
+                    temp_ooption2 = temp_JSONobj.getInt(TAG_OOPTION2);
+                    CommonUtilities.ID = temp_JSONobj.getString(TAG_CID);
+                    CommonUtilities.PASSWORD = temp_JSONobj.getString(TAG_CPW);
+                    temp_corder = temp_JSONobj.getInt(TAG_COURSE_ORDER);
+                    temp_image_id = sRid.getImageID(ename);
+                    RowItem temp_row_item = new RowItem(temp_eid, CommonUtilities.ID, CommonUtilities.PASSWORD, temp_etype, temp_epart, temp_ooption1,
+                            temp_ooption2, temp_image_id, ename, ehan, temp_corder);
                     CourseFragment.current_array_list.add(temp_row_item);
                 }
                 else {
                     //add_array
-                    temp_image_id = sRid.getImageID(exercise_name + "2");
-                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype, temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
+                    temp_corder = 0;
+                    temp_epart = temp_JSONobj.getInt(TAG_EPART);
+                    temp_etype = temp_JSONobj.getInt(TAG_ETYPE);
+                    temp_ooption1 = temp_JSONobj.getInt(TAG_EOPTION1);
+                    temp_ooption2 = temp_JSONobj.getInt(TAG_EOPTION2);
+                    temp_image_id = sRid.getImageID(ename + "2");
+                    RowItem temp_row_item = new RowItem(temp_eid, CommonUtilities.ID, CommonUtilities.PASSWORD, temp_etype, temp_epart, temp_ooption1,
+                            temp_ooption2, temp_image_id, ename, ehan, temp_corder);
                     CourseFragment.add_array_list.add(temp_row_item);
                 }
 

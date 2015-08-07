@@ -142,9 +142,12 @@ public class MakeHistoryList extends AsyncTask<Void, Void, Void> {
 
                     temp_image_id = sRid.getImageID(exercise_name);
 
-                    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype,
+                    //public RowItem(int eid, String cid, String cpw, int etype, int epart,  int ooption1, int ooption2, int imageId, String ename, String ehan, int corder)
+
+                    // TODO : RowItem 형태 고쳐야 함
+                    /*    RowItem temp_row_item = new RowItem(temp_id, temp_cid, temp_cpw, temp_otype,
                             temp_opart, temp_ooption1, temp_ooption2, temp_image_id, exercise_name);
-                    temp_list.add(temp_row_item);
+                    temp_list.add(temp_row_item);*/
 
 
                 }

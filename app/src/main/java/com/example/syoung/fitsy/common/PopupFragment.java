@@ -152,12 +152,14 @@ public class PopupFragment extends DialogFragment {
         );
     }
 
+    //    public RowItem(int eid, String cid, String cpw, int etype, int epart,  int ooption1, int ooption2, int imageId, String ename, String ehan, int corder)
+
     private void addChange(){
         ok.setOnClickListener(new View.OnClickListener() {
                                   @Override
                                   public void onClick(View v) {
-                                      RowItem temp = new RowItem(data.getId(),data.getCid(),data.getCpw(),
-                                              data.getOtype(),data.getOpart(),data.getOoption1(),data.getOoption2(),data.getImageId(),data.getExerciseName());
+                                      RowItem temp = new RowItem(data.getEid(),data.getCid(),data.getCpw(),
+                                              data.getEtype(),data.getEpart(),data.getOoption1(),data.getOoption2(),data.getImageId(),data.getEname(), data.getEhan(), data.getCorder());
                                       CourseFragment.isChanged = true;
                                       CourseFragment.addToCurrent(temp);
                                   }}

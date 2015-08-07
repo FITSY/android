@@ -84,7 +84,7 @@ public class SearchConverter {
         ArrayList<RowItem> temp_array = new ArrayList<RowItem>();
 
         for(int i = 0; i < data.size(); i++){
-            if(data.get(i).getOpart() == part){
+            if(data.get(i).getEpart() == part){
                 temp_array.add(data.get(i));
             }
         }
@@ -96,7 +96,7 @@ public class SearchConverter {
         ArrayList<RowItem> temp_array = new ArrayList<RowItem>();
 
         for(int i = 0; i < data.size(); i++){
-            if(data.get(i).getExerciseName().endsWith(exercise_name)){
+            if(data.get(i).getEname().endsWith(exercise_name)){
                 temp_array.add(data.get(i));
             }
         }

@@ -25,6 +25,16 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
 
     static final String TAG_SUCCESS = "success";
 
+    /**
+     * 3. 코스 내용 업데이트
+     updateCourse.php
+
+     POST [cid, cpw, otype, opart, ooption1, ooption2, eid, ename, corder]
+     => [사용자 아이디, 사용자 비번, 운동 타입, 운동 파트, 옵션1, 옵션2, 운동 고유 아이디, 운동 영어이름, 운동 한글 이름, 운동 코스 순서]
+
+     리턴값 {"success":"1"} or {"success":"0"}
+     */
+
     static final String TAG_ID = "id";
     static final String TAG_CID = "cid";
     static final String TAG_CPW = "cpw";
@@ -39,7 +49,8 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
     static final int RECOMMEND = 1;
     static final int HISTORY = 2;
 
-    String URL = "http://192.168.0.21:8080/sgen_test/change_course.php";
+    //String URL = "http://192.168.0.21:8080/sgen_test/change_course.php";
+    String URL = "http://ebsud89.iptime.org:8022/updateCourse.php";
 
     Activity activity;
 

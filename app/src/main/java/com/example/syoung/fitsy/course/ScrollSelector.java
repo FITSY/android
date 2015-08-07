@@ -71,9 +71,10 @@ public class ScrollSelector extends DialogFragment{
          * - ooption2 : 횟수(무산소) / 속도(유산소)
          */
 
-        if(item.getOtype() == AEROBIC){
+        if(item.getEtype() == AEROBIC){
             int temp = item.getOoption1();
             Log.e("ScollSelector", "유산소 : " + temp);
+            Log.e("ScollSelector", "운동 순서 : " + item.getCorder());
 
             if(temp >= 10){
                 int temp2 = temp/10;
@@ -89,6 +90,7 @@ public class ScrollSelector extends DialogFragment{
         }else{
             int temp = item.getOoption2();
             Log.e("ScrollSelector", "무산소 : " + temp);
+            Log.e("ScollSelector", "운동 순서 : " + item.getCorder());
 
             if(temp >= 10){
                 int temp2 = temp/10;
@@ -125,7 +127,7 @@ public class ScrollSelector extends DialogFragment{
     private void clickConfirm(){
         int result = 0;
 
-        if(item.getOtype() == AEROBIC){
+        if(item.getEtype() == AEROBIC){
             // 운동 시간
             int temp = picker1.getValue();
 
