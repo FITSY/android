@@ -27,6 +27,7 @@ public class ConnectThread extends Thread {
     private static final int POINT_THICKNESS = 5;	// must be odd number.
     private static final int POINT_WIDTH_HALF = 2;
     private static final int POINT_THICKNESS_HALF = 2;
+    private static int nStepCount = 0;
 
     static boolean bStart = true;
     static int PrevDrawingX;
@@ -111,7 +112,7 @@ public class ConnectThread extends Thread {
         try {
             inputStream = mmSocket.getInputStream();
             while ((count = inputStream.read(buffer)) != -1) {
-                setByteArray(buffer, buffer.length);
+                manageData(buffer);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,7 +120,23 @@ public class ConnectThread extends Thread {
     }
 
     public void setByteArray(byte[] buffer, int count) {
-        parseStream(buffer, count);
+        //parseStream(buffer, count);
+    }
+
+    private void manageData(byte[] buffer) {
+        StringBuilder builder = new StringBuilder();
+
+        int i = 0;
+        for(byte b : buffer){
+            ++i;
+            if(i%3==0){
+                builder.append(b);
+            }else{
+                builder.append(b);
+            }
+        }
+        //Log.e(TAG, builder.toString());
+        Log.e(TAG, "buffer : " + builder.toString());
     }
 
     public ContentObject getObject() {
@@ -253,18 +270,43 @@ public class ConnectThread extends Thread {
             mObjectQueue.add(mContentObject);
             mContentObject = null;
         }
-/**
- *
- drawAccelGraph(getObject().mAccelData);
- */
-        if(mObjectQueue != null){
-            drawAccelData();
-        }
+        //drawAccelGraph(getObject().mAccelData);
+        newAnalyze();
+
+        /*if(mObjectQueue != null){
+            analyzeData();
+        }*/
     }
 
-    private void drawAccelData(){
-        drawAccelGraph(getObject().mAccelData);
+    private void analyzeData(){
+        ContentObject co1 = getObject();
+
+        int idx = co1.mAccelData.length/3;
+
+        float [] nX = new float[idx];
+        float [] nY = new float[idx];
+        float [] nZ = new float[idx];
+        float [] n3D = new float[idx];
+
+        for(int i = 0; i < idx; ++i)
+        {
+            nX[i] = (float)(co1.mAccelData[i*3]+32768)/65535.f;
+            //Log.d(TAG, "#"+nX[i]);
+            nY[i] = (float)(co1.mAccelData[i*3+1]+32768)/65535.f;
+            //Log.d(TAG, "#"+nY[i]);
+            nZ[i] = (float)(co1.mAccelData[i*3+2]+32768)/65535.f;
+            //Log.d(TAG, "#"+nZ[i]);
+            n3D[i] = (float) Math.sqrt(nX[i]*nX[i]+nY[i]*nY[i]+nZ[i]*nZ[i]);
+            Log.e(TAG, "#"+n3D[i]);
+        }
+
+        //drawAccelGraph(n3D);
+
     }
+
+    /*private void drawAccelData(){
+        drawAccelGraph(getObject().mAccelData);
+    }*/
 
     private void drawAccelGraph(int[] accelArray){
         if(accelArray == null || accelArray.length < 3)
@@ -282,7 +324,7 @@ public class ConnectThread extends Thread {
             drawLine(TYPE_RED, PrevDrawingX, mCurrentDrawingX, accelArray[i - 3], accelArray[i]);*/
 
             //mCurrentDrawingX = accelArray[i];
-            int result = accelArray[i] - accelArray[i-3];
+            float result = accelArray[i] - accelArray[i-3];
             Log.e(TAG, "x Axis | Current X - Prev X = " + result);
 
             // y axis value is Blue dot
@@ -291,7 +333,7 @@ public class ConnectThread extends Thread {
 
             //mCurrentDrawingX = accelArray[i +1];
             //Log.e(TAG, "y Axis | Prev Y : " + accelArray[i - 2] + ", Current Y : " + accelArray[i + 1]);
-            int result2 = accelArray[i + 1] - accelArray[i-2];
+            float result2 = accelArray[i + 1] - accelArray[i-2];
             Log.e(TAG, "y Axis | Current Y - Prev Y = " + result2);
 
             // z axis value is Green dot
@@ -299,11 +341,167 @@ public class ConnectThread extends Thread {
             drawLine(TYPE_BLUE, PrevDrawingX, mCurrentDrawingX, accelArray[i - 1], accelArray[i + 2]);*/
 
             //Log.e(TAG, "z Axis | Prev Z : " + accelArray[i - 1] + ", Current Z : " + accelArray[i + 2]);
-            int result3 = accelArray[i + 2] - accelArray[i-1];
+            float result3 = accelArray[i + 2] - accelArray[i-1];
             Log.e(TAG, "z Axis | Current Z - Prev Z = " + result3);
 
         }
 
+    }
+
+    private void newAnalyze(){
+        ContentObject co1 = mObjectQueue.get(0);
+
+        int nPrevX;
+        int nPrevY;
+        int nPrevZ;
+        int nDiffX;
+        int nDiffY;
+        int nDiffZ;
+        int nPrevDiffX;
+        int nPrevDiffY;
+        int nPrevDiffZ;
+
+        int nDirection1X = 0;
+        int nDirection1Y = 0;
+        int nDirection1Z = 0;
+
+        int nDirection2X = 0;
+        int nDirection2Y = 0;
+        int nDirection2Z = 0;
+
+        int idx = co1.mAccelData.length/3;
+
+        nPrevX = co1.mAccelData[idx];
+        nPrevY = co1.mAccelData[idx+1];
+        nPrevZ = co1.mAccelData[idx+2];
+
+        nPrevDiffX = nPrevX - co1.mAccelData[idx-3];
+        nPrevDiffY = nPrevY - co1.mAccelData[idx-2];
+        nPrevDiffZ = nPrevZ - co1.mAccelData[idx-1];
+
+
+        int nThreshold = 100;
+        if(Math.abs(nPrevDiffX) > nThreshold)
+            nDirection2X = 1;
+        else if(Math.abs(nPrevDiffX) < -nThreshold)
+            nDirection2X = -1;
+
+        if(Math.abs(nPrevDiffY) > nThreshold)
+            nDirection2Y = 1;
+        else if(Math.abs(nPrevDiffY) < -nThreshold)
+            nDirection2Y = -1;
+
+        if(Math.abs(nPrevDiffZ) > nThreshold)
+            nDirection2Z = 1;
+        else if(Math.abs(nPrevDiffZ) < -nThreshold)
+            nDirection2Z = -1;
+
+
+        for(int j=1; j<mObjectQueue.size(); j++) {
+            ContentObject co = mObjectQueue.get(j);
+            /*if(j == 0)
+                ar.mStartTime = co.mTimeInMilli;*/
+
+            //Make your own analyzing code here.
+            if(co.mAccelData != null) {
+                int last_x = 0;
+                int last_y = 0;
+                int last_z = 0;
+
+                // [kbjung]
+                nDiffX = co.mAccelData[0] - nPrevX;
+                nDiffY = co.mAccelData[1] - nPrevY;
+                nDiffZ = co.mAccelData[2] - nPrevZ;
+
+                Log.e(TAG, "nDiffX : " + nDiffX);
+                Log.e(TAG, "nDiffY : " + nDiffY);
+                Log.e(TAG, "nDiffZ : " + nDiffZ);
+
+                if(nDiffX > nThreshold)
+                    nDirection1X = 1;
+                else if(nDiffX < -nThreshold)
+                    nDirection1X = -1;
+
+                if(nDiffY > nThreshold)
+                    nDirection1Y = 1;
+                else if(nDiffY < -nThreshold)
+                    nDirection1Y = -1;
+
+                if(nDiffZ > nThreshold)
+                    nDirection1Z = 1;
+                else if(nDiffZ < -nThreshold)
+                    nDirection1Z = -1;
+
+                if(nDirection1Y != 0 && nDirection2Y != 0 && nDirection1Y != nDirection2Y)
+                    nStepCount++;
+//					ar.mShakeActionCount++;
+
+                nPrevDiffX = nDiffX;
+                nPrevDiffY = nDiffY;
+                nPrevDiffZ = nDiffZ;
+
+                for(int i=3; i<co.mAccelData.length/3; i+=3) {
+                    int axis_x = co.mAccelData[i];
+                    int axis_y = co.mAccelData[i+1];
+                    int axis_z = co.mAccelData[i+2];
+
+                    // [kbjung]
+                    nDiffX = axis_x - nPrevX;
+                    nDiffY = axis_y - nPrevY;
+                    nDiffZ = axis_z - nPrevZ;
+
+                    if(nDiffX > nThreshold)
+                        nDirection1X = 1;
+                    else if(nDiffX < -nThreshold)
+                        nDirection1X = -1;
+
+                    if(nDiffY > nThreshold)
+                        nDirection1Y = 1;
+                    else if(nDiffY < -nThreshold)
+                        nDirection1Y = -1;
+
+                    if(nDiffZ > nThreshold)
+                        nDirection1Z = 1;
+                    else if(nDiffZ < -nThreshold)
+                        nDirection1Z = -1;
+
+                    nPrevDiffX = nDiffX;
+                    nPrevDiffY = nDiffY;
+                    nPrevDiffZ = nDiffZ;
+
+//					double difference = 0;
+//
+//					if(last_x == 0 && last_y == 0 && last_z == 0) {
+//
+//					} else {
+//						difference = Math.abs(axis_x + axis_y + axis_z - last_x - last_y - last_z) / samplingInterval * 10000;
+//						ar.mSumOfDifference += difference;
+//						ar.mCount++;
+//
+//						if(difference > SHAKE_THRESHHOLD) {
+//							// This is shake action
+//							ar.mShakeActionCount++;
+//						}
+//					}
+//					last_x = axis_x;
+//					last_y = axis_y;
+//					last_z = axis_z;
+
+
+                    /*if(axis_x == 0 && axis_y == 0 && axis_z == 0) {
+                        previousMagnitude = 0;
+                    } else {
+                        difference = Math.sqrt(Math.pow(axis_x, 2) + Math.pow(axis_y, 2) + Math.pow(axis_z, 2));
+                        if(previousMagnitude > 0) {
+                            ar.mSumOfDifference += Math.abs(previousMagnitude - difference);
+                            ar.mCount++;
+                        }
+                        previousMagnitude = difference;
+                    }*/
+                }	// End of for loop
+            }
+
+        }
     }
 
     /**
@@ -321,18 +519,5 @@ public class ConnectThread extends Thread {
     }
 
     //TODO 연결이 끊기면 그 전에 연결한 기기 다시 연결하게 하기
-   /* private void manageData(byte[] data) {
-        StringBuilder builder = new StringBuilder();
 
-        int i = 0;
-        for(byte b : data){
-            ++i;
-            if(i%3==0){
-                builder.append(b).append("           ");
-            }else{
-                builder.append(b).append(" ");
-            }
-        }
-        Log.e("data", builder.toString());
-    }*/
 }

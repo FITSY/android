@@ -77,7 +77,7 @@ public class CourseFragment extends android.support.v4.app.Fragment{
 
     ActionAnim anim;
     private static SearchImageRID searchImageRID;
-    ChangeCurrentCourse changeCurrentCourse;
+    private static ChangeCurrentCourse changeCurrentCourse;
     private static SearchConverter searchConverter;
 
     public static ProgressBar bar;
@@ -243,7 +243,6 @@ public class CourseFragment extends android.support.v4.app.Fragment{
     }
 
     public static void recommendSave(int whichRecommend){
-        ChangeCurrentCourse changeCurrentCourse;
 
         switch (whichRecommend){
             case PT:
@@ -269,7 +268,8 @@ public class CourseFragment extends android.support.v4.app.Fragment{
             change_save.setVisibility(View.GONE);
             popupFragment.dismiss();
             isChanged = false;
-            //changeCurrentCourse = new ChangeCurrentCourse(getActivity(), current_array_list, RECOMMEND);
+            changeCurrentCourse = new ChangeCurrentCourse(thisActivity, current_array_list, RECOMMEND);
+            changeCurrentCourse.execute();
         }else{
             change_save.setVisibility(View.GONE);
             popupFragment.dismiss();

@@ -92,7 +92,8 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
             CourseFragment.bar.setVisibility(View.VISIBLE);
         }else{
             // history_course로 현재 코스를 바꿀 경우
-
+            HistoryFragment.backgrd.setVisibility(View.VISIBLE);
+            HistoryFragment.bar.setVisibility(View.VISIBLE);
         }
     }
 
@@ -159,7 +160,7 @@ public class ChangeCurrentCourse extends AsyncTask<Void, Void, Void> {
                 CourseFragment.initialize();
                 CourseFragment.startConnection();
             }else{
-                HistoryFragment.history_array_list.clear();
+                HistoryFragment.initialize();
                 HistoryFragment.startConnection();
             }
         }else{
