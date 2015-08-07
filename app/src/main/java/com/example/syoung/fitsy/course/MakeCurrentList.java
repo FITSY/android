@@ -103,7 +103,7 @@ public class MakeCurrentList extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
         } else {
-            //Log.e(TAG, "해당 URL 로부터 아무런 정보를 얻을 수 없습니다.");
+            Log.e(TAG, "해당 URL 로부터 아무런 정보를 얻을 수 없습니다.");
         }
 
         return null;

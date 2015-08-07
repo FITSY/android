@@ -12,10 +12,12 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -24,6 +26,7 @@ import org.json.JSONArray;
  * Created by HyunJoo on 15. 7. 9..
  */
 public class ServiceHandler {
+    private final String TAG = "ServiceHandler";
     static String response = null;
     public final static int GET = 1;
     public final static int POST = 2;
@@ -73,7 +76,7 @@ public class ServiceHandler {
             }
             httpEntity = httpResponse.getEntity();
             response = EntityUtils.toString(httpEntity);
-            Log.e("ServiceHandler", "response : " + response);
+            Log.e(TAG, "response : " + response);
 
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -89,5 +92,48 @@ public class ServiceHandler {
         return response;
 
     }
+
+    public String makeJSONServiceCall(String url, int method, String json) {
+        try {
+            // http client
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpEntity httpEntity = null;
+            HttpResponse httpResponse = null;
+
+            StringEntity se = new StringEntity(json);
+
+            Log.e(TAG, "보내는 정보 : " + se);
+
+            URL _url = new URL(url);
+
+            HttpPost httpPost = null;
+            httpPost = new HttpPost(_url.toURI());
+
+            httpPost.setEntity(se);
+
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+
+            httpResponse = (HttpResponse) httpclient.execute(httpPost);
+
+            httpEntity = httpResponse.getEntity();
+            response = EntityUtils.toString(httpEntity);
+            Log.e(TAG, "response : " + response);
+
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // JSON 형태의 response
+        return response;
+
+    }
+
 
 }

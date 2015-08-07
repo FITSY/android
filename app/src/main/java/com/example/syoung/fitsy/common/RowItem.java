@@ -112,4 +112,8 @@ public class RowItem {
         this.corder = corder;
     }
 
+    public String toString(int data){
+        return String.valueOf(data);
+    }
+
 }
