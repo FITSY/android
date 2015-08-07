@@ -26,11 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.syoung.fitsy.R;
-import com.example.syoung.fitsy.main.server.FITSYService;
-import com.example.syoung.fitsy.main.server.UserCourse;
 import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.util.List;
 
 import retrofit.Callback;
@@ -46,11 +43,10 @@ public class MyInformationFragment extends Fragment {
     private View rootView;
     private ImageView img;
     int cnt1 = 0;
-    TextView tv1, tv2, tv3, tv4, tv5, tv6;
+    TextView tv1, tv2, tv3, tv4, tv5, tv6,tv7,tv8,tv9,tv10,tv11,tv12,tv13;
     Button btn1, btn2, btn3, btn4;
     final int PICK_FROM_GALLERY = 2;
     private static MyInformationFragment instance;
-
     public MyInformationFragment() {
     }
 
@@ -72,6 +68,13 @@ public class MyInformationFragment extends Fragment {
         tv4 = (TextView) rootView.findViewById(R.id.text4);
         tv5 = (TextView) rootView.findViewById(R.id.text5);
         tv6 = (TextView) rootView.findViewById(R.id.text6);
+        tv7 = (TextView) rootView.findViewById(R.id.text7);
+        tv8 = (TextView) rootView.findViewById(R.id.text8);
+        tv9 = (TextView) rootView.findViewById(R.id.text9);
+        tv10 = (TextView) rootView.findViewById(R.id.text10);
+        tv11 = (TextView) rootView.findViewById(R.id.text11);
+        tv12 = (TextView) rootView.findViewById(R.id.text12);
+        tv13 = (TextView) rootView.findViewById(R.id.text13);
         btn1 = (Button) rootView.findViewById(R.id.button1);
         btn2 = (Button) rootView.findViewById(R.id.button2);
         btn3 = (Button) rootView.findViewById(R.id.button3);
@@ -84,11 +87,34 @@ public class MyInformationFragment extends Fragment {
                 .build();
 
         MyInfoService service = restAdapter.create(MyInfoService.class);
-
         service.getInbodyInfo(new Callback<List<MyInfoData>>() {
             @Override
             public void success(List<MyInfoData> myInfoDatas, Response response) {
                 Log.e("SUCCESS", myInfoDatas.get(0).getDate());
+                String str1 = myInfoDatas.get(0).getInfo().getCname();
+                tv1.setText("이름 : " + str1);
+                String str2 = myInfoDatas.get(0).getInfo().getHeight();
+                tv2.append(str2);
+                String str3 = myInfoDatas.get(0).getInfo().getWeight();
+                tv3.append(str3);
+                tv4.append(str2);
+                tv5.append(str3);
+                String str4 = myInfoDatas.get(0).getInfo().getBasic();
+                tv6.append(str4 + "kcal");
+                String str5 = myInfoDatas.get(0).getInfo().getInlevel();
+                tv7.setText(str5 + " 균형");
+                String str6 = myInfoDatas.get(0).getInfo().getInarea();
+                tv8.setText(str6+" 균형");
+                String str7 = myInfoDatas.get(0).getInfo().getBellycir();
+                tv9.setText(str7+" (적정 80cm 미만)");
+                String str8 = myInfoDatas.get(0).getInfo().getBellyfat();
+                tv10.setText(str8);
+                String str9=myInfoDatas.get(0).getInfo().getBodywei();
+                tv11.setText(str9+" 적정");
+                String str10=myInfoDatas.get(0).getInfo().getBodyfat();
+                tv12.setText(str10+" 적정");
+                String str11=myInfoDatas.get(0).getInfo().getBodymus();
+                tv13.setText(str11+" 적정");
             }
 
             @Override
@@ -96,13 +122,6 @@ public class MyInformationFragment extends Fragment {
                 Log.e("FAIL", error.toString());
             }
         });
-
-        tv1.append("이상훈");
-        tv2.append("180cm");
-        tv3.append("74kg");
-        tv4.append("180cm");
-        tv5.append("74kg");
-        tv6.append("2100kcal");
         btn1.setBackgroundColor(Color.WHITE);
         btn1.setTextColor(Color.BLACK);
         btn2.setBackgroundColor(Color.WHITE);
