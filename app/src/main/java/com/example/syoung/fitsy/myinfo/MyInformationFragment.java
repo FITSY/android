@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.syoung.fitsy.R;
+import com.example.syoung.fitsy.main.server.FITSYService;
+import com.example.syoung.fitsy.main.server.UserCourse;
+import com.google.gson.Gson;
+
+import java.io.Serializable;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 /**
  * Created by syoung on 2015-06-28.
@@ -63,6 +76,27 @@ public class MyInformationFragment extends Fragment {
         btn2 = (Button) rootView.findViewById(R.id.button2);
         btn3 = (Button) rootView.findViewById(R.id.button3);
         btn4 = (Button) rootView.findViewById(R.id.button4);
+
+        Gson gson = new Gson();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://ebsud89.iptime.org:8022")
+                .setConverter(new GsonConverter(gson))
+                .build();
+
+        MyInfoService service = restAdapter.create(MyInfoService.class);
+
+        service.getInbodyInfo(new Callback<List<MyInfoData>>() {
+            @Override
+            public void success(List<MyInfoData> myInfoDatas, Response response) {
+                Log.e("SUCCESS", myInfoDatas.get(0).getDate());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("FAIL", error.toString());
+            }
+        });
+
         tv1.append("이상훈");
         tv2.append("180cm");
         tv3.append("74kg");

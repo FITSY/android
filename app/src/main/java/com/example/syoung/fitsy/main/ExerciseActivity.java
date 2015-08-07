@@ -76,7 +76,7 @@ public class ExerciseActivity extends Activity {
                         }
                     });
                     //TODO : sec => min으로 바꾸기
-                    if(sec == boundMin){
+                    if(min == boundMin){
                         exerciseTypeOneFinish();
                         intentNFCReadActivity();
                         return;
@@ -142,6 +142,11 @@ public class ExerciseActivity extends Activity {
         }
         //TODO : 중간에 이동 할 때 현재 유산소 운동에 대한 정보, 무산소 운도 일 때 결과 정보 저장
 
+        if(exerciseType == 1){
+            exerciseTypeOneFinish();
+        }else if(exerciseType == 2){
+
+        }
         intentNFCReadActivity();
     }
 
