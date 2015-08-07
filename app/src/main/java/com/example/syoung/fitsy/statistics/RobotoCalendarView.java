@@ -19,6 +19,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,7 @@ public class RobotoCalendarView extends LinearLayout {
     public RobotoCalendarView(Context context) {
         super(context);
         this.context = context;
+
         onCreateView();
     }
 
@@ -120,10 +122,11 @@ public class RobotoCalendarView extends LinearLayout {
         initializeComponentBehavior();
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/Roboto-Regular.otf")
+                        .setDefaultFontPath("assets/fonts/Roboto-Regular.otf")
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
+
 
         return view;
     }
@@ -179,7 +182,7 @@ public class RobotoCalendarView extends LinearLayout {
         int color = getResources().getColor(monthTitleColor);
         dateTitle.setTextColor(color);
 
-        String dateText = new DateFormatSymbols(locale).getMonths()[currentCalendar.get(Calendar.MONTH)].toString();
+        String dateText = new DateFormatSymbols(Locale.UK).getMonths()[currentCalendar.get(Calendar.MONTH)].toString();
         dateText = dateText.substring(0, 1).toUpperCase() + dateText.subSequence(1, dateText.length());
         Calendar calendar = Calendar.getInstance();
         if (currentCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
@@ -197,7 +200,7 @@ public class RobotoCalendarView extends LinearLayout {
 
         TextView dayOfWeek;
         String dayOfTheWeekString;
-        String[] weekDaysArray = new DateFormatSymbols(locale).getShortWeekdays();
+        String[] weekDaysArray = new DateFormatSymbols(Locale.UK).getShortWeekdays();
         for (int i = 1; i < weekDaysArray.length; i++) {
             dayOfWeek = (TextView) view.findViewWithTag(DAY_OF_WEEK + getWeekIndex(i, currentCalendar));
             dayOfTheWeekString = weekDaysArray[i];
@@ -205,13 +208,18 @@ public class RobotoCalendarView extends LinearLayout {
             dayOfWeek.setText(dayOfTheWeekString);
 
             // Apply styles
-            dayOfWeek.setTextColor(color);
+            if (i == 1) {
+                dayOfWeek.setTextColor(Color.rgb(201,101,101));
+            }
+            else
+                dayOfWeek.setTextColor(color);
         }
     }
 
     @SuppressLint("DefaultLocale")
     private String checkSpecificLocales(String dayOfTheWeekString, int i) {
         // Set Wednesday as "X" in Spanish locale
+
         if (i == 4 && locale.getCountry().equals("ES")) {
             dayOfTheWeekString = "X";
         } else {
@@ -273,7 +281,8 @@ public class RobotoCalendarView extends LinearLayout {
             }
             dayOfMonthContainer.setOnClickListener(onDayOfMonthClickListener);
             dayOfMonthText.setVisibility(View.VISIBLE);
-            dayOfMonthText.setText(String.valueOf(i));
+            String no = String.format("%02d", i);
+            dayOfMonthText.setText(no);
 
 
             if (firstDayOfMonth == 7) {
