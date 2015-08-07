@@ -43,7 +43,7 @@ public class MyInformationFragment extends Fragment {
     private View rootView;
     private ImageView img;
     int cnt1 = 0;
-    TextView tv1, tv2, tv3, tv4, tv5, tv6,tv7,tv8,tv9,tv10,tv11,tv12,tv13;
+    TextView tv1, tv2, tv3, tv4, tv5, tv6,tv7,tv8,tv9,tv10,tv11,tv12,tv13,tv14,tv15,tv16,tv17,tv18,tv19,tv20,tv21,tv22,tv23;
     Button btn1, btn2, btn3, btn4;
     final int PICK_FROM_GALLERY = 2;
     private static MyInformationFragment instance;
@@ -75,6 +75,16 @@ public class MyInformationFragment extends Fragment {
         tv11 = (TextView) rootView.findViewById(R.id.text11);
         tv12 = (TextView) rootView.findViewById(R.id.text12);
         tv13 = (TextView) rootView.findViewById(R.id.text13);
+        tv14 = (TextView) rootView.findViewById(R.id.text14);
+        tv15 = (TextView) rootView.findViewById(R.id.text15);
+        tv16 = (TextView) rootView.findViewById(R.id.text16);
+        tv17 = (TextView) rootView.findViewById(R.id.text17);
+        tv18 = (TextView) rootView.findViewById(R.id.text18);
+        tv19 = (TextView) rootView.findViewById(R.id.text19);
+        tv20 = (TextView) rootView.findViewById(R.id.text20);
+        tv21 = (TextView) rootView.findViewById(R.id.text21);
+        tv22 = (TextView) rootView.findViewById(R.id.text22);
+        tv23 = (TextView) rootView.findViewById(R.id.text23);
         btn1 = (Button) rootView.findViewById(R.id.button1);
         btn2 = (Button) rootView.findViewById(R.id.button2);
         btn3 = (Button) rootView.findViewById(R.id.button3);
@@ -115,6 +125,27 @@ public class MyInformationFragment extends Fragment {
                 tv12.setText(str10+" 적정");
                 String str11=myInfoDatas.get(0).getInfo().getBodymus();
                 tv13.setText(str11+" 적정");
+                String str12=myInfoDatas.get(0).getInfo().getRafat();
+                tv14.setText(str12);
+                String str13=myInfoDatas.get(0).getInfo().getLafat();
+                tv15.setText(str13);
+                String str14=myInfoDatas.get(0).getInfo().getRamus();
+                tv16.setText(str14);
+                String str15=myInfoDatas.get(0).getInfo().getLamus();
+                tv17.setText(str15);
+                String str16 = myInfoDatas.get(0).getInfo().getTofat();
+                tv18.setText(str16);
+                String str17 = myInfoDatas.get(0).getInfo().getTomus();
+                tv19.setText(str17);
+                String str18 = myInfoDatas.get(0).getInfo().getRlfat();
+                tv20.setText(str18);
+                String str19 = myInfoDatas.get(0).getInfo().getLlfat();
+                tv21.setText(str19);
+                String str20 = myInfoDatas.get(0).getInfo().getRlmus();
+                tv22.setText(str20);
+                String str21 = myInfoDatas.get(0).getInfo().getLlmus();
+                tv23.setText(str21);
+
             }
 
             @Override

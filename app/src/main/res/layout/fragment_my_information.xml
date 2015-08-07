@@ -158,19 +158,117 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/inbody_information">
+                android:layout_height="400dp"
+                android:background="@drawable/inbody_information"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="250dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:adjustViewBounds="true"
-                    android:paddingBottom="20dp"
-                    android:paddingTop="20dp"
-                    android:src="@drawable/person" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="125dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="125dp"
+                        android:paddingLeft="70dp"
+                        android:paddingTop="110dp" />
+
+                    <TextView
+                        android:id="@+id/text15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="125dp"
+                        android:paddingLeft="160dp"
+                        android:paddingTop="110dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:paddingLeft="70dp"
+                        android:paddingTop="5dp" />
+
+                    <TextView
+                        android:id="@+id/text17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:paddingLeft="160dp"
+                        android:paddingTop="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:paddingLeft="165dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:paddingLeft="165dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="110dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="110dp"
+                        android:paddingLeft="70dp"
+                        android:paddingTop="95dp" />
+
+                    <TextView
+                        android:id="@+id/text21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="110dp"
+                        android:paddingLeft="160dp"
+                        android:paddingTop="95dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:paddingLeft="70dp"
+                        android:paddingTop="5dp" />
+
+                    <TextView
+                        android:id="@+id/text23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:paddingLeft="160dp"
+                        android:paddingTop="5dp" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -257,21 +355,22 @@
                         android:layout_width="175dp"
                         android:layout_height="100dp"
                         android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="30dp"
                             android:paddingTop="74dp"
-                            android:textSize="8dp"
-                            android:src="@drawable/bodywei" />
+                            android:src="@drawable/bodywei"
+                            android:textSize="8dp" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="40dp"
                             android:paddingTop="62dp"
-                            android:textSize="8dp"
-                            android:src="@drawable/bodyfat" />
+                            android:src="@drawable/bodyfat"
+                            android:textSize="8dp" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -313,34 +412,35 @@
                             android:text="근육량"
                             android:textSize="10dp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="175dp"
                         android:layout_height="15dp"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/text11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="14dp"
-                            android:id="@+id/text11"
-                            android:textSize="10dp"
-                            android:textColor="#0000FF"/>
+                            android:textColor="#0000FF"
+                            android:textSize="10dp" />
 
                         <TextView
+                            android:id="@+id/text12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="20dp"
-                            android:id="@+id/text12"
-                            android:textSize="10dp"
-                            android:textColor="#0000FF"/>
+                            android:textColor="#0000FF"
+                            android:textSize="10dp" />
 
                         <TextView
+                            android:id="@+id/text13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
-                            android:id="@+id/text13"
-                            android:textSize="10dp"
-                            android:textColor="#0000FF"/>
+                            android:textColor="#0000FF"
+                            android:textSize="10dp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -473,15 +573,6 @@
                         android:textSize="15dp" />
                 </LinearLayout>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15px"
-                android:paddingTop="30dp"
-                android:text="체성분 변화 그래프"
-                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/button3"
