@@ -3,8 +3,6 @@ package com.example.syoung.fitsy.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.Time;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +42,7 @@ public class ExerciseActivity extends Activity {
     private ExerciseData exerciseData;
     private List<NowCourse> nowExerciseCourseItemList;
     private NowCourse nowExercise;
-    private int exerciseType = 1;
+    private int exerciseType = 0;
 
     private int mainTime = 0;
     private int min = 0;
@@ -63,7 +61,7 @@ public class ExerciseActivity extends Activity {
         setViewComponent();
         setNowExerciseCourseHorizontalListView();
 
-        if(exerciseType == 2){
+        if(exerciseType == 1){
             mTimer = new Timer();
             TimerTask task = new TimerTask(){
                 public void run(){
@@ -79,13 +77,14 @@ public class ExerciseActivity extends Activity {
                     });
                     //TODO : sec => min으로 바꾸기
                     if(sec == boundMin){
+                        exerciseTypeOneFinish();
                         intentNFCReadActivity();
                         return;
                     }
                 }
             };
             mTimer.schedule(task, 1000, 1000);
-        }else if(exerciseType == 1){
+        }else if(exerciseType == 2){
             //TODO : 무산소
             runOnUiThread(new Runnable() {
                 @Override
@@ -99,19 +98,19 @@ public class ExerciseActivity extends Activity {
     private void setViewComponent() {
         int index = 0;
         for (NowCourse nowCourse : nowExerciseCourseItemList) {
-            if(nowCourse.isCheck()){
-                Toast.makeText(this, "이미 한 운동입니다.", Toast.LENGTH_SHORT).show();
-                intentNFCReadActivity();
-                return;
-            }
             if (nowCourse.getUserCourse().getOdid() != null && nowCourse.getUserCourse().getOdid().equals(exerciseData.getTagId())) {
+                if(nowCourse.isCheck()){
+                    Toast.makeText(this, "이미 한 운동입니다.", Toast.LENGTH_SHORT).show();
+                    intentNFCReadActivity();
+                    return;
+                }
                 nowExercise = nowCourse;
                 nowExerciseIndex = index;
                 exerciseName.setText(nowCourse.getUserCourse().getEname().replace("_", " ").toUpperCase());
-                if (nowCourse.getUserCourse().getOtype() == 1) {
-                    initComponentExerciseTypeOne(nowCourse);//무산소
+                if (nowCourse.getUserCourse().getOtype() == 2) {
+                    initComponentExerciseTypeTwo(nowCourse);//무산소
                 } else {
-                    initComponentExerciseTypeTwo(nowCourse);//유산소
+                    initComponentExerciseTypeOne(nowCourse);//유산소
                 }
                 return;
             }
@@ -142,28 +141,18 @@ public class ExerciseActivity extends Activity {
             return;
         }
         //TODO : 중간에 이동 할 때 현재 유산소 운동에 대한 정보, 무산소 운도 일 때 결과 정보 저장
-        if(exerciseType == 1){
-
-        }else if(exerciseType == 2){
-
-        }
 
         intentNFCReadActivity();
     }
 
     private void intentNFCReadActivity() {
-        if(exerciseType == 2){
-            exerciseTypeTwoFinish();
-        }else if(exerciseType == 1){
-            //TODO : 무산소 운동 결과 setting
-        }
         Intent exerciseIntent = new Intent(this, NFCReadActivity.class);
         exerciseIntent.putExtra("nowExerciseCourseList", (Serializable) nowExerciseCourseItemList);
         startActivity(exerciseIntent);
         finish();
     }
 
-    private void exerciseTypeTwoFinish() {
+    private void exerciseTypeOneFinish() {
         nowExerciseCourseItemList.get(nowExerciseIndex).setImageId(this.getResources().getIdentifier("exercise_one_finish", "drawable", this.getPackageName()));
         nowExerciseCourseItemList.get(nowExerciseIndex).setCheck(true);
         nowExerciseCourseItemList.get(nowExerciseIndex).setResult(min);
@@ -176,8 +165,8 @@ public class ExerciseActivity extends Activity {
         nowExerciseCourseHorizontalListView.setAdapter(nowExerciseCourseListAdapter);
     }
 
-    private void initComponentExerciseTypeTwo(NowCourse nowCourse) {
-        exerciseType = 2;
+    private void initComponentExerciseTypeOne(NowCourse nowCourse) {
+        exerciseType = 1;
         optionOneKey.setText("speed");
         optionTwoKey.setText("running Time");
         optionOneValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption1()) + " km/h");
@@ -188,8 +177,8 @@ public class ExerciseActivity extends Activity {
         nowNumber2.setText("0");
     }
 
-    private void initComponentExerciseTypeOne(NowCourse nowCourse) {
-        exerciseType = 1;
+    private void initComponentExerciseTypeTwo(NowCourse nowCourse) {
+        exerciseType = 2;
         optionOneKey.setText("weight");
         optionTwoKey.setText("count");
         optionOneValue.setText(String.valueOf(nowCourse.getUserCourse().getOoption1()) + "kg");
