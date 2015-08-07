@@ -72,7 +72,7 @@ public class ScrollSelector extends DialogFragment{
          */
 
         if(item.getEtype() == AEROBIC){
-            int temp = item.getOoption1();
+            int temp = item.getOoption2();
             Log.e("ScollSelector", "유산소 : " + temp);
             Log.e("ScollSelector", "운동 순서 : " + item.getCorder());
 
@@ -139,7 +139,7 @@ public class ScrollSelector extends DialogFragment{
                 result = temp2;
             }
 
-            CourseFragment.current_array_list.get(position).setOoption1(result);
+            CourseFragment.current_array_list.get(position).setOoption2(result);
         }else{
             // 횟수
             int temp = picker1.getValue();

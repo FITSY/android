@@ -87,11 +87,12 @@ public class HistoryFragment extends Fragment {
         popupFragment.dismiss();
 
         // TODO : 바뀐 현재 코스 내용 (ArrayList<RowItem> 형태)를 전송하는 클래스 완성
-        /*ChangeCurrentCourse changeCurrentCourse = new ChangeCurrentCourse(thisActivity,items,HISTORY);
-        changeCurrentCourse.execute();*/
+        ChangeCurrentCourse changeCurrentCourse = new ChangeCurrentCourse(thisActivity,items,HISTORY);
+        changeCurrentCourse.execute();
+    }
 
-        // TODO : 위의 부분이 완성되면 지워야 한다
-        isChanged();
+    public static void initialize(){
+        history_array_list.clear();
     }
 
     public static void isChanged(){
