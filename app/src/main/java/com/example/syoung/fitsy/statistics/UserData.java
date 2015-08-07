@@ -1,55 +1,43 @@
 package com.example.syoung.fitsy.statistics;
 
-import java.util.List;
-
-import retrofit.http.GET;
-
 /**
  * Created by sub_HeeJin on 2015-08-01.
  */
 public class UserData {
-    String cbmi;
-    String cfat;
-    String cmuscle;
+    String id;
+    String cid;
+    String date;
+    String ratio;
 
-    public String getCbmi() {
-        return cbmi;
+    public String getId() {
+        return id;
     }
 
-    public void setCbmi(String cbmi) {
-        this.cbmi = cbmi;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCfat() {
-        return cfat;
+    public String getCid() {
+        return cid;
     }
 
-    public void setCfat(String cfat) {
-        this.cfat = cfat;
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
-    public String getCmuscle() {
-        return cmuscle;
+    public String getDate() {
+        return date;
     }
 
-    public void setCmuscle(String cmuscle) {
-        this.cmuscle = cmuscle;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getRatio() {
+        return ratio;
+    }
+
+    public void setRatio(String ratio) {
+        this.ratio = ratio;
     }
 }
-
-
-/*
-interface CallData {
-
-    @GET("http://ebsud89.iptime.org:8022/getCustomerInfo.php")
-    List getcbmi(@Named("cbmi") String cbmi);
-
-    @GET("http://ebsud89.iptime.org:8022/getCustomerInfo.php")
-    List getcfat(@Named("cfat") String cfat);
-
-    @GET("http://ebsud89.iptime.org:8022/getCustomerInfo.php")
-    List getcmuscle(@Named("cmuscle") String cmuscle);
-
-}
-
-*/

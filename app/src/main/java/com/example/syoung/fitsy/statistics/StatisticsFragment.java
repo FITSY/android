@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.syoung.fitsy.R;
+import com.example.syoung.fitsy.main.server.FITSYService;
+import com.example.syoung.fitsy.main.server.UserCourse;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -22,16 +25,24 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 import com.example.syoung.fitsy.statistics.RobotoCalendarView.RobotoCalendarListener;
+import com.google.gson.Gson;
 
 /**
  * Created by syoung on 2015-06-28.
@@ -48,10 +59,10 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
     Date now = new Date();
     String dumi = "1995-01-01";
 
-    ArrayList<String> sKey = new ArrayList<String>();
-    ArrayList<String> sDate = new ArrayList<String>();
+    List<String> sKey = new ArrayList<String>();
+    List<String> sDate = new ArrayList<String>();
 
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
     int count = 0;
 
@@ -74,13 +85,12 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
         return instance;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
 
         this.myView = rootView;
-
-
 
         mChart = new LineChart(this.getActivity());
 
@@ -104,6 +114,8 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
         LineData data = new LineData(getXAxisValues(), getDataSet());
 
         mChart.setData(data);
+
+        mChart.setBackgroundColor(Color.rgb(242,242,242));
 
         Legend i = mChart.getLegend();
 
@@ -156,6 +168,7 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
         robotoCalendarView.markDayAsCurrentDay(now);
 
 
+        /*
         String dd5 = "2015-08-07";
         sDate.add("0");
         sKey.add(dd5);
@@ -220,14 +233,41 @@ public class StatisticsFragment extends Fragment implements RobotoCalendarListen
             e.printStackTrace();
         }
 
+        */
 
-        saveArray();
-        loadArray(getActivity());
+        Gson gson = new Gson();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://ebsud89.iptime.org:8022")
+                .setConverter(new GsonConverter(gson))
+                .build();
+
+        StatisticsInterface service = restAdapter.create(StatisticsInterface.class);
+
+        service.getExerciseRatio(new Callback<List<UserData>>() {
+            @Override
+            public void success(List<UserData> userDatas, Response response) {
+                Log.e("SERVER", userDatas.get(0).getCid());
+                for (UserData userData : userDatas) {
+                    sDate.add(userData.getRatio());
+                    sKey.add(userData.getDate());
+                }
+                saveArray();
+                loadArray(getActivity());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("SEVER", error.toString());
+
+            }
+        });
+
+//        saveArray();
+//        loadArray(getActivity());
 
 
 
         LinearLayout textview = (LinearLayout) rootView.findViewById(R.id.textview);
-
         textview.bringToFront() ;
 
 
